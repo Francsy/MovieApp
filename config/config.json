@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "enzedata",
+    "password": "TKdEY2fcLQkYsUEN8YyZFHDKNcGmljPE",
+    "database": "database_development",
+    "host": "manny.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "enzedata",
+    "password": "TKdEY2fcLQkYsUEN8YyZFHDKNcGmljPE",
+    "database": "database_test",
+    "host": "manny.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "enzedata",
+    "password": "TKdEY2fcLQkYsUEN8YyZFHDKNcGmljPE",
+    "database": "database_production",
+    "host": "manny.db.elephantsql.com",
+    "dialect": "postgres"
+  }
+}
