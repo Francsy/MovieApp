@@ -8,7 +8,6 @@ const renderBrowser = async (req, res, next) =>{
         let filmsFoundsArr = filmsFounds.results
         filmsFoundsArr = filmsFoundsArr.filter(film => film.image != '') // filter films with no image
         filmsFoundsArr = filmsFoundsArr.slice(0, 10); // 10 results limit
-        console.log(filmsFoundsArr);
         res.status(200).render('browser', {"movies": filmsFoundsArr, "search": searchEx})
     }
 }
