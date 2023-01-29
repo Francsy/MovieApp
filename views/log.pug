@@ -15,9 +15,10 @@ html(lang="en")
             option(value="GMAIL") GMAIL
             option(value="FACEBOOK") FACEBOOK
             option(value="GITHUB") GITHUB
-        form(action="", method="get", class="loginForm")
+        form(action="/", method="get", class="loginForm")
             input(type="email", class="emailForm", name="userLog", placeholder="Email address")
             input(type="password", class="passwordForm", placeholder="Password")
+            a(href="/recoverpassword") Forgot your password?
             input(type="submit" value="Login")
 
     //- script(src="/scripts.js") 

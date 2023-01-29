@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config()
-// const fetch = require('node-fetch')
+const fetch = require('node-fetch')
 
 // Middlewares modules:
 const morgan = require('morgan')
@@ -9,6 +9,7 @@ const errorManager = require('./middlewares/errorManager')
 // Routes modules:
 // const searchRouter = require('./routes/searchRoutes')
 const logSignRouter = require('./routes/logSignRoutes')
+const searchRouter = require('./routes/searchRoutes')
 
 const app = express();
 const PORT = 3000;
@@ -19,7 +20,7 @@ app.set('views','./views');
 
 // Routes:
 app.use('/',logSignRouter);
-// app.use('/search',searchRouter);
+app.use('/search',searchRouter);
 
 app.use(errorManager)
 
