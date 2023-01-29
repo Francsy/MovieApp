@@ -1,7 +1,7 @@
 const renderBrowser = (req, res, next) => {
     res.render('browser')
-    if(req.body.title){
-        const { title } = req.body;
+    if(req.query.title){
+        const { title } = req.query;
         console.log(`Title: ${title}`);
     }
 }
