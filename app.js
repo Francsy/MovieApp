@@ -1,4 +1,6 @@
-const express = require("express");
+const express = require('express');
+require('dotenv').config()
+const fetch = require('node-fetch')
 
 // Middlewares modules:
 const morgan = require('morgan')
