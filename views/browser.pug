@@ -6,10 +6,21 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Browser
         link(rel="stylesheet", type="text/css", href="/styles.css")
-
     body
-        form(action="/search", method="get" class="search-form")
-            img(src="/assets/search-icon.svg" alt="search", class="search-icon")
-            input(type="text", class="search-input hidden", name="title")
-        script(src="/scripts.js") 
+        header 
+            h1.main-title Browser
+        main
+            form(action="/search", method="get" class="search-form")
+                img(src="/assets/search-icon.svg" alt="search", class="search-icon")
+                input(type="text", class="search-input hidden", name="searchEx")
+            if movies
+                h2.search-title Results for #{search}
+                section(class="movies-found")
+                    if movies
+                        each movie in movies
+                            article 
+                                a(href=`/search/${movie.id}`)
+                                    img(src=`${movie.image}`)
+                                    p.movie-title= movie.title
+    script(src="/scripts.js") 
         
