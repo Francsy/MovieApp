@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Login
+        //- link(rel="stylesheet", type="text/css", href="/styles.css")
+    header
+        h2 FS MOVIES+
+        img(src="/assets/girl.jpg" alt="logo") 
+    body 
+        h3 LOG IN with
+        select(id="account" name="account")
+            option(value="GMAIL") GMAIL
+            option(value="FACEBOOK") FACEBOOK
+            option(value="GITHUB") GITHUB
+        form(action="/", method="get", class="loginForm")
+            input(type="email", class="emailForm", name="userLog", placeholder="Email address")
+            input(type="password", class="passwordForm", placeholder="Password")
+            a(href="/recoverpassword") Forgot your password?
+            input(type="submit" value="Login")
+            a(href="") Or login with GOOGLE
+            a(href="")
+                img(src="")
+            a(href="") Don't you have an account? SIGN UP
+
+    //- script(src="/scripts.js") 

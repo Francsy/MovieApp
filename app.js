@@ -7,6 +7,8 @@ const morgan = require('morgan')
 const errorManager = require('./middlewares/errorManager')
 
 // Routes modules:
+// const searchRouter = require('./routes/searchRoutes')
+const logSignRouter = require('./routes/logSignRoutes')
 const searchRouter = require('./routes/searchRoutes')
 
 const app = express();
@@ -17,6 +19,7 @@ app.set('view engine', 'pug');
 app.set('views','./views');
 
 // Routes:
+app.use('/',logSignRouter);
 app.use('/search',searchRouter);
 
 app.use(errorManager)
