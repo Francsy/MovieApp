@@ -17,3 +17,16 @@ CREATE TABLE user_roles (
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
 );
+CREATE TABLE favorites (
+    movie_title VARCHAR ( 255 ) PRIMARY KEY
+);
+CREATE TABLE user_favorites (
+    user_id INT NOT NULL,
+    movie_title VARCHAR ( 255 ) NOT NULL,
+    PRIMARY KEY (user_id, movie_title),
+    FOREIGN KEY (movie_title)
+        REFERENCES roles (movie_title),
+    FOREIGN KEY (user_id)
+        REFERENCES users (user_id)
+    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
