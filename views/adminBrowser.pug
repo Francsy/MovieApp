@@ -1,0 +1,28 @@
+//- COPIADO DE BROWSER.PUG
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Browser
+        link(rel="stylesheet", type="text/css", href="/styles.css")
+    body
+        header 
+            h1.main-title Browser
+        main
+            form(action="/search", method="get" class="search-form")
+                img(src="/assets/search-icon.svg" alt="search", class="search-icon")
+                input(type="text", class="search-input hidden", name="searchEx")
+            if message
+                h2.search-title #{message}
+            if movies
+                h2.search-title Results for #{search}
+                section(class="movies-found")
+                    if movies
+                        each movie in movies
+                            article 
+                                a(href=`/search/${movie.Title}`)
+                                    img(src=`${movie.Poster}`)
+                                    p.movie-title= movie.Title
+    script(src="/scripts.js")
