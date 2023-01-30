@@ -8,3 +8,21 @@ if (document.title === 'Browser') {
         searchInput.style.opacity = '1';
     });
 }
+
+
+// To change routes:
+
+if (document.querySelector('.movie-details')) {
+    document.getElementById('saveFav').addEventListener('click', () => {
+        fetch('/rutaparaguardarfavs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Title: `${document.title}`,
+            })
+        });
+    });
+}
+
