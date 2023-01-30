@@ -1,6 +1,3 @@
-const axios = require('axios');
-const sharp = require('sharp');
-
 const renderBrowser = async (req, res, next) => {
     if (!req.query.searchEx) {
         res.status(200).render('browser')
