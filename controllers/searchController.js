@@ -6,7 +6,7 @@ const renderBrowser = async (req, res, next) => {
     } else {
         try {
             const { searchEx } = req.query;
-            let movieRes = await fetch(`https://www.omdbapi.com/?s=${searchEx}&apikey=${process.env.OMDB_KEY}`);
+            let movieRes = await fetch(`https://www.omdbapi.com/?s=${searchEx}&type=movie&apikey=${process.env.OMDB_KEY}`);
             const moviesFounds = await movieRes.json();
             let moviesFoundsArr = moviesFounds.Search;
             moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
