@@ -2,9 +2,8 @@ const express = require('express');
 const adminRouter = express.Router();
 const adminController = require('../controllers/adminController');
 
-adminRouter.get('/', adminController.renderAdminBrowser);
+adminRouter.get('/', adminController.renderAdminPage);
 adminRouter.get('/createmovie', adminController.getAdminCreate);
-adminRouter.get('/editmovie', adminController.getAdminEdit); //FALTA /:id
-adminRouter.get('/:title', adminController.getAdminMovie);
+adminRouter.get('/editmovie/:Title', adminController.getAdminEdit); 
 
 module.exports = adminRouter;
