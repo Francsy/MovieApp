@@ -1,3 +1,6 @@
+const pool = require('../utils/db_pgsql')
+
+
 //LOG USER
 const logUser = async (entry) => {
     const { username, password } = entry;

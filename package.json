@@ -2,7 +2,7 @@
   "name": "movieapp",
   "version": "1.0.0",
   "description": "Movie App Api Rest with MongoDB and SQL data base",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
