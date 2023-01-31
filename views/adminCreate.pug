@@ -9,8 +9,18 @@ html(lang="en")
         a(href="")
                 img(src="/assets/backarrow.png")
         p CREATE MOVIE
-        label Title
+        label Poster
+        input(type="file" id="poster" accept="image/png, image/jpeg")
+        label Movie Details
+        input(type="text" placeholder="Year - Title - Runtime")
+        label IMBD Rating:
         input(type="text")
-        label Sypnosis
+        label Genres:
+        input(type="text")
+        label Directors:
+        input(type="text")
+        label Writers:
+        input(type="text")
+        label Actors:
         input(type="text")
         input(type="submit" value="CONFIRM CREATION")
