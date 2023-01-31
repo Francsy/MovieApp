@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.ATLAS_ADMIN_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true });
+require('../utils/db_mongo')
 
 const movieSchema = new mongoose.Schema({
     Title: { type: String, required: true },
