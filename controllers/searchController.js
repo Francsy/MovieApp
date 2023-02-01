@@ -9,7 +9,6 @@ const renderBrowser = async (req, res, next) => {
             let movieRes = await fetch(`https://www.omdbapi.com/?s=${searchEx}&type=movie&apikey=${process.env.OMDB_KEY}`);
             const moviesFounds = await movieRes.json();
             let moviesFoundsArr = moviesFounds.Search;
-            moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
             if (moviesFoundsArr.length === 0) {
                 try {
                     let dbMovies = await Movie.find({ Title: { $regex: searchEx, $options: "i" } })
@@ -22,6 +21,7 @@ const renderBrowser = async (req, res, next) => {
                     next(err)
                 }
             } else {
+                moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
                 res.status(200).render('browser', { "movies": moviesFoundsArr, "search": searchEx });
             }
         } catch (err) {
