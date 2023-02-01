@@ -131,7 +131,7 @@ section.movies-found article a p.movie-title {
 
 section.movies-found article a:hover p.movie-title {
     display: block;
-    opacity: 1; 
+    opacity: 1;
 }
 
 
@@ -139,19 +139,83 @@ section.movies-found article a:hover p.movie-title {
     display: none;
 }
 
+/* HAMBURGUESA */
+#formatHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;   
+    justify-content:space-around;
+    margin-top: 5%;
+}
 
+#space{
+    width:10vw;
+}
+
+#burger{
+    width: 10vw;
+    border: solid rgb(206, 78, 228);
+    border-radius: 50%;
+}
+
+#burger-checkbox{
+    display: none;
+}
+
+nav{
+    display:none;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        padding: 10px 90px;
+        box-sizing: border-box;
+        z-index: 9999
+}
+
+nav ul {
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: solid white;
+    background-color: wheat;
+}
+
+nav ul li a {
+    line-height: 60px;
+    color: #fff;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+nav ul li a:hover {
+    background-color: rgb(161, 108, 108);
+    border-radius: 5px;
+}
+
+#burger-checkbox:checked ~ nav{
+    display:block;
+}
+/* ***** */
 
 @media screen and (min-width: 768px) and (max-width: 1366px) {
     * {
         font-size: 1.1rem;
     }
+
     .main-title {
         font-size: 1.8rem;
     }
+
     .movies-found {
         height: 40vh;
-        
+
     }
+
     .search-title {
         margin-top: 5%;
         font-size: 1.4rem;
@@ -162,12 +226,15 @@ section.movies-found article a:hover p.movie-title {
     * {
         font-size: 1.2rem;
     }
+
     .main-title {
         font-size: 2rem;
     }
+
     .movies-found {
-        height: 70vh; 
+        height: 70vh;
     }
+
     .search-title {
         margin-top: 4%;
         font-size: 1.5rem;

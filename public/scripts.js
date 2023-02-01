@@ -1,3 +1,4 @@
+// User search/ browser.pug:
 if (document.title === 'Browser') {
     const searchIcon = document.querySelector('.search-icon');
     const searchInput = document.querySelector('.search-input');
@@ -10,11 +11,10 @@ if (document.title === 'Browser') {
 }
 
 
-// To change routes:
-
+// User /search/:title movie.pug page:
 if (document.querySelector('.movie-details')) {
     document.getElementById('saveFav').addEventListener('click', () => {
-        fetch('/rutaparaguardarfavs', {
+        fetch('/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,4 +25,3 @@ if (document.querySelector('.movie-details')) {
         });
     });
 }
-

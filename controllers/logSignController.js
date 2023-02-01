@@ -10,6 +10,10 @@ const renderRecoverPassword = (req, res) => {
     res.status(200).render('recoverpassword')
 }
 
+const renderRestorePassword = (req, res) => {
+    res.status(200).render('restorepassword')
+}
+
 const postLogin = async (req, res) => {
     const loggedUser = req.body;
     const response = await entry.logUser(newUser);
@@ -31,6 +35,7 @@ module.exports = {
     renderLogin,
     renderSignup,
     renderRecoverPassword,
+    renderRestorePassword,
     postLogin,
     postSignup
 }
