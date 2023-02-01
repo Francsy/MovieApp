@@ -26,8 +26,7 @@ const createMovie = async (req, res) => {
         let answer = await response.save();
         console.log(answer)
 
-        let movies = await Movie.find({}, '-_id -__v');
-        res.status(200).render('adminPage', { "adminMovies": movies });
+        res.status(200).redirect("/admin")
     } catch (err) {
         res.status(400).json({
             msj: err.message
