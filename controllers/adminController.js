@@ -1,8 +1,13 @@
-const renderAdminBrowser = async (req, res, next) => {
-    res.status(200).render('adminBrowser')
-}
+const Movie = require('../models/movies');
 
-const getAdminMovie = async (req, res, next) => {
+const renderAdminPage= async (req, res, next) => {
+    try {
+        let movies = await Movie.find({},'-_id -__v');
+        res.status(200).render('adminPage', { "adminMovies": movies });
+    }
+    catch(err){
+        next(err)
+    }
 }
 
 const getAdminCreate = (req, res) => {
@@ -14,8 +19,8 @@ const getAdminEdit = async (req, res, next) => {
 }
 
 module.exports = {
-    renderAdminBrowser,
-    getAdminMovie,
+    renderAdminPage,
     getAdminCreate,
     getAdminEdit,
+
 }

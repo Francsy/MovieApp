@@ -21,7 +21,7 @@ app.set('views','./views');
 // Routes:
 app.use('/',logSignRouter);
 app.use('/search',searchRouter);
-app.use('/adminsearch',adminRouter);
+app.use('/admin',adminRouter);
 
 app.use(errorManager)
 
