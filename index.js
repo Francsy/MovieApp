@@ -17,6 +17,7 @@ const PORT = 3000;
 app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views','./views');
+app.use(express.json())
 
 // Routes:
 app.use('/',logSignRouter);

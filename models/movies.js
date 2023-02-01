@@ -13,7 +13,7 @@ const movieSchema = new mongoose.Schema({
     Poster: { type: String, required: true },
     imdbRating: { type: String, required: true },
 });
-const Movie = mongoose.model('editMovies', movieSchema);
+const Movie = mongoose.model('editedMovies', movieSchema);
 
 module.exports = Movie;
 

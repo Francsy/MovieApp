@@ -19,8 +19,8 @@ const getAdminEdit = async (req, res, next) => {
 }
 
 const createMovie = async (req, res) => {
-    const newMovie = req.body;
-
+    const newMovie = await req.body;
+    console.log(newMovie)
     try {
         let response = await new Movie(newMovie);
         let answer = await response.save();
