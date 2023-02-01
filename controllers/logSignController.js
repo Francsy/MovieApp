@@ -38,7 +38,7 @@ const getMoviesById = async (req, res) => {
     let userid = req.params.userid;
     console.log(userid);
     movies = await entries.getMoviesById(userid);
-    res.render('userMyMovies', { movieTitle: movies[0].movie_title });
+    res.render('userMyMovies', { movies: movies });
 }
 
 module.exports = {

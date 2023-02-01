@@ -25,4 +25,11 @@ html(lang="en")
                 li 
                     a(href="/") < Log out
         main 
-            h1= movieTitle
+            h1 User's Favorite Movies
+            
+            section.movies-found
+                each movie in movies
+                    article
+                        a(href="/search/")
+                            img(src=`${movie.Poster}`, alt="", srcset="")
+                        p= movie.movie_title
