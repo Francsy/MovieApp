@@ -11,10 +11,6 @@ html(lang="en")
         img(src="/assets/girl.jpg" alt="logo") 
     body 
         h3 SIGN UP with
-        select(id="account" name="account")
-            option(value="GMAIL") GMAIL
-            option(value="FACEBOOK") FACEBOOK
-            option(value="GITHUB") GITHUB
         form(action="/signup", method="post", class="loginForm")
             input(type="email", class="emailForm", name="userSign", placeholder="Email address")
             input(type="password", class="passwordForm", placeholder="Password")

@@ -25,4 +25,3 @@ if (document.querySelector('.movie-details')) {
         });
     });
 }
-
