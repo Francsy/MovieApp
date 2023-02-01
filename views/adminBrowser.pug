@@ -8,8 +8,18 @@ html(lang="en")
         title Browser
         link(rel="stylesheet", type="text/css", href="/styles.css")
     body
-        header 
+        header(id="formatHeader")
+            div(id="space")            
             h1.main-title Browser
+            label(for="burger-checkbox")
+                img(src="./assets/rick.png" id="burger" alt="")
+        input(type="checkbox" id="burger-checkbox")
+        nav
+            ul
+                li 
+                    a(href="/createmovie") Create Movie
+                li 
+                    a(href="/") < Log out
         main
             form(action="/search", method="get" class="search-form")
                 img(src="/assets/search-icon.svg" alt="search", class="search-icon")

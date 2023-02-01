@@ -143,8 +143,9 @@ section.movies-found article a:hover p.movie-title {
 #formatHeader{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;   
-    justify-content:space-around; 
+    align-items: center;   
+    justify-content:space-around;
+    margin-top: 5%;
 }
 
 #space{
