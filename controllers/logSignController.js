@@ -1,3 +1,5 @@
+const entries = require('../models/userMyMovies');
+
 const renderLogin = (req, res) => {
     res.status(200).render('log')
 }
@@ -31,11 +33,20 @@ const postSignup = async (req, res) => {
     });
 }
 
+const getMoviesById = async (req, res) => {
+    let movies;
+    let userid = req.params.userid;
+    console.log(userid);
+    movies = await entries.getMoviesById(userid);
+    res.render('userMyMovies', { movieTitle: movies[0].movie_title });
+}
+
 module.exports = {
     renderLogin,
     renderSignup,
     renderRecoverPassword,
     renderRestorePassword,
     postLogin,
-    postSignup
+    postSignup,
+    getMoviesById,
 }

@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title User My Movies
+        link(rel="stylesheet", type="text/css", href="/styles.css")
+    body
+        header(id="formatHeader")
+            a(href="/search")
+                    img(src="/assets/backarrow.png")           
+            h1.main-title My Movies
+            label(for="burger-checkbox")
+                img(src="./assets/morty.png" id="burger" alt="burguer icon")
+        input(type="checkbox" id="burger-checkbox")
+        nav
+            ul
+                li 
+                    a(href="/search") Browser
+                li 
+                    a(href="/restorepassword") Change Password
+                li 
+                    a(href="/about") About FS Movies+
+                li 
+                    a(href="/") < Log out
+        main 
+            h1= movieTitle
