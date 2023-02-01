@@ -13,7 +13,7 @@ const movieSchema = new mongoose.Schema({
     Poster: { type: String, required: true },
     imdbRating: { type: String, required: true },
 });
-const Movie = mongoose.model('editMovies', movieSchema);
+const Movie = mongoose.model('editedMovies', movieSchema);
 
 module.exports = Movie;
 
@@ -30,6 +30,19 @@ const newMovie = new Movie({
     "Poster": "https://m.media-amazon.com/images/M/MV5BNTU2ODkyY2MtMjU1NC00NjE1LWEzYjgtMWQ3MzRhMTE0NDc0XkEyXkFqcGdeQXVyMjM4MzQ4OTQ@._V1_SX300.jpg",
     "imdbRating": "8.4"
 });
+
+{
+    "Title": "Family Guy",
+    "Year": "2023",
+    "Runtime": "118 min",
+    "Genre": "Comedy, Adventure",
+    "Director": "Seth MacFarlane",
+    "Writer": "Daniel Palladino, Seth MacFarlane, Lolee Aries",
+    "Actors": "Seth MacFarlane, Mila Kunis, Alex Borstein",
+    "Plot": "The show centers around the adventures and activities of the dysfunctional Griffin family, consisting of father Peter Griffin, a bumbling and clumsy yet well-intentioned blue-collar worker; Lois, a stay-at-home mother and piano teacher (in early episodes) who is a member of the affluent Pewterschmidt family; Meg, their often bullied teenage daughter who is also constantly ridiculed or ignored by the family; Chris, their awkward teenage son, who is overweight, unintelligent, unathletic and, in many respects, is simply a younger version of his father; and Stewie, their diabolical infant son of ambiguous sexual orientation who is an adult-mannered evil genius and uses stereotypical archvillain phrases. Living with the family is their witty, smoking, martini-swilling, sarcastic, English-speaking anthropomorphic dog Brian, though he is still considered a pet in many ways.",
+    "Poster": "https://pbs.twimg.com/media/FjvC-g3X0AEVzzH?format=jpg&name=medium",
+    "imdbRating": "9.2"
+}
 
 newMovie.save((error) => {
     if (error) {
