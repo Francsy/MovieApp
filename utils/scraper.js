@@ -33,8 +33,6 @@ const getFilmAffinity = async (title) => {
         const browser = await puppeteer.launch({headless:false})
         const page = await browser.newPage();
         await page.goto('https://www.filmaffinity.com/en/main.html');
-
-        
     } catch (err) {
         console.log(err)
     }
