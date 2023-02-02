@@ -36,7 +36,6 @@ const postSignup = async (req, res) => {
 const getMoviesById = async (req, res) => {
     let movies;
     let userid = req.params.userid;
-    console.log(userid);
     movies = await entries.getMoviesById(userid);
     res.render('userMyMovies', { movies: movies });
 }
@@ -48,5 +47,5 @@ module.exports = {
     renderRestorePassword,
     postLogin,
     postSignup,
-    getMoviesById,
+    getMoviesById
 }

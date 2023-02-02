@@ -27,9 +27,9 @@ html(lang="en")
         main 
             h1 User's Favorite Movies
             
-            section.movies-found
+            section(class="movies-found")
                 each movie in movies
                     article
-                        a(href="/search/")
+                        a(href="")
                             img(src=`${movie.Poster}`, alt="", srcset="")
                         p= movie.movie_title
