@@ -4,23 +4,42 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Edit Movie
     body
         a(href="")
                 img(src="/assets/backarrow.png")
         p EDIT MOVIE
-        label Poster
-        input(type="file" id="poster" accept="image/png, image/jpeg")
-        label Movie Details
-        input(type="text" placeholder="Year - Title - Runtime")
-        label IMBD Rating:
-        input(type="text")
-        label Genres:
-        input(type="text")
-        label Directors:
-        input(type="text")
-        label Writers:
-        input(type="text")
-        label Actors:
-        input(type="text")
-        input(type="submit" value="CONFIRM EDITION")
+        form(method="post" id="editmovie-form")
+            input(type="hidden" name="Title" value=movie.Title)
+            label Title
+            input(type="text" name="Title" value=movie.Title)
+            br
+            input(type="hidden" name="Year" value=movie.Year)
+            label Year
+            input(type="text" name="Year" value=movie.Year)
+            br
+            input(type="hidden" name="Runtime" value=movie.Runtime)
+            label Runtime
+            input(type="text" name="Runtime" value=movie.Runtime)
+            br
+            input(type="hidden" name="Director" value=movie.Director)
+            label Director
+            input(type="text" name="Director" value=movie.Director)
+            br
+            input(type="hidden" name="Writer" value=movie.Writer)
+            label Writer
+            input(type="text" name="Writer" value=movie.Writer)
+            br
+            input(type="hidden" name="Actors" value=movie.Actors)
+            label Actors
+            input(type="text" name="Actors" value=movie.Actors)
+            br
+            input(type="hidden" name="Plot" value=movie.Plot)
+            label Plot
+            input(type="text" name="Plot" value=movie.Plot)
+            br
+            input(type="hidden" name="Poster" value=movie.Poster)
+            label Poster
+            input(type="text" name="Poster" value=movie.Poster)
+            br
+            button(type="submit" value="CONFIRM EDITION" name="submit") CONFIRM EDITION
