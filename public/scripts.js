@@ -24,7 +24,7 @@ if (document.title === 'Browser') {
 // User /search/:title movie.pug page:
 if (document.querySelector('.movie-details')) {
     document.getElementById('saveFav').addEventListener('click', () => {
-        fetch('/movies', {
+        fetch('http://localhost:3000/search/movies/22', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,8 +32,8 @@ if (document.querySelector('.movie-details')) {
             body: JSON.stringify({
                 Title: `${document.title}`,
             })
-        });
-    });
+        })
+    })
 }
 
 // Manage editMovie put request

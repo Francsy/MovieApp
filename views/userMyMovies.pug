@@ -12,7 +12,7 @@ html(lang="en")
                     img(src="/assets/backarrow.png")           
             h1.main-title My Movies
             label(for="burger-checkbox")
-                img(src="./assets/morty.png" id="burger" alt="burguer icon")
+                img(src="/assets/morty.png" id="burger" alt="burguer icon")
         input(type="checkbox" id="burger-checkbox")
         nav
             ul
@@ -30,6 +30,5 @@ html(lang="en")
             section(class="movies-found")
                 each movie in movies
                     article
-                        a(href="")
-                            img(src=`${movie.Poster}`, alt="", srcset="")
+                        
                         p= movie.movie_title
