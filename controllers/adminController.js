@@ -20,7 +20,6 @@ const getAdminEdit = async (req, res, next) => {
 
 const createMovie = async (req, res) => {
     const newMovie = await req.body;
-    console.log(newMovie)
     try {
         let response = await new Movie(newMovie);
         let answer = await response.save();
@@ -34,10 +33,31 @@ const createMovie = async (req, res) => {
     }
 }
 
+const editMovie = async (req, res) => {
+    const movie = await Movie.findOne({ title: req.query.Title }, (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        return result
+    });
+    const editedMovie = await req.body;
+    try {
+        let response = await new Movie(editedMovie);
+        let answer = await response.save();
+        console.log(answer)
+
+        res.status(200).render("adminEdit", {movie})
+    } catch (err) {
+        res.status(400).json({
+            msj: err.message
+        });
+    }
+}
+
 module.exports = {
     renderAdminPage,
     getAdminCreate,
     getAdminEdit,
     createMovie,
-    
+    editMovie
 }

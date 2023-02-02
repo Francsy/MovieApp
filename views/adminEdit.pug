@@ -4,23 +4,25 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Edit Movie
     body
         a(href="")
                 img(src="/assets/backarrow.png")
         p EDIT MOVIE
+        label Title
+        input(type="text" name="Title" value=movie.title)
+        label Year
+        input(type="text" name="Year" value=movie.year)
+        label Runtime
+        input(type="text" name="Runtime" value=movie.runtime)
+        label Director
+        input(type="text" name="Director" value=movie.director)
+        label Writer
+        input(type="text" name="Writer" value=movie.writer)
+        label Actors
+        input(type="text" name="Actors" value=movie.actors)
+        label Plot
+        input(type="text" name="Plot" value=movie.plot)
         label Poster
-        input(type="file" id="poster" accept="image/png, image/jpeg")
-        label Movie Details
-        input(type="text" placeholder="Year - Title - Runtime")
-        label IMBD Rating:
-        input(type="text")
-        label Genres:
-        input(type="text")
-        label Directors:
-        input(type="text")
-        label Writers:
-        input(type="text")
-        label Actors:
-        input(type="text")
-        input(type="submit" value="CONFIRM EDITION")
+        input(type="text" name="Poster" value=movie.poster)
+        input(type="submit" value="CONFIRM EDITION" name="submit")
