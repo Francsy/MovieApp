@@ -4,13 +4,13 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Restore Password
+        title User My Movies
         link(rel="stylesheet", type="text/css", href="/styles.css")
     body
         header(id="formatHeader")
             a(href="/search")
-                    img(src="/assets/backarrow.png")          
-            h1.main-title RECOVER PASSWORD
+                    img(src="/assets/backarrow.png")           
+            h1.main-title My Movies
             label(for="burger-checkbox")
                 img(src="./assets/morty.png" id="burger" alt="burguer icon")
         input(type="checkbox" id="burger-checkbox")
@@ -19,14 +19,17 @@ html(lang="en")
                 li 
                     a(href="/search") Browser
                 li 
-                    a(href="/movies/:id") Manage Your Movies
+                    a(href="/restorepassword") Change Password
                 li 
                     a(href="/about") About FS Movies+
                 li 
                     a(href="/") < Log out
-        p Please, enter your current password and a new one:
-        form(action="/", method="post", class="loginForm")
-            input(type="password", placeholder="Current Password")
-            input(type="password", placeholder="New Password")
-
-    script(src="/scripts.js") 
+        main 
+            h1 User's Favorite Movies
+            
+            section(class="movies-found")
+                each movie in movies
+                    article
+                        a(href="")
+                            img(src=`${movie.Poster}`, alt="", srcset="")
+                        p= movie.movie_title
