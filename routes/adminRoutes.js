@@ -8,6 +8,7 @@ adminRouter.get('/createmovie', adminController.getAdminCreate);
 adminRouter.post('/createmovie', adminController.createMovie);
 
 adminRouter.get('/editmovie/:Title', adminController.getAdminEdit); 
+adminRouter.post('/editmovie/:Title', adminController.editMovie);
 
 
 module.exports = adminRouter;

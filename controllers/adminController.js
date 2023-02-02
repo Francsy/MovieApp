@@ -1,4 +1,5 @@
 const Movie = require('../models/movies');
+const { renderBrowser } = require('./searchController');
 
 const renderAdminPage = async (req, res, next) => {
     try {
@@ -15,7 +16,8 @@ const getAdminCreate = (req, res) => {
 }
 
 const getAdminEdit = async (req, res, next) => {
-    res.status(200).render('adminEdit')
+    const movie = await Movie.findOne({ title: req.params.Title });
+    res.status(200).render('adminEdit', { movie })
 }
 
 const createMovie = async (req, res) => {
@@ -34,19 +36,20 @@ const createMovie = async (req, res) => {
 }
 
 const editMovie = async (req, res) => {
-    const movie = await Movie.findOne({ title: req.query.Title }, (error, result) => {
-        if (error) {
-            console.log(error)
-        }
-        return result
-    });
-    const editedMovie = await req.body;
+    console.log(req.body)
     try {
-        let response = await new Movie(editedMovie);
-        let answer = await response.save();
-        console.log(answer)
+        await Movie.findOneAndUpdate({ Title: req.body.Title }, {
+            Title: req.body.Title,
+            Year: req.body.Year,
+            Runtime: req.body.Runtime,
+            Director: req.body.Director,
+            Writer: req.body.Writer,
+            Actors: req.body.Actors,
+            Plot: req.body.Plot,
+            Poster: req.body.Poster,
+        }, { new: true });
 
-        res.status(200).render("adminEdit", {movie})
+        res.status(200).redirect('/admin');
     } catch (err) {
         res.status(400).json({
             msj: err.message
