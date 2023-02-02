@@ -36,18 +36,31 @@ const createMovie = async (req, res) => {
 }
 
 const editMovie = async (req, res) => {
-    console.log(req.body)
     try {
         await Movie.findOneAndUpdate({ Title: req.body.Title }, {
             Title: req.body.Title,
             Year: req.body.Year,
             Runtime: req.body.Runtime,
+            Genre: req.body.Genre,
             Director: req.body.Director,
             Writer: req.body.Writer,
             Actors: req.body.Actors,
             Plot: req.body.Plot,
             Poster: req.body.Poster,
+            imdbRating: req.body.imdbRating
         }, { new: true });
+
+        res.status(200).redirect('/admin');
+    } catch (err) {
+        res.status(400).json({
+            msj: err.message
+        });
+    }
+}
+
+const deleteMovie = async (req, res) => {
+    try {
+        await Movie.findOneAndDelete({ Title: req.params.Title });
 
         res.status(200).redirect('/admin');
     } catch (err) {
@@ -62,5 +75,6 @@ module.exports = {
     getAdminCreate,
     getAdminEdit,
     createMovie,
-    editMovie
+    editMovie,
+    deleteMovie
 }

@@ -10,5 +10,7 @@ adminRouter.post('/createmovie', adminController.createMovie);
 adminRouter.get('/editmovie/:Title', adminController.getAdminEdit); 
 adminRouter.post('/editmovie/:Title', adminController.editMovie);
 
+adminRouter.delete('/deletemovie/:Title', adminController.deleteMovie);
+
 
 module.exports = adminRouter;

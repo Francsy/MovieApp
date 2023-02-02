@@ -5,6 +5,7 @@ const fetch = require('node-fetch')
 // Middlewares modules:
 const morgan = require('morgan')
 const errorManager = require('./middlewares/errorManager')
+const bodyParser = require('body-parser');
 
 // Routes modules:
 const logSignRouter = require('./routes/logSignRoutes')
@@ -18,6 +19,9 @@ app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views','./views');
 app.use(express.json())
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Routes:
 app.use('/',logSignRouter);

@@ -10,36 +10,34 @@ html(lang="en")
                 img(src="/assets/backarrow.png")
         p EDIT MOVIE
         form(method="post" id="editmovie-form")
-            input(type="hidden" name="Title" value=movie.Title)
             label Title
             input(type="text" name="Title" value=movie.Title)
             br
-            input(type="hidden" name="Year" value=movie.Year)
             label Year
             input(type="text" name="Year" value=movie.Year)
             br
-            input(type="hidden" name="Runtime" value=movie.Runtime)
             label Runtime
             input(type="text" name="Runtime" value=movie.Runtime)
             br
-            input(type="hidden" name="Director" value=movie.Director)
+            label Genre
+            input(type="text" name="Genre" value=movie.Genre)
+            br
             label Director
             input(type="text" name="Director" value=movie.Director)
             br
-            input(type="hidden" name="Writer" value=movie.Writer)
             label Writer
             input(type="text" name="Writer" value=movie.Writer)
             br
-            input(type="hidden" name="Actors" value=movie.Actors)
             label Actors
             input(type="text" name="Actors" value=movie.Actors)
             br
-            input(type="hidden" name="Plot" value=movie.Plot)
             label Plot
             input(type="text" name="Plot" value=movie.Plot)
             br
-            input(type="hidden" name="Poster" value=movie.Poster)
             label Poster
             input(type="text" name="Poster" value=movie.Poster)
+            br
+            label imdbRating
+            input(type="text" name="imdbRating" value=movie.imdbRating)
             br
             button(type="submit" value="CONFIRM EDITION" name="submit") CONFIRM EDITION
