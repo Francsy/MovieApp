@@ -14,10 +14,10 @@ const adminRouter = require('./routes/adminRoutes')
 const app = express();
 const PORT = 3000;
 
+app.use(express.json())
 app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views','./views');
-app.use(express.json())
 
 // Routes:
 app.use('/search',searchRouter);
