@@ -1,4 +1,5 @@
 const Movie = require('../models/movies')
+const entries = require('../models/userMyMovies');
 
 const renderBrowser = async (req, res, next) => {
     if (!req.query.searchEx) {
@@ -44,7 +45,32 @@ const getMovieDetails = async (req, res, next) => {
     }
 }
 
+const getMoviesById = async (req, res) => {
+    console.log(req.params.userid);
+    let movies = await entries(parseInt(req.params.userid));
+    res.render('userMyMovies', { movies });
+}
+
+const postMoviesById = async (req, res) => {
+    console.log(req.body.Title);
+    console.log(req.params.userid);
+    try {
+        const title = req.body.Title;
+        if (!title) {
+            return res.status(400).send({ error: 'Title is required' });
+        }
+        const userid = req.params.userid;
+        const result = await entries(title, userid);
+        res.status(200).send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to add movie to favorites' });
+    }
+};
+
 module.exports = {
     renderBrowser,
-    getMovieDetails
+    getMovieDetails,
+    getMoviesById,
+    postMoviesById
 }

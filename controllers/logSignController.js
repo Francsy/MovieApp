@@ -1,5 +1,3 @@
-const entries = require('../models/userMyMovies');
-
 const renderLogin = (req, res) => {
     res.status(200).render('log')
 }
@@ -33,19 +31,11 @@ const postSignup = async (req, res) => {
     });
 }
 
-const getMoviesById = async (req, res) => {
-    let movies;
-    let userid = req.params.userid;
-    movies = await entries.getMoviesById(userid);
-    res.render('userMyMovies', { movies: movies });
-}
-
 module.exports = {
     renderLogin,
     renderSignup,
     renderRecoverPassword,
     renderRestorePassword,
     postLogin,
-    postSignup,
-    getMoviesById
+    postSignup
 }

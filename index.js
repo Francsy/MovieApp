@@ -20,9 +20,9 @@ app.set('views','./views');
 app.use(express.json())
 
 // Routes:
-app.use('/',logSignRouter);
 app.use('/search',searchRouter);
 app.use('/admin',adminRouter);
+app.use('/',logSignRouter);
 
 app.use(errorManager)
 
