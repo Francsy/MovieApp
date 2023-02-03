@@ -40,6 +40,7 @@ const getMoviesById = async (userid) => {
 
 const postMovieById = async (userid, movie_title, movie_poster) => {
     let client, result;
+    const currentDateTime = new Date().toLocaleString();
     try {
         if (!userid) {
             throw new Error("userid is required");
@@ -48,7 +49,7 @@ const postMovieById = async (userid, movie_title, movie_poster) => {
             throw new Error("Title is required");
         }
         client = await pool.connect();
-        const data = await client.query('INSERT INTO favorites (user_id, movie_title, date_added, movie_poster) VALUES ($1, $2, $3, $4)', [userid, title, "CURRENT_TIMESTAMP", movie_poster])
+        const data = await client.query('INSERT INTO favorites (user_id, movie_title, date_added, movie_poster) VALUES ($1, $2, $3, $4)', [userid, movie_title, currentDateTime, movie_poster])
         result = data.rows
     } catch (err) {
         console.log(err);
