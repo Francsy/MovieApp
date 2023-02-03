@@ -4,20 +4,20 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{movie.Title}
+        title #{movie.title}
         link(rel="stylesheet", type="text/css", href="/styles.css")
     body
         header
             a(href=`/u/search/`)
                 p &#60;
         main
-            img(src=`${movie.Poster}`, alt="", srcset="")
-            button#saveFav Guardar favorito
-            h2.movie-details #{movie.Year} - #{movie.Title} - #{movie.Runtime}
-            p IMDB Rating: #{movie.imdbRating}
-            p Genres: #{movie.Genre}
-            p #{movie.Plot}
-            p Directors: #{movie.Director}
-            p Writers: #{movie.Writer}
-            p Actors: #{movie.Actors}
+            img(src=`${movie.img}`, alt="", srcset="")
+            button#saveFav Save Favourite
+            h2.movie-detailsh2(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
+            p Rating: #{movie.id}
+            p Genres: #{movie.genre}
+            p #{movie.plot}
+            p Directors: #{movie.director}
+            p Writers: #{movie.writer}
+            p Actors: #{movie.actors}
     script(src="/scripts.js")

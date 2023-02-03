@@ -8,7 +8,7 @@ userRouter.get('/search', userController.renderBrowser);
 
 // Renderiza pagina detallada de la pelicula, con botón para añadir a fav y comentarios por scraping:
 // CAMBIO IMPORTANTE: Cambiarr para que el id este en el front y al clicar se saque los detalles por id
-userRouter.get('/search/:title', userController.renderMovieDetails);
+userRouter.get('/search/:id', userController.renderMovieDetails);
 
 // Renderiza pagina de favoritos del usuario, cada peli con botón para borrar favorito:
 // Debe introducir en el front también el id de la peli (sea el de la api o el de mongo) para poder eliminar

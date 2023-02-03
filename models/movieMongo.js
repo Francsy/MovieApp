@@ -12,6 +12,7 @@ const movieSchema = new mongoose.Schema({
     Plot: { type: String, required: true },
     Poster: { type: String, required: true },
     imdbRating: { type: String, required: true },
+    movieId: { type: Number, required: true }
 });
 const Movie = mongoose.model('editedMovies', movieSchema);
 

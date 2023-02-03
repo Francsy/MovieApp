@@ -13,10 +13,15 @@ const renderBrowser = async (req, res, next) => {
             let movieRes = await fetch(`https://www.omdbapi.com/?s=${search}&type=movie&apikey=${process.env.OMDB_KEY}`);
             const moviesFounds = await movieRes.json();
             let moviesFoundsArr = moviesFounds.Search;
-            if (moviesFoundsArr.length === 0) {
+            if (moviesFoundsArr === undefined) {
                 try {
                     let dbMovies = await Movie.find({ Title: { $regex: search, $options: "i" } })
+                    console.log(dbMovies)
                     if (dbMovies.length > 0) {
+                        dbMovies = dbMovies.map(film => {
+                            let stringID = film['movieId'].toString();
+                            return { id: stringID, title: film.Title, img: film.Poster }
+                        })
                         res.status(200).render('userBrowser', { "movies": dbMovies, "search": search });
                     } else {
                         res.status(200).render('userBrowser', { message: "Not results available" });
@@ -26,6 +31,9 @@ const renderBrowser = async (req, res, next) => {
                 }
             } else {
                 moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
+                moviesFoundsArr = moviesFoundsArr.map(film => {
+                    return { id: film.imdbID, title: film.Title, img: film.Poster }
+                })
                 res.status(200).render('userBrowser', { "movies": moviesFoundsArr, "search": search });
             }
         } catch (err) {
@@ -38,12 +46,40 @@ const renderBrowser = async (req, res, next) => {
 // CAMBIO IMPORTANTE: Cambiarr para que el id este en el front y al clicar se saque los detalles por id
 const renderMovieDetails = async (req, res, next) => {
     try {
-        const movieRes = await fetch(`https://www.omdbapi.com/?t=${req.params.title}&plot=full&apikey=${process.env.OMDB_KEY}`);
-        const movie = await movieRes.json();
-        if (movie.Response === 'False') {
-            const dbMovie = await Movie.findOne({ Title: req.params.title }, { "_id": 0, "__v": 0 })
-            res.status(200).render('userMovie', { dbMovie });
+        const movieRes = await fetch(`https://www.omdbapi.com/?i=${req.params.id}&plot=full&apikey=${process.env.OMDB_KEY}`);
+        const apiMovie = await movieRes.json();
+        if (apiMovie.Response === 'False') {
+            const dbMovie = await Movie.findOne({ movieId: req.params.id }, { "_id": 0, "__v": 0 })
+            const dbAdaptedMovie = {
+                title: dbMovie.Title,
+                year: dbMovie.Year,
+                runtime: dbMovie.Runtime,
+                genre: dbMovie.Genre,
+                director: dbMovie.Director,
+                writer: dbMovie.Writer,
+                actors: dbMovie.Actors,
+                plot: dbMovie.Plot,
+                img: dbMovie.Poster,
+                rating: dbMovie.imdbRating,
+                id: dbMovie.movieId
+
+            }
+            res.status(200).render('userMovie', { movie: dbAdaptedMovie });
         }
+        const movie = {
+            title: apiMovie.Title,
+            year: apiMovie.Year,
+            runtime: apiMovie.Runtime,
+            genre: apiMovie.Genre,
+            director: apiMovie.Director,
+            writer: apiMovie.Writer,
+            actors: apiMovie.Actors,
+            plot: apiMovie.Plot,
+            img: apiMovie.Poster,
+            rating: apiMovie.imdbRating,
+            id: apiMovie.imdbID
+        }
+        console.log(movie)
         res.status(200).render('userMovie', { movie });
     } catch (err) {
         next(err)
