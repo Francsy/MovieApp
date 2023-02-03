@@ -8,9 +8,11 @@ CREATE TABLE users (
 
 CREATE TABLE favorites (
     user_id INT NOT NULL,
+    movie_id serial,
     movie_title VARCHAR ( 255 ) NOT NULL,
     date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (user_id, movie_title),
-    FOREIGN KEY (user_id),
+    movie_poster VARCHAR ( 255 ) NOT NULL,
+    PRIMARY KEY (user_id, movie_id),
+    FOREIGN KEY (user_id)
         REFERENCES users (user_id)
 );

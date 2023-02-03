@@ -15,9 +15,10 @@ adminRouter.get('/editmovie/:Title', adminController.renderAdminEdit);
 // Post del formulario de crear, envia todos los datos por req.body
 adminRouter.post('/createmovie', adminController.createMovie);
 
-// Envia un put a editar pelicula 
-// IMPORTANTE: cambiar para que edite por id => /editmovie/:id
-adminRouter.put('/editmovie/:Title', adminController.editMovie);
+adminRouter.get('/editmovie/:Title', adminController.getAdminEdit); 
+adminRouter.post('/editmovie/:Title', adminController.editMovie);
+
+adminRouter.delete('/deletemovie/:Title', adminController.deleteMovie);
 
 // Elimina una pelicula al pulsar el botón simplemente ponieendo el id al final de la ruta
 adminRouter.delete('/removeMovie/:id', adminController.removeMovie)
