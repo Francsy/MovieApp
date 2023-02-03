@@ -5,6 +5,7 @@ CREATE TABLE users (
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
     role VARCHAR ( 50 ) UNIQUE NOT NULL
 );
+
 CREATE TABLE favorites (
     user_id INT NOT NULL,
     movie_title VARCHAR ( 255 ) NOT NULL,

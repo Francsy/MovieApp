@@ -7,8 +7,8 @@ const morgan = require('morgan')
 const errorManager = require('./middlewares/errorManager')
 
 // Routes modules:
-const logSignRouter = require('./routes/logSignRoutes')
-const searchRouter = require('./routes/searchRoutes')
+const authRouter = require('./routes/authRoutes')
+const userRouter = require('./routes/userRoutes')
 const adminRouter = require('./routes/adminRoutes')
 
 const app = express();
@@ -18,15 +18,14 @@ app.use(express.json())
 app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views','./views');
+app.use(express.static('public'))
 
 // Routes:
-app.use('/search',searchRouter);
 app.use('/admin',adminRouter);
-app.use('/',logSignRouter);
+app.use('/u', userRouter);
+app.use('/', authRouter);
 
 app.use(errorManager)
-
-app.use(express.static('public'))
 
 app.listen(PORT, () => {
     console.info(`> Traemos un montón de películas en el puerto ${PORT}!!! 🎥✨🎬`);

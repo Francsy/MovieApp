@@ -16,6 +16,8 @@ const pool = require('../utils/db_pgsql')
 //     return result
 // }
 
+// Envia la query para retornar las pelis favoritas (id, imagen y titulo)
+
 const getMoviesById = async (userid) => {
     let client, result;
     try {
@@ -34,7 +36,9 @@ const getMoviesById = async (userid) => {
     return result
 }
 
-const postMoviesById = async (userid, title) => {
+// Añade un favorito introduciendo titulo, imagen e id 
+
+const postMovieById = async (userid, title) => {
     let client, result;
     try {
         if (!userid) {
@@ -55,4 +59,7 @@ const postMoviesById = async (userid, title) => {
     return result
 };
 
-module.exports = getMoviesById, postMoviesById;
+module.exports = {
+    getMoviesById, 
+    postMovieById 
+}
