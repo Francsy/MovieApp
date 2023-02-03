@@ -35,7 +35,7 @@ html(lang="en")
                     if movies
                         each movie in movies
                             article 
-                                a(href=`/u/search/${movie.Title}`)
-                                    img(src=`${movie.Poster}`)
-                                    p.movie-title= movie.Title
+                                a(href=`/u/search/${movie.id}`)
+                                    img(src=`${movie.img}`)
+                                    p.movie-title= movie.title
     script(src="/scripts.js")  

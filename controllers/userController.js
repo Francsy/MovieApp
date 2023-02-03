@@ -1,9 +1,7 @@
 const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
 
-// Renderiza buscador sin peliculas y con peliculas de la api y de mongo
-// CAMBIO IMPORTANTE: Debe tener el id para abrir detalles de la pelicula
-
+// Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
     if (!req.query.search) {
         res.status(200).render('userBrowser')
@@ -13,11 +11,16 @@ const renderBrowser = async (req, res, next) => {
             let movieRes = await fetch(`https://www.omdbapi.com/?s=${search}&type=movie&apikey=${process.env.OMDB_KEY}`);
             const moviesFounds = await movieRes.json();
             let moviesFoundsArr = moviesFounds.Search;
-            if (moviesFoundsArr.length === 0) {
+            if (moviesFoundsArr === undefined) {
                 try {
                     let dbMovies = await Movie.find({ Title: { $regex: search, $options: "i" } })
+                    console.log(dbMovies)
                     if (dbMovies.length > 0) {
-                        res.status(200).render('userBrowser', { "movies": dbMovies, "search": search });
+                        let movies = dbMovies.map(film => {
+                            let stringID = film['movieId'].toString();
+                            return { id: stringID, title: film.Title, img: film.Poster }
+                        })
+                        res.status(200).render('userBrowser', { movies, search });
                     } else {
                         res.status(200).render('userBrowser', { message: "Not results available" });
                     }
@@ -26,7 +29,10 @@ const renderBrowser = async (req, res, next) => {
                 }
             } else {
                 moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
-                res.status(200).render('userBrowser', { "movies": moviesFoundsArr, "search": search });
+                let movies = moviesFoundsArr.map(film => {
+                    return { id: film.imdbID, title: film.Title, img: film.Poster }
+                })
+                res.status(200).render('userBrowser', { movies, search });
             }
         } catch (err) {
             next(err)
@@ -35,15 +41,44 @@ const renderBrowser = async (req, res, next) => {
 }
 
 // Renderiza pagina detallada de la pelicula, con botón para añadir a fav y comentarios por scraping:
-// CAMBIO IMPORTANTE: Cambiarr para que el id este en el front y al clicar se saque los detalles por id
+// Faltan comentarios por scraping
+
 const renderMovieDetails = async (req, res, next) => {
     try {
-        const movieRes = await fetch(`https://www.omdbapi.com/?t=${req.params.title}&plot=full&apikey=${process.env.OMDB_KEY}`);
-        const movie = await movieRes.json();
-        if (movie.Response === 'False') {
-            const dbMovie = await Movie.findOne({ Title: req.params.title }, { "_id": 0, "__v": 0 })
-            res.status(200).render('userMovie', { dbMovie });
+        const movieRes = await fetch(`https://www.omdbapi.com/?i=${req.params.id}&plot=full&apikey=${process.env.OMDB_KEY}`);
+        const apiMovie = await movieRes.json();
+        if (apiMovie.Response === 'False') {
+            const dbMovie = await Movie.findOne({ movieId: req.params.id }, { "_id": 0, "__v": 0 })
+            let movie = {
+                title: dbMovie.Title,
+                year: dbMovie.Year,
+                runtime: dbMovie.Runtime,
+                genre: dbMovie.Genre,
+                director: dbMovie.Director,
+                writer: dbMovie.Writer,
+                actors: dbMovie.Actors,
+                plot: dbMovie.Plot,
+                img: dbMovie.Poster,
+                rating: dbMovie.imdbRating,
+                id: dbMovie.movieId
+
+            }
+            res.status(200).render('userMovie', { movie });
         }
+        let movie = {
+            title: apiMovie.Title,
+            year: apiMovie.Year,
+            runtime: apiMovie.Runtime,
+            genre: apiMovie.Genre,
+            director: apiMovie.Director,
+            writer: apiMovie.Writer,
+            actors: apiMovie.Actors,
+            plot: apiMovie.Plot,
+            img: apiMovie.Poster,
+            rating: apiMovie.imdbRating,
+            id: apiMovie.imdbID
+        }
+        console.log(movie)
         res.status(200).render('userMovie', { movie });
     } catch (err) {
         next(err)
