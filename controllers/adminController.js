@@ -19,7 +19,7 @@ const renderAdminCreate = (req, res) => {
 // Renderiza la pagina para editar pelicula
 // Importante: cambbiar para que renderice por id (con el id publico en el front) => /editmovie/:id
 const renderAdminEdit = async (req, res, next) => {
-    const movie = await Movie.findOne({ title: req.params.Title });
+    const movie = await Movie.findOne({ Title: req.params.Title });
     res.status(200).render('adminEdit', { movie })
 }
 
