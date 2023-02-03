@@ -38,17 +38,17 @@ const getMoviesById = async (userid) => {
 
 // Añade un favorito introduciendo titulo, imagen e id 
 
-const postMovieById = async (userid, title) => {
+const postMovieById = async (userid, movie_title, movie_poster) => {
     let client, result;
     try {
         if (!userid) {
             throw new Error("userid is required");
         }
-        if (!title) {
+        if (!movie_title) {
             throw new Error("Title is required");
         }
         client = await pool.connect();
-        const data = await client.query('INSERT INTO favorites (user_id, movie_title, date_added) VALUES ($1, $2, NOW());', [userid, title])
+        const data = await client.query('INSERT INTO favorites (user_id, movie_title, date_added, movie_poster) VALUES ($1, $2, $3, $4)', [userid, title, "CURRENT_TIMESTAMP", movie_poster])
         result = data.rows
     } catch (err) {
         console.log(err);

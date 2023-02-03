@@ -63,20 +63,20 @@ const renderUserFavs = async (req, res) => {
 // El id de la pelicula (sea de la api o de la peli en mongo debe llegar por req.body):
 // Por ahora pasamos la id de usuario por params:
 const addFav = async (req, res) => {
-    console.log(req.body.Title);
-    console.log(req.params.userid);
+    console.log(req.params);
+    console.log(req.body);
     try {
-        const title = req.body.Title;
-        if (!title) {
-            return res.status(400).send({ error: 'Title is required' });
+        const { movie_title, movie_poster } = req.body;
+        if (!movie_title) {
+          return res.status(400).send({ error: 'Title is required' });
         }
         const userid = req.params.userid;
-        const result = await favMovies.postMovieById(title, userid);
+        const result = await favMovies.postMovieById(userid, movie_title, movie_poster);
         res.status(200).send(result);
-    } catch (error) {
+      } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to add movie to favorites' });
-    }
+      }
 };
 
 // Renderiza la pagina con el formulario para cambiar contraseña:
