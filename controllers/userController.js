@@ -1,5 +1,5 @@
 const Movie = require('../models/movieMongo')
-const favMovies = require('../models/favMoviesSQL');
+const favMovies = require('../models/favMoviesPGSQL');
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo
 // CAMBIO IMPORTANTE: Debe tener el id para abrir detalles de la pelicula
