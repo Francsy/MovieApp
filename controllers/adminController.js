@@ -42,17 +42,18 @@ const createMovie = async (req, res) => {
 // Envia un put a editar pelicula 
 // IMPORTANTE: cambiar para que edite por id => /editmovie/:id
 const editMovie = async (req, res) => {
-    console.log(req.body)
     try {
         await Movie.findOneAndUpdate({ Title: req.body.Title }, {
             Title: req.body.Title,
             Year: req.body.Year,
             Runtime: req.body.Runtime,
+            Genre: req.body.Genre,
             Director: req.body.Director,
             Writer: req.body.Writer,
             Actors: req.body.Actors,
             Plot: req.body.Plot,
             Poster: req.body.Poster,
+            imdbRating: req.body.imdbRating
         }, { new: true });
 
         res.status(200).redirect('/admin');
@@ -63,9 +64,16 @@ const editMovie = async (req, res) => {
     }
 }
 
-// Elimina una pelicula al pulsar el botón simplemente ponieendo el id al final de la ruta
-const removeMovie = async (req, res) => {
-    console.log('Pelicula borrada')
+const deleteMovie = async (req, res) => {
+    try {
+        await Movie.findOneAndDelete({ Title: req.params.Title });
+
+        res.status(200).redirect('/admin');
+    } catch (err) {
+        res.status(400).json({
+            msj: err.message
+        });
+    }
 }
 
 module.exports = {
@@ -74,5 +82,5 @@ module.exports = {
     renderAdminEdit,
     createMovie,
     editMovie,
-    removeMovie
+    deleteMovie
 }

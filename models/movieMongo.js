@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-sequence')(mongoose);
 require('../utils/db_mongo')
 
 const movieSchema = new mongoose.Schema({
@@ -14,6 +15,8 @@ const movieSchema = new mongoose.Schema({
     imdbRating: { type: String, required: true },
     movieId: { type: Number, required: true }
 });
+
+movieSchema.plugin(autoIncrement, {inc_field: 'movieId'});
 const Movie = mongoose.model('editedMovies', movieSchema);
 
 module.exports = Movie;
