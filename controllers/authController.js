@@ -23,7 +23,7 @@ const postLogin = async (req, res) => {
 
 // Recibe email y contraseña para registrar usuario:
 
-const postSignup = async (req, res) => {
+const postSignUp = async (req, res) => {
     const newUser = req.body;
     const response = await entry.createUser(newUser);
     res.status(201).json({
@@ -43,13 +43,19 @@ const postRecoverPassword =  (req, res) => {
     console.log('Pidiendo password')
 }
 
+// const googleLogin?
+// const googleSingUp
+// const logOut
 
 
 module.exports = {
     renderLogin,
     renderSignup,
     postLogin,
-    postSignup,
+    postSignUp,
     renderRecoverPassword,
     postRecoverPassword
+    // googleLogin?
+    // googleSingUp
+    // logOut
 }
