@@ -11,22 +11,22 @@ html(lang="en")
             div(id="space")            
             h1.main-title Browser
             label(for="burger-checkbox")
-                img(src="./assets/morty.png" id="burger" alt="burguer icon")
+                img(src="/assets/morty.png" id="burger" alt="burguer icon")
         input(type="checkbox" id="burger-checkbox")
         nav
             ul
                 li 
-                    a(href="/movies/:id") Manage Your Movies
+                    a(href="/u/movies/22") Manage Your Movies
                 li 
-                    a(href="/restorepassword") Change Password
+                    a(href="/u/restorepassword") Change Password
                 li 
                     a(href="/about") About FS Movies+
                 li 
                     a(href="/") < Log out
         main
-            form(action="/search", method="get" class="search-form")
+            form(action="/u/search", method="get" class="search-form")
                 img(src="/assets/search-icon.svg" alt="search", class="search-icon")
-                input(type="text", class="search-input hidden", name="searchEx")
+                input(type="text", class="search-input hidden", name="search")
             if message
                 h2.search-title #{message}
             if movies
@@ -35,7 +35,7 @@ html(lang="en")
                     if movies
                         each movie in movies
                             article 
-                                a(href=`/search/${movie.Title}`)
+                                a(href=`/u/search/${movie.Title}`)
                                     img(src=`${movie.Poster}`)
                                     p.movie-title= movie.Title
     script(src="/scripts.js")  

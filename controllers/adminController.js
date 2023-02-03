@@ -1,6 +1,6 @@
-const Movie = require('../models/movies');
-const { renderBrowser } = require('./searchController');
+const Movie = require('../models/movieMongo');
 
+// Renderiza pagina del admin con todas las pelis, con botón para crear, boton en cada peli para editar por id de mongo y botón borrar.
 const renderAdminPage = async (req, res, next) => {
     try {
         let movies = await Movie.find({}, '-_id -__v');
@@ -11,15 +11,19 @@ const renderAdminPage = async (req, res, next) => {
     }
 }
 
-const getAdminCreate = (req, res) => {
+// Renderiza pagina para crear nueva pelicula con formulario para introducirla en mongo (un id publico debe ser añadido automaticamente)
+const renderAdminCreate = (req, res) => {
     res.status(200).render('adminCreate')
 }
 
-const getAdminEdit = async (req, res, next) => {
-    const movie = await Movie.findOne({ title: req.params.Title });
+// Renderiza la pagina para editar pelicula
+// Importante: cambbiar para que renderice por id (con el id publico en el front) => /editmovie/:id
+const renderAdminEdit = async (req, res, next) => {
+    const movie = await Movie.findOne({ Title: req.params.Title });
     res.status(200).render('adminEdit', { movie })
 }
 
+// Post del formulario de crear, envia todos los datos por req.body
 const createMovie = async (req, res) => {
     const newMovie = await req.body;
     try {
@@ -35,6 +39,8 @@ const createMovie = async (req, res) => {
     }
 }
 
+// Envia un put a editar pelicula 
+// IMPORTANTE: cambiar para que edite por id => /editmovie/:id
 const editMovie = async (req, res) => {
     try {
         await Movie.findOneAndUpdate({ Title: req.body.Title }, {
@@ -72,8 +78,8 @@ const deleteMovie = async (req, res) => {
 
 module.exports = {
     renderAdminPage,
-    getAdminCreate,
-    getAdminEdit,
+    renderAdminCreate,
+    renderAdminEdit,
     createMovie,
     editMovie,
     deleteMovie
