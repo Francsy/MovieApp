@@ -1,8 +1,7 @@
 const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
 
-// Renderiza buscador sin peliculas y con peliculas de la api y de mongo
-// CAMBIO IMPORTANTE: Debe tener el id para abrir detalles de la pelicula
+// Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 
 const renderBrowser = async (req, res, next) => {
     if (!req.query.search) {
@@ -18,11 +17,11 @@ const renderBrowser = async (req, res, next) => {
                     let dbMovies = await Movie.find({ Title: { $regex: search, $options: "i" } })
                     console.log(dbMovies)
                     if (dbMovies.length > 0) {
-                        dbMovies = dbMovies.map(film => {
+                        let movies = dbMovies.map(film => {
                             let stringID = film['movieId'].toString();
                             return { id: stringID, title: film.Title, img: film.Poster }
                         })
-                        res.status(200).render('userBrowser', { "movies": dbMovies, "search": search });
+                        res.status(200).render('userBrowser', { movies, search });
                     } else {
                         res.status(200).render('userBrowser', { message: "Not results available" });
                     }
@@ -31,10 +30,10 @@ const renderBrowser = async (req, res, next) => {
                 }
             } else {
                 moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
-                moviesFoundsArr = moviesFoundsArr.map(film => {
+                let movies = moviesFoundsArr.map(film => {
                     return { id: film.imdbID, title: film.Title, img: film.Poster }
                 })
-                res.status(200).render('userBrowser', { "movies": moviesFoundsArr, "search": search });
+                res.status(200).render('userBrowser', { movies, search });
             }
         } catch (err) {
             next(err)
@@ -43,14 +42,15 @@ const renderBrowser = async (req, res, next) => {
 }
 
 // Renderiza pagina detallada de la pelicula, con botón para añadir a fav y comentarios por scraping:
-// CAMBIO IMPORTANTE: Cambiarr para que el id este en el front y al clicar se saque los detalles por id
+// Faltan comentarios por scraping
+
 const renderMovieDetails = async (req, res, next) => {
     try {
         const movieRes = await fetch(`https://www.omdbapi.com/?i=${req.params.id}&plot=full&apikey=${process.env.OMDB_KEY}`);
         const apiMovie = await movieRes.json();
         if (apiMovie.Response === 'False') {
             const dbMovie = await Movie.findOne({ movieId: req.params.id }, { "_id": 0, "__v": 0 })
-            const dbAdaptedMovie = {
+            let movie = {
                 title: dbMovie.Title,
                 year: dbMovie.Year,
                 runtime: dbMovie.Runtime,
@@ -64,9 +64,9 @@ const renderMovieDetails = async (req, res, next) => {
                 id: dbMovie.movieId
 
             }
-            res.status(200).render('userMovie', { movie: dbAdaptedMovie });
+            res.status(200).render('userMovie', { movie });
         }
-        const movie = {
+        let movie = {
             title: apiMovie.Title,
             year: apiMovie.Year,
             runtime: apiMovie.Runtime,
