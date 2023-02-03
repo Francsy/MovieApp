@@ -12,7 +12,7 @@ authRouter.get('/signup', authController.renderSignup);
 authRouter.post('/login', authController.postLogin);
 
 // Recibe email y contraseña para registrar usuario:
-authRouter.post('/signup', authController.postSignup);
+authRouter.post('/signup', authController.postSignUp);
 
 // Renderiza pagina de recuperación de password:
 authRouter.get('/recoverpassword', authController.renderRecoverPassword);
@@ -22,8 +22,9 @@ authRouter.post('/recoverpassword', authController.postRecoverPassword)
 
 // authRouter.post('/googlelogin, authController.googleLogin) ???
 
-// authRouter.post('/googlesignup, authController.googleSignup) ??
+// authRouter.post('/googlesignup, authController.googleSignUp) ??
 
+// authRouter.get('/logout', authController.logOut) ????
 
 
 module.exports = authRouter;
