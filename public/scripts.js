@@ -14,7 +14,7 @@ if (document.title === 'Browser') {
 // u/search/:title page:
 if (document.querySelector('.movie-details')) {
     document.querySelector('#saveFav').addEventListener('click', function () {
-        
+
         const movie = {
             movie_id: document.querySelector('.movie-details').id,
             movie_title: document.title,
@@ -28,14 +28,25 @@ if (document.querySelector('.movie-details')) {
     });
 }
 
+if (document.title === 'My movies') {
+    document.querySelectorAll('.delete-fav').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const movieId = this.id;
+            fetch(`/u/movies/22`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ movie_id: movieId })
+            });
+            this.parentElement.remove();
+        });
+    });
+}
+
 
 // Manage editMovie put request
 
 if (document.title === 'Edit movie') {
-<<<<<<< HEAD
-    const editMovieForm = document.querySelector('#editmovie-form');
-=======
->>>>>>> develop
     const Title = document.querySelector("#editmovie-form > input[type=text]:nth-child(3)").value
     const Year = document.querySelector("#editmovie-form > input[type=text]:nth-child(7)").value
     const Runtime = document.querySelector("#editmovie-form > input[type=text]:nth-child(11)").value
@@ -48,11 +59,7 @@ if (document.title === 'Edit movie') {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-<<<<<<< HEAD
-        fetch(`/admin/editmovie/${title}`, {
-=======
         fetch(`https://localhost:3000/admin/editmovie/${title}`, {
->>>>>>> develop
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,8 +76,6 @@ if (document.title === 'Edit movie') {
             })
         })
     });
-<<<<<<< HEAD
-=======
 }
 
 // Delete function for buttton remove in admin page
@@ -79,5 +84,4 @@ const deleteMovieButton = (deleteRoute) => {
         method: 'DELETE'
     })
         .then(location.reload())
->>>>>>> develop
 }
