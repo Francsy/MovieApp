@@ -14,7 +14,7 @@ if (document.title === 'Browser') {
 // u/search/:title page:
 if (document.querySelector('.movie-details')) {
     document.querySelector('#saveFav').addEventListener('click', function () {
-
+        
         const movie = {
             movie_id: document.querySelector('.movie-details').id,
             movie_title: document.title,
@@ -28,6 +28,7 @@ if (document.querySelector('.movie-details')) {
     });
 }
 
+//DELETE FAV
 if (document.title === 'My movies') {
     document.querySelectorAll('.delete-fav').forEach(button => {
         button.addEventListener('click', function (event) {
@@ -42,7 +43,6 @@ if (document.title === 'My movies') {
         });
     });
 }
-
 
 // Manage editMovie put request
 
