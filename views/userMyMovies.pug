@@ -23,12 +23,15 @@ html(lang="en")
                 li 
                     a(href="/about") About FS Movies+
                 li 
-                    a(href="/") < Log out
+                    a(href="/logout") < Log out
         main 
             h1 User's Favorite Movies
             
             section(class="movies-found")
                 each movie in movies
                     article
-                        
-                        p= movie.movie_title
+                        a(href=`/u/search/${movie.movie_id}`)
+                            img(src=`${movie.movie_poster}`)
+                            p= movie.movie_title
+                        button.delete-fav(id=movie.movie_id) 🗑
+    script(src="/scripts.js")

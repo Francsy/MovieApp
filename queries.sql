@@ -8,7 +8,7 @@ CREATE TABLE users (
 
 CREATE TABLE favorites (
     user_id INT NOT NULL,
-    movie_id serial,
+    movie_id VARCHAR ( 255 ),
     movie_title VARCHAR ( 255 ) NOT NULL,
     date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     movie_poster VARCHAR ( 255 ) NOT NULL,
