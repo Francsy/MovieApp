@@ -4,13 +4,13 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title User My Movies
+        title My movies
         link(rel="stylesheet", type="text/css", href="/styles.css")
     body
         header(id="formatHeader")
             a(href="/search")
                     img(src="/assets/backarrow.png")           
-            h1.main-title My Movies
+            h1.main-title My movies
             label(for="burger-checkbox")
                 img(src="/assets/morty.png" id="burger" alt="burguer icon")
         input(type="checkbox" id="burger-checkbox")
@@ -25,13 +25,14 @@ html(lang="en")
                 li 
                     a(href="/logout") < Log out
         main 
-            h1 User's Favorite Movies
+            h1 #{title}
             
             section(class="movies-found")
-                each movie in movies
-                    article
-                        a(href=`/u/search/${movie.movie_id}`)
-                            img(src=`${movie.movie_poster}`)
-                            p= movie.movie_title
-                        button.delete-fav(id=movie.movie_id) 🗑
+                if movies
+                    each movie in movies
+                        article
+                            a(href=`/u/search/${movie.movie_id}`)
+                                img(src=`${movie.movie_poster}`)
+                                p= movie.movie_title
+                            button.delete-fav(id=movie.movie_id) 🗑
     script(src="/scripts.js")

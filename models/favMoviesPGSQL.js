@@ -60,7 +60,23 @@ const postMovieById = async (userid, movie_id, movie_title, movie_poster) => {
     return result
 };
 
+const deleteMovieById = async (user_id, movie_id) => {
+    let client, result;
+    try {
+        client = await pool.connect(); // Espera a abrir conexion
+        const data = await client.query('DELETE FROM favorites AS f WHERE f.user_id=$1 AND f.movie_id=$2',[user_id, movie_id])
+        result = data.rowCount
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+};
+
 module.exports = {
     getMoviesById, 
-    postMovieById
+    postMovieById,
+    deleteMovieById
 }
