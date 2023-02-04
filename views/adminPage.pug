@@ -14,7 +14,9 @@ html(lang="en")
                 if adminMovies
                         each movie in adminMovies
                             article 
-                                a(href=`/search/${movie.Title}`)
+                                a(href=`/search/${movie.movieId}`)
                                     img(src=`${movie.Poster}`)
                                     p.movie-title= movie.Title
+                                button(onclick=`window.location.href='/admin/editmovie/${movie.movieId}'`) Edit 
+                                button(onclick=`deleteMovieButton('/admin/removemovie/${movie.movieId}')`) Remove
     script(src="/scripts.js")

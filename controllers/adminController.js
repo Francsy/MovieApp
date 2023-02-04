@@ -19,7 +19,7 @@ const renderAdminCreate = (req, res) => {
 // Renderiza la pagina para editar pelicula
 // Importante: cambbiar para que renderice por id (con el id publico en el front) => /editmovie/:id
 const renderAdminEdit = async (req, res, next) => {
-    const movie = await Movie.findOne({ Title: req.params.Title });
+    const movie = await Movie.findOne({ movieId: req.params.movieId });
     res.status(200).render('adminEdit', { movie })
 }
 
@@ -43,7 +43,7 @@ const createMovie = async (req, res) => {
 // IMPORTANTE: cambiar para que edite por id => /editmovie/:id
 const editMovie = async (req, res) => {
     try {
-        await Movie.findOneAndUpdate({ Title: req.body.Title }, {
+        await Movie.findOneAndUpdate({ movieId: req.body.movieId }, {
             Title: req.body.Title,
             Year: req.body.Year,
             Runtime: req.body.Runtime,
@@ -66,7 +66,7 @@ const editMovie = async (req, res) => {
 
 const deleteMovie = async (req, res) => {
     try {
-        await Movie.findOneAndDelete({ Title: req.params.Title });
+        await Movie.findOneAndDelete({ movieId: req.params.movieId });
 
         res.status(200).redirect('/admin');
     } catch (err) {

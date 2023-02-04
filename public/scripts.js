@@ -32,7 +32,10 @@ if (document.querySelector('.movie-details')) {
 // Manage editMovie put request
 
 if (document.title === 'Edit movie') {
+<<<<<<< HEAD
     const editMovieForm = document.querySelector('#editmovie-form');
+=======
+>>>>>>> develop
     const Title = document.querySelector("#editmovie-form > input[type=text]:nth-child(3)").value
     const Year = document.querySelector("#editmovie-form > input[type=text]:nth-child(7)").value
     const Runtime = document.querySelector("#editmovie-form > input[type=text]:nth-child(11)").value
@@ -45,7 +48,11 @@ if (document.title === 'Edit movie') {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
+<<<<<<< HEAD
         fetch(`/admin/editmovie/${title}`, {
+=======
+        fetch(`https://localhost:3000/admin/editmovie/${title}`, {
+>>>>>>> develop
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,4 +69,15 @@ if (document.title === 'Edit movie') {
             })
         })
     });
+<<<<<<< HEAD
+=======
+}
+
+// Delete function for buttton remove in admin page
+const deleteMovieButton = (deleteRoute) => {
+    fetch(deleteRoute, {
+        method: 'DELETE'
+    })
+        .then(location.reload())
+>>>>>>> develop
 }
