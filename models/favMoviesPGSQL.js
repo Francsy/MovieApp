@@ -25,7 +25,7 @@ const getMoviesById = async (userid) => {
             throw new Error("userid is required");
         }
         client = await pool.connect();
-        const data = await client.query('SELECT movie_title FROM favorites WHERE user_id = $1', [userid])
+        const data = await client.query('SELECT movie_id, movie_title, movie_poster FROM favorites WHERE user_id = $1', [userid])
         result = data.rows
     } catch (err) {
         console.log(err);
@@ -38,7 +38,7 @@ const getMoviesById = async (userid) => {
 
 // Añade un favorito introduciendo titulo, imagen e id 
 
-const postMovieById = async (userid, movie_title, movie_poster) => {
+const postMovieById = async (userid, movie_id, movie_title, movie_poster) => {
     let client, result;
     const currentDateTime = new Date().toLocaleString();
     try {
@@ -49,7 +49,7 @@ const postMovieById = async (userid, movie_title, movie_poster) => {
             throw new Error("Title is required");
         }
         client = await pool.connect();
-        const data = await client.query('INSERT INTO favorites (user_id, movie_title, date_added, movie_poster) VALUES ($1, $2, $3, $4)', [userid, movie_title, currentDateTime, movie_poster])
+        const data = await client.query('INSERT INTO favorites (user_id, movie_id, movie_title, date_added, movie_poster) VALUES ($1, $2, $3, $4, $5)', [userid, movie_id, movie_title, currentDateTime, movie_poster])
         result = data.rows
     } catch (err) {
         console.log(err);
@@ -62,5 +62,5 @@ const postMovieById = async (userid, movie_title, movie_poster) => {
 
 module.exports = {
     getMoviesById, 
-    postMovieById 
+    postMovieById
 }

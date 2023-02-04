@@ -78,7 +78,6 @@ const renderMovieDetails = async (req, res, next) => {
             rating: apiMovie.imdbRating,
             id: apiMovie.imdbID
         }
-        console.log(movie)
         res.status(200).render('userMovie', { movie });
     } catch (err) {
         next(err)
@@ -89,8 +88,10 @@ const renderMovieDetails = async (req, res, next) => {
 // Debe introducir en el front también el id de la peli (sea el de la api o el de mongo) para poder eliminar
 // Por ahora pasamos la id de usuario por params
 const renderUserFavs = async (req, res) => {
-    console.log(req.params.userid);
-    let movies = await favMovies.getMoviesById(parseInt(req.params.userid));
+    const { userid } = req.params
+    console.log(userid)
+    const movies = await favMovies.getMoviesById(userid);
+    console.log(movies)
     res.render('userMyMovies', { movies });
 }
 
@@ -101,18 +102,23 @@ const addFav = async (req, res) => {
     console.log(req.params);
     console.log(req.body);
     try {
-        const { movie_title, movie_poster } = req.body;
+        const { movie_title, movie_id, movie_poster } = req.body;
         if (!movie_title) {
           return res.status(400).send({ error: 'Title is required' });
         }
         const userid = req.params.userid;
-        const result = await favMovies.postMovieById(userid, movie_title, movie_poster);
+        const result = await favMovies.postMovieById(userid, movie_id, movie_title, movie_poster);
         res.status(200).send(result);
       } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to add movie to favorites' });
       }
 };
+
+const deleteFav = async (req, res) => {
+    const { userid } = req.params;
+    const { movie_id } = req.body;
+}
 
 // Renderiza la pagina con el formulario para cambiar contraseña:
 const renderRestorePassword = (req, res) => {
@@ -130,5 +136,6 @@ module.exports = {
     renderUserFavs,
     addFav,
     renderRestorePassword,
-    changePassword
+    changePassword,
+    deleteFav
 }

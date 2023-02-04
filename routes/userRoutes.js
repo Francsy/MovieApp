@@ -19,6 +19,8 @@ userRouter.get('/movies/:userid', userController.renderUserFavs); //http://local
 // Por ahora pasamos la id de usuario por params
 userRouter.post('/movies/:userid', userController.addFav);
 
+userRouter.delete('/movies/:userid', userController.deleteFav)
+
 
 // Renderiza la pagina con el formulario para cambiar contraseña:
 userRouter.get('/restorepassword', userController.renderRestorePassword);

@@ -12,26 +12,13 @@ if (document.title === 'Browser') {
 }
 
 // u/search/:title page:
-
-// if (document.querySelector('.movie-details')) {
-//     document.getElementById('saveFav').addEventListener('click', () => {
-//         fetch('/u/movies/${userid}', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 Title: document.title
-//             })
-//         })
-//     })
-// }
 if (document.querySelector('.movie-details')) {
     document.querySelector('#saveFav').addEventListener('click', function () {
+        
         const movie = {
-            movie_id: 1,
+            movie_id: document.querySelector('.movie-details').id,
             movie_title: document.title,
-            movie_poster: document.querySelector('img').src
+            movie_poster: document.querySelector('img').src,
         };
         fetch('/u/movies/22', {
             method: 'POST',
@@ -58,7 +45,7 @@ if (document.title === 'Edit movie') {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        fetch(`https://localhost:3000/admin/editmovie/${title}`, {
+        fetch(`/admin/editmovie/${title}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
