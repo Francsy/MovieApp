@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const jwt_key = process.env.JWT_KEY;
 
 
-
 // Renderiza pagina inicial con formulario de autenticación: 
 
 const renderLogin = (req, res) => {
