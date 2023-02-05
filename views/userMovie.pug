@@ -7,9 +7,22 @@ html(lang="en")
         title #{movie.title}
         link(rel="stylesheet", type="text/css", href="/styles.css")
     body
-        header
-            a(href=`/u/search/`)
-                p &#60;
+        header(id="formatHeader")
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title Your Selection
+            label(for="burger-checkbox")
+                img(src="/assets/morty.png" id="burger" alt="burguer icon")
+        input(type="checkbox" id="burger-checkbox")
+        nav
+            ul
+                li 
+                    a(href="/u/search") Browser
+                li 
+                    a(href="/u/restorepassword") Change Password
+                li 
+                    a(href="/about") About FS Movies+
+                li 
+                    a(href="/logout") < Log out
         main
             img(src=`${movie.img}`, alt="", srcset="")
             button#saveFav Save Favourite
