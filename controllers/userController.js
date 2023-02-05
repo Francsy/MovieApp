@@ -89,7 +89,7 @@ const renderMovieDetails = async (req, res, next) => {
 // Por ahora pasamos la id de usuario por params
 const renderUserFavs = async (req, res) => {
     const { userid } = req.params;
-    const movies = await favMovies.getMoviesById(userid);
+    const movies = await favMovies.getMoviesByUser(userid);
     if(!movies[0]) {
         res.render('userMyMovies', { title: 'You didn´t save any movie yet' })
     } else {

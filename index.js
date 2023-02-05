@@ -1,7 +1,11 @@
 const express = require('express');
+const session = require('express-session');
 require('dotenv').config()
 const fetch = require('node-fetch')
 const path = require('path');
+const cookieParser = require("cookie-parser");
+const protect = require('./middlewares/verifiedToken')
+
 
 
 // Middlewares modules:
@@ -22,13 +26,15 @@ app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'))
+app.use(cookieParser());
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes:
-app.use('/admin',adminRouter);
-app.use('/u', userRouter);
+app.use('/admin', protect.adminProtector, adminRouter);
+app.use('/u', protect.userProtector, userRouter);
 app.use('/', authRouter);
 
 app.use(errorManager)

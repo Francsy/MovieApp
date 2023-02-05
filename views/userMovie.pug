@@ -2,10 +2,10 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title #{movie.title}
-        link(rel="stylesheet", type="text/css", href="/styles.css")
+        link(rel="stylesheet" type="text/css" href="/styles.css")
     body
         header(id="formatHeader")
             button(type="button", onclick="history.back()") &#8678
@@ -24,7 +24,7 @@ html(lang="en")
                 li 
                     a(href="/logout") < Log out
         main
-            img(src=`${movie.img}`, alt="", srcset="")
+            img(src=`${movie.img}` alt="" srcset="")
             button#saveFav Save Favourite
             h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
             p Rating: #{movie.rating}
