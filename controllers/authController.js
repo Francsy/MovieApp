@@ -23,13 +23,14 @@ const renderSignup = (req, res) => {
 const postLogin = async (req, res) => {
     const { email, password } = req.body;
     try {
-        let data = await users.getUserPassword(email)
-        const { password: dbPassword, role } = data[0];
+        let data = await users.getUserData(email)
+        const { user_id, password: dbPassword, role } = data[0];
         const match = await bcrypt.compare(password, dbPassword);
         if (match) {
             await users.changeStatusToTrue(email)
             const userForToken = {
-                email         
+                email,
+                id: user_id        
             };
             const token = jwt.sign(userForToken, jwt_key, {expiresIn: '20m'});
             res.cookie('access-token', token,  {
