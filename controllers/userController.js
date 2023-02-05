@@ -1,8 +1,18 @@
+const regex = require('../utils/regex')
+const jwt = require('jsonwebtoken');
+const jwt_key = process.env.JWT_KEY;
+const bcrypt = require('bcrypt');
 const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
+const users = require('../models/usersPGSQL')
+const saltRounds = 10;
+
+
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
+    console.log(req.decoded.id)
+    console.log(req.decoded.email)
     if (!req.query.search) {
         res.status(200).render('userBrowser')
     } else {
@@ -90,10 +100,10 @@ const renderMovieDetails = async (req, res, next) => {
 const renderUserFavs = async (req, res) => {
     const { userid } = req.params;
     const movies = await favMovies.getMoviesByUser(userid);
-    if(!movies[0]) {
+    if (!movies[0]) {
         res.render('userMyMovies', { title: 'You didn´t save any movie yet' })
     } else {
-        res.render('userMyMovies', { movies, title: 'User´s Favorite Movies'  });
+        res.render('userMyMovies', { movies, title: 'User´s Favorite Movies' });
     }
 }
 
@@ -104,15 +114,15 @@ const addFav = async (req, res) => {
     try {
         const { movie_title, movie_id, movie_poster } = req.body;
         if (!movie_title) {
-          return res.status(400).send({ error: 'Title is required' });
+            return res.status(400).send({ error: 'Title is required' });
         }
         const userid = req.params.userid;
         const result = await favMovies.postMovieById(userid, movie_id, movie_title, movie_poster);
         res.status(200).send(result);
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).send({ error: 'Failed to add movie to favorites' });
-      }
+    }
 };
 
 const deleteFav = async (req, res) => {
@@ -127,17 +137,41 @@ const renderRestorePassword = (req, res) => {
     res.status(200).render('userRestorePassword')
 }
 
+
+
 // Recibe contraseña actual a través de POST y la nueva repetida dos veces para validar:
-const changePassword = (req, res) => {
-    console.log('enviando petición de cambio de contraseña')
+const changePassword = async (req, res) => {
+    const { password, newPassword, newPasswordCheck } = req.body;
+    if (newPassword === newPasswordCheck) {
+        if (regex.validatePassword(newPassword)) {
+            try {
+                let data = await users.getUserPassword(req.decoded.email)
+                const { password: dbPassword } = data[0];
+                const match = await bcrypt.compare(password, dbPassword);
+                if (match) {
+                    const hashNewPassword = await bcrypt.hash(newPassword, saltRounds);
+                    await users.setNewPassword(req.decoded.email, hashNewPassword)
+                    console.log('password changes')
+                }
+            } catch (err) {
+                console.log(err)
+            }
+            const token = req.cookies['access-token'];
+        } else {
+            res.status(400).json({ msg: 'Invalid new password' })
+        }
+    } else {
+        res.status(400).json({ msg: 'You didn´t write the same password' })
+    }
 }
+
 
 module.exports = {
     renderBrowser,
     renderMovieDetails,
     renderUserFavs,
     addFav,
+    deleteFav,
     renderRestorePassword,
-    changePassword,
-    deleteFav
+    changePassword
 }
