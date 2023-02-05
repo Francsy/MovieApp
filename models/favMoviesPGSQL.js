@@ -18,7 +18,7 @@ const pool = require('../utils/db_pgsql')
 
 // Envia la query para retornar las pelis favoritas (id, imagen y titulo)
 
-const getMoviesById = async (userid) => {
+const getMoviesByUser = async (userid) => {
     let client, result;
     try {
         if (!userid) {
@@ -76,7 +76,7 @@ const deleteMovieById = async (user_id, movie_id) => {
 };
 
 module.exports = {
-    getMoviesById, 
+    getMoviesByUser, 
     postMovieById,
     deleteMovieById
 }

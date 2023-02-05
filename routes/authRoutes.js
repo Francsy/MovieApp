@@ -14,11 +14,13 @@ authRouter.post('/login', authController.postLogin);
 // Recibe email y contraseña para registrar usuario:
 authRouter.post('/signup', authController.postSignUp);
 
+authRouter.get('/logout', authController.logOut)
+
 // Renderiza pagina de recuperación de password:
-authRouter.get('/recoverpassword', authController.renderRecoverPassword);
+// authRouter.get('/recoverpassword', authController.renderRecoverPassword);
 
 // Envia un post para la recuperación de password
-authRouter.post('/recoverpassword', authController.postRecoverPassword)
+// authRouter.post('/recoverpassword', authController.postRecoverPassword)
 
 // authRouter.post('/googlelogin, authController.googleLogin) ???
 
