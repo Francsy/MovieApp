@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config()
 const fetch = require('node-fetch')
+const path = require('path');
+
 
 // Middlewares modules:
 const morgan = require('morgan')
@@ -18,7 +20,7 @@ const PORT = 3000;
 app.use(express.json())
 app.use(morgan('dev'));
 app.set('view engine', 'pug');
-app.set('views','./views');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: false }));
