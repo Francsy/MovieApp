@@ -6,9 +6,6 @@ const userController = require('../controllers/userController');
 // Renderiza pagina del admin con todas las pelis, con botón para crear, boton en cada peli para editar por id de mongo y botón borrar.
 adminRouter.get('/', adminController.renderAdminPage);
 
-// Renders the movie details page
-adminRouter.get('/:id', userController.renderMovieDetails);
-
 // Renderiza pagina para crear nueva pelicula con formulario para introducirla en mongo (un id publico debe ser añadido automaticamente)
 adminRouter.get('/createmovie', adminController.renderAdminCreate);
 
