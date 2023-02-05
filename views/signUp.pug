@@ -5,18 +5,21 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Signup
-        //- link(rel="stylesheet", type="text/css", href="/styles.css")
+        link(rel="stylesheet", type="text/css", href="/styles.css")
     header
         h2 FS MOVIES+
-        img(src="/assets/girl.jpg" alt="logo") 
+        img(src="/assets/girl.jpg", alt="logo", class="girl-logo") 
     body 
-        h3 SIGN UP with
-        form(action="/signup", method="post", class="loginForm")
-            input(type="email", class="emailForm", name="userSign", placeholder="Email address")
-            input(type="password", class="passwordForm", placeholder="Password")
+        h3 SIGN UP
+        div
+            form(action="/signup", method="post", class="loginForm")
+                input(type="email", class="emailForm", name="userSign", placeholder="Email address")
+                input(type="password", class="passwordForm", placeholder="Password")
+                input(type="password", class="passwordForm", placeholder="Repeat Password")
             input(type="submit" value="Sign up")
+        div
             a(href="") Or sign up with GOOGLE
             a(href="")
-                img(src="/assets/googleicon.png")
+                img(src="/assets/googleicon.png" class="googleicon")
 
-    //- script(src="/scripts.js") 
+    script(src="/scripts.js") 

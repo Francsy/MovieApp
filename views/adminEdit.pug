@@ -6,8 +6,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Edit Movie
     body
-        a(href="")
-                img(src="/assets/backarrow.png")
+        button(type="button", onclick="history.back()") &#8678
         p EDIT MOVIE
         form(method="post" id="editmovie-form")
             label Title
@@ -40,4 +39,5 @@ html(lang="en")
             label imdbRating
             input(type="text" name="imdbRating" value=movie.imdbRating)
             br
+            input(type="hidden" name="movieId" value=movie.movieId)
             button(type="submit" value="CONFIRM EDITION" name="submit") CONFIRM EDITION
