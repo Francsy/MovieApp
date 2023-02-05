@@ -8,17 +8,19 @@ html(lang="en")
         link(rel="stylesheet", type="text/css", href="/styles.css")
     header
         h2 FS MOVIES+
-        img(src="/assets/girl.jpg" alt="logo") 
+        img(src="/assets/girl.jpg", alt="logo", class="girl-logo") 
     body 
-        h3 LOG IN with
-        form(action="/", method="post", class="loginForm")
-            input(type="email", class="emailForm", name="userLog", placeholder="Email address")
-            input(type="password", class="passwordForm", placeholder="Password")
+        h3 LOG IN
+        div
+            form(action="/", method="post", class="loginForm")
+                input(type="email", class="emailForm", name="userLog", placeholder="Email address")
+                input(type="password", class="passwordForm", placeholder="Password")
             a(href="/recoverpassword") Forgot your password?
             input(type="submit" value="Login")
+        div
             a(href="") Or login with GOOGLE
             a(href="")
-                img(src="/assets/googleicon.png")
-            a(href="/signup") Don't you have an account? SIGN UP
+                img(src="/assets/googleicon.png" class="googleicon")
+        a(href="/signup") Don't you have an account? SIGN UP
 
     script(src="/scripts.js") 
