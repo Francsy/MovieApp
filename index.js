@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 
 // Routes:
 app.use('/admin', protect.adminProtector, adminRouter);
-app.use('/u', protect.userProtector, userRouter);
+app.use('/u', protect.userProtectorAndRefresh, userRouter);
 app.use('/', authRouter);
 
 app.use(errorManager)
