@@ -47,6 +47,21 @@ const changeStatusToTrue = async (email) => {
     return result
 }
 
+const changeStatusToFalse = async (email) => {
+    let client, result;
+    try {
+        client = await pool.connect(); 
+        const data = await client.query(`UPDATE users SET logged_in='false' WHERE email=$1`, [email])
+        result = data.rows;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+}
+
 const getRole = async (email ) => {
     let client, result;
     try {
@@ -66,5 +81,6 @@ module.exports = {
     createUser,
     getUserPassword,
     changeStatusToTrue,
+    changeStatusToFalse,
     getRole
 }
