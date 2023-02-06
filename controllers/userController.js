@@ -98,8 +98,8 @@ const renderMovieDetails = async (req, res, next) => {
 // Debe introducir en el front también el id de la peli (sea el de la api o el de mongo) para poder eliminar
 // Por ahora pasamos la id de usuario por params
 const renderUserFavs = async (req, res) => {
-    const { userid } = req.params;
-    const movies = await favMovies.getMoviesByUser(userid);
+    const { id } = req.decoded;
+    const movies = await favMovies.getMoviesByUser(id);
     if (!movies[0]) {
         res.render('userMyMovies', { title: 'You didn´t save any movie yet' })
     } else {
@@ -116,7 +116,8 @@ const addFav = async (req, res) => {
         if (!movie_title) {
             return res.status(400).send({ error: 'Title is required' });
         }
-        const userid = req.params.userid;
+        const { id } = req.decoded;
+        const userid = id;
         const result = await favMovies.postMovieById(userid, movie_id, movie_title, movie_poster);
         res.status(200).send(result);
     } catch (error) {
@@ -126,18 +127,17 @@ const addFav = async (req, res) => {
 };
 
 const deleteFav = async (req, res) => {
-    const { userid } = req.params;
-    const { movie_id } = req.body;
-    const response = await favMovies.deleteMovieById(userid, movie_id);
-    console.log(response)
+        const { id } = req.decoded;
+        const userid = id;
+        const { movie_id } = req.body;
+        const response = await favMovies.deleteMovieById(userid, movie_id);
+        console.log(response);
 }
 
 // Renderiza la pagina con el formulario para cambiar contraseña:
 const renderRestorePassword = (req, res) => {
     res.status(200).render('userRestorePassword')
 }
-
-
 
 // Recibe contraseña actual a través de POST y la nueva repetida dos veces para validar:
 const changePassword = async (req, res) => {
