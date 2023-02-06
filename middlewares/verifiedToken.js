@@ -6,7 +6,7 @@ const authController = require('../controllers/authController')
 
 const adminProtector = express.Router();
 const userProtector = express.Router(); // Esto se puede unificar
-const getEmailForLogOut = express.Router();
+const getEmailForLogOutAndRefresh = express.Router();
 const userProtectorAndRefresh = express.Router()
 
 adminProtector.use((req, res, next) => {
@@ -49,7 +49,7 @@ userProtector.use((req, res, next) => {
     }
 });
 
-getEmailForLogOut.use((req, res, next) => {
+getEmailForLogOutAndRefresh.use((req, res, next) => {
     const token = req.cookies['access-token'];
     jwt.verify(token, jwt_key, async (err, decoded) => {
         authController.logOut(decoded.email, res)

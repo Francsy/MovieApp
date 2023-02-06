@@ -15,7 +15,7 @@ authRouter.post('/login', authController.postLogin);
 // Recibe email y contraseña para registrar usuario:
 authRouter.post('/signup', authController.postSignUp);
 
-authRouter.get('/logout', verifiedToken.getEmailForLogOut)
+authRouter.get('/logout', verifiedToken.getEmailForLogOutAndRefresh)
 
 // Renderiza pagina de recuperación de password:
 // authRouter.get('/recoverpassword', authController.renderRecoverPassword);
