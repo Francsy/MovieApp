@@ -30,7 +30,7 @@ const postLogin = async (req, res) => {
             await users.changeStatusToTrue(email)
             const userForToken = {
                 email,
-                id: user_id        
+                id: user_id
             };
             const token = jwt.sign(userForToken, jwt_key, { expiresIn: '20m' });
             res.cookie('access-token', token, {
@@ -69,7 +69,6 @@ const postSignUp = async (req, res) => {
 
 const logOut = async (req, res) => {
     try {
-        console.log(req)
         await users.changeStatusToFalse(req)
         res.clearCookie('access-token').redirect('/');
     } catch (err) {
@@ -89,11 +88,6 @@ const postRecoverPassword = (req, res) => {
     console.log('Pidiendo password')
 }
 
-// const googleLogin?
-// const googleSingUp
-// const logOut
-
-
 module.exports = {
     renderLogin,
     renderSignup,
@@ -102,6 +96,4 @@ module.exports = {
     renderRecoverPassword,
     postRecoverPassword,
     logOut
-    // googleLogin?
-    // googleSingUp
 }
