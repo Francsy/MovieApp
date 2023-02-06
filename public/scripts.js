@@ -29,17 +29,49 @@ if (document.querySelector('.movie-details')) {
 }
 
 //DELETE FAV
+// if (document.title === 'My Movies') {
+//     document.querySelectorAll('.delete-fav').forEach(button => {
+//         button.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             const movieId = this.id;
+//             fetch(`/u/movies`, {
+//                 method: 'DELETE',
+//                 headers: { 'Content-Type': 'application/json' },
+//                 body: JSON.stringify({ movie_id: movieId })
+//             });
+//             this.parentElement.remove();
+//         });
+//     });
+// }
+
 if (document.title === 'My Movies') {
     document.querySelectorAll('.delete-fav').forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
             const movieId = this.id;
-            fetch(`/u/movies`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ movie_id: movieId })
+            const popup = document.createElement("div");
+            popup.innerHTML = `
+                <div class="popup-background">
+                    <div class="popup-content">
+                        <p>Are you sure you want to delete this movie from your favorites?</p>
+                        <button id="confirm-delete">Delete</button>
+                        <button id="cancel-delete">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            document.getElementById("confirm-delete").addEventListener("click", function() {
+                fetch(`/u/movies`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ movie_id: movieId })
+                });
+                this.parentElement.remove();
+                popup.remove();
             });
-            this.parentElement.remove();
+            document.getElementById("cancel-delete").addEventListener("click", function() {
+                popup.remove();
+            });
         });
     });
 }
