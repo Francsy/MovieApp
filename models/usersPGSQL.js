@@ -17,11 +17,11 @@ const createUser = async (email, hashPassword, role) => {
 }
 
 //LOG USER
-const getUserPassword = async (email) => {
+const getUserData = async (email) => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query('SELECT password, role FROM users WHERE email = $1', [email])
+        const data = await client.query('SELECT user_id, password, role FROM users WHERE email = $1', [email])
         result = data.rows;
     } catch (err) {
         console.log(err);
@@ -77,10 +77,26 @@ const getRole = async (email ) => {
     return result
 }
 
+const setNewPassword = async (email, newPassword) => {
+    let client, result;
+    try {
+        client = await pool.connect(); 
+        const data = await client.query(`UPDATE users SET password=$1 WHERE email=$2`, [newPassword, email])
+        result = data.rows;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+}
+
 module.exports = {
     createUser,
-    getUserPassword,
+    getUserData,
     changeStatusToTrue,
     changeStatusToFalse,
-    getRole
+    getRole,
+    setNewPassword
 }

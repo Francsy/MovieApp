@@ -28,13 +28,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'))
 app.use(cookieParser());
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes:
 app.use('/admin', protect.adminProtector, adminRouter);
-app.use('/u', protect.userProtector, userRouter);
+app.use('/u', protect.userProtectorAndRefresh, userRouter);
 app.use('/', authRouter);
 
 app.use(errorManager)
