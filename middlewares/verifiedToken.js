@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const users = require('../models/usersPGSQL');
 const jwt_key = process.env.JWT_KEY;
-const authController = require('../controllers/authController')
 
 const adminProtector = express.Router();
 const userProtector = express.Router();
