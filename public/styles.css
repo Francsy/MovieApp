@@ -239,6 +239,19 @@ nav ul li a:hover {
     height: 25%;
 }
 
+a:hover{
+    cursor: pointer;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button:active{
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
+}
+
 @media screen and (min-width: 768px) and (max-width: 1366px) {
     * {
         font-size: 1.1rem;

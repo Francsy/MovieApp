@@ -66,6 +66,7 @@ if (document.title === 'My Movies') {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ movie_id: movieId })
                 });
+                window.location.reload();
                 this.parentElement.remove();
                 popup.remove();
             });
