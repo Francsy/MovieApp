@@ -16,6 +16,8 @@ html(lang="en")
         nav
             ul
                 li 
+                    a(href="/u/movies") Manage Your Movies
+                li 
                     a(href="/u/search") Browser
                 li 
                     a(href="/u/restorepassword") Change Password
@@ -24,7 +26,7 @@ html(lang="en")
                 li 
                     a(href="/logout") < Log out
         main
-            img(src=`${movie.img}` alt="" srcset="")
+            img(src=`${movie.img}` alt="" srcset="" id="renderPoster")
             button#saveFav Save Favourite
             h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
             p Rating: #{movie.rating}

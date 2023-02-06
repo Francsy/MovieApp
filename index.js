@@ -4,7 +4,7 @@ require('dotenv').config()
 const fetch = require('node-fetch')
 const path = require('path');
 const cookieParser = require("cookie-parser");
-const protect = require('./middlewares/verifiedToken')
+const { adminProtector, userProtector } = require('./middlewares/verifiedToken')
 const passport = require("passport");
 
 // Middlewares modules:
