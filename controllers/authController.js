@@ -69,7 +69,6 @@ const postSignUp = async (req, res) => {
 
 const logOut = async (req, res) => {
     try {
-        console.log(req)
         await users.changeStatusToFalse(req)
         res.clearCookie('access-token').redirect('/');
     } catch (err) {
