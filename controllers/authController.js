@@ -26,21 +26,21 @@ const postLogin = async (req, res) => {
         let data = await users.getUserData(email)
         const { user_id, password: dbPassword, role } = data[0];
         const match = await bcrypt.compare(password, dbPassword);
-        if (match) {
+        if (match) {
             await users.changeStatusToTrue(email)
             const userForToken = {
                 email,
                 id: user_id        
             };
-            const token = jwt.sign(userForToken, jwt_key, {expiresIn: '20m'});
-            res.cookie('access-token', token,  {
+            const token = jwt.sign(userForToken, jwt_key, { expiresIn: '20m' });
+            res.cookie('access-token', token, {
                 httpOnly: true
                 // secure: process.env.NODE_ENV === "production"
             })
             role === 'user' ? res.status(200).redirect('/u/search') : res.status(200).redirect('/admin')
         } else {
-            res.status(400).json({ msg: 'Incorrect user or password'});
-        }   
+            res.status(400).json({ msg: 'Incorrect user or password' });
+        }
     } catch (err) {
         console.log(err);
     }
@@ -48,29 +48,36 @@ const postLogin = async (req, res) => {
 
 // Recibe email y contraseña para registrar usuario:
 
-const postSignUp = async (req, res) => { 
+const postSignUp = async (req, res) => {
     try {
-        const { email, password, passwordCheck, role} = req.body;
+        const { email, password, passwordCheck, role } = req.body;
         if (password === passwordCheck) {
-        const hashPassword = await bcrypt.hash(password, saltRounds);
-            if(regex.validateEmail(email) && regex.validatePassword(password)){
+            const hashPassword = await bcrypt.hash(password, saltRounds);
+            if (regex.validateEmail(email) && regex.validatePassword(password)) {
                 let data = await users.createUser(email, hashPassword, role);
                 res.redirect('/')
-            }else{
-                res.status(400).json({msg: 'Invalid email or password'})
+            } else {
+                res.status(400).json({ msg: 'Invalid email or password' })
             }
         } else {
-            res.status(400).json({msg: 'You didn´t write the same password'})
+            res.status(400).json({ msg: 'You didn´t write the same password' })
         }
     } catch (error) {
         console.log('Error:', error);
     }
 }
 
-
 const logOut = async (req, res) => {
-    console.log("Funciona");
+    try {
+        console.log(req)
+        await users.changeStatusToFalse(req)
+        res.clearCookie('access-token').redirect('/');
+    } catch (err) {
+        console.log(err)
+    }
 }
+
+
 // Renderiza pagina de recuperación de password:
 
 const renderRecoverPassword = (req, res) => {
@@ -78,7 +85,7 @@ const renderRecoverPassword = (req, res) => {
 }
 
 // Envia un post para la recuperación de password
-const postRecoverPassword =  (req, res) => {
+const postRecoverPassword = (req, res) => {
     console.log('Pidiendo password')
 }
 
@@ -97,5 +104,4 @@ module.exports = {
     logOut
     // googleLogin?
     // googleSingUp
-    // logOut
 }

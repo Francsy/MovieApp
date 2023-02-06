@@ -2,9 +2,11 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const users = require('../models/usersPGSQL');
 const jwt_key = process.env.JWT_KEY;
+const authController = require('../controllers/authController')
 
 const adminProtector = express.Router();
-const userProtector = express.Router();
+const userProtector = express.Router(); // Esto se puede unificar
+const getEmailForLogOutAndRefresh = express.Router();
 const userProtectorAndRefresh = express.Router()
 
 adminProtector.use((req, res, next) => {
@@ -48,6 +50,12 @@ userProtector.use((req, res, next) => {
         });
     }
 });
+getEmailForLogOutAndRefresh.use((req, res, next) => {
+    const token = req.cookies['access-token'];
+    jwt.verify(token, jwt_key, async (err, decoded) => {
+        authController.logOut(decoded.email, res)
+    });
+});
 
 userProtectorAndRefresh.use((req, res, next) => {
     const token = req.cookies['access-token'];
@@ -90,5 +98,6 @@ userProtectorAndRefresh.use((req, res, next) => {
 module.exports = {
     adminProtector,
     userProtector,
-    userProtectorAndRefresh
+    userProtectorAndRefresh,
+    getEmailForLogOutAndRefresh
 }
