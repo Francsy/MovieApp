@@ -24,7 +24,7 @@ html(lang="en")
                 li 
                     a(href="/logout") < Log out
         main
-            img(src=`${movie.img}` alt="" srcset="")
+            img(src=`${movie.img}` alt="" srcset="" id="renderPoster")
             button#saveFav Save Favourite
             h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
             p Rating: #{movie.rating}

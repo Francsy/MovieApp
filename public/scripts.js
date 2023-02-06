@@ -18,9 +18,9 @@ if (document.querySelector('.movie-details')) {
         const movie = {
             movie_id: document.querySelector('.movie-details').id,
             movie_title: document.title,
-            movie_poster: document.querySelector('img').src,
+            movie_poster: document.querySelector('#renderPoster').src,
         };
-        fetch('/u/movies/22', {
+        fetch('/u/movies', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(movie)
@@ -29,12 +29,12 @@ if (document.querySelector('.movie-details')) {
 }
 
 //DELETE FAV
-if (document.title === 'My movies') {
+if (document.title === 'My Movies') {
     document.querySelectorAll('.delete-fav').forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
             const movieId = this.id;
-            fetch(`/u/movies/22`, {
+            fetch(`/u/movies`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ movie_id: movieId })
