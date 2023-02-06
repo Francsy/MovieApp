@@ -11,8 +11,6 @@ const saltRounds = 10;
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
-    console.log(req.decoded.id)
-    console.log(req.decoded.email)
     if (!req.query.search) {
         res.status(200).render('userBrowser')
     } else {
