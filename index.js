@@ -23,7 +23,7 @@ const PORT = 3000;
 
 //Inicializamos passport y la session de passport
 app.use(session({
-    secret: 'secret-key',
+    secret: process.env.SESS_KEY,
     resave: false,
     saveUninitialized: true,
 }));
