@@ -1,6 +1,7 @@
 const express = require('express');
 const userRouter = express.Router();
 const userController = require('../controllers/userController');
+const verifiedToken = require('../middlewares/verifiedToken').userProtector;
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo
 userRouter.get('/search', userController.renderBrowser);
@@ -12,15 +13,14 @@ userRouter.get('/search/:id', userController.renderMovieDetails);
 // Renderiza pagina de favoritos del usuario, cada peli con botón para borrar favorito:
 // Debe introducir en el front también el id de la peli (sea el de la api o el de mongo) para poder eliminar
 // Por ahora pasamos la id de usuario por params
-userRouter.get('/movies/:userid', userController.renderUserFavs); //http://localhost:3000/u/movies/22
+userRouter.get('/movies', verifiedToken, userController.renderUserFavs); //http://localhost:3000/u/movies/
 
 // Postea una película a lista de favoritos del usuario.
 // El id de la pelicula (sea de la api o de la peli en mongo debe llegar por req.body)
 // Por ahora pasamos la id de usuario por params
-userRouter.post('/movies/:userid', userController.addFav);
+userRouter.post('/movies', verifiedToken, userController.addFav);
 
-userRouter.delete('/movies/:userid', userController.deleteFav)
-
+userRouter.delete('/movies', verifiedToken, userController.deleteFav);
 
 // Renderiza la pagina con el formulario para cambiar contraseña:
 userRouter.get('/restorepassword', userController.renderRestorePassword);
