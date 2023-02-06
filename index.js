@@ -4,7 +4,7 @@ require('dotenv').config()
 const fetch = require('node-fetch')
 const path = require('path');
 const cookieParser = require("cookie-parser");
-const protect = require('./middlewares/verifiedToken')
+const { adminProtector, userProtector } = require('./middlewares/verifiedToken')
 
 
 
@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes:
-app.use('/admin', protect.adminProtector, adminRouter);
-app.use('/u', protect.userProtectorAndRefresh, userRouter);
+app.use('/admin', adminProtector, adminRouter);
+app.use('/u', userProtector, userRouter);
 app.use('/', authRouter);
 
 app.use(errorManager)
