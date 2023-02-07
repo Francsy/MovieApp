@@ -96,11 +96,27 @@ const getRole = async (email) => {
     return result
 }
 
+const setNewPassword = async (email, newPassword) => {
+    let client, result;
+    try {
+        client = await pool.connect();
+        const data = await client.query(`UPDATE users SET password=$1 WHERE email=$2`, [newPassword, email])
+        result = data.rows;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+}
+
 module.exports = {
     createUser,
     getUserData,
     checkGoogleUser,
     changeStatusToTrue,
     changeStatusToFalse,
-    getRole
+    getRole,
+    setNewPassword
 }

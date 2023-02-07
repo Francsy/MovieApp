@@ -25,7 +25,7 @@ authRouter.post('/recoverpassword/:email', authController.recoverPassword);
 // Renderiza pagina de recuperación de password:
 authRouter.get('/resetpassword/:recoverToken', authController.renderResetPassword);
 // PUT para Reset del Password
-authRouter.put('/resetpassword/:recoverToken', authController.resetPassword);
+authRouter.post('/resetpassword/:recoverToken', authController.resetPassword);
 
 // authRouter.post('/googlelogin, authController.googleLogin) ???
 

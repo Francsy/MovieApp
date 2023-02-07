@@ -87,12 +87,12 @@ const renderRecoverPassword = (req, res) => {
     res.status(200).render('recoverPassword')
 }
 
-const recoverPassword = async(req, res) => {
+const recoverPassword = async (req, res) => {
     console.log(req.body);
     const email = req.body.email;
     console.log(email);
     try {
-        const recoverToken = jwt.sign({email: email}, jwt_secret, {expiresIn: '20m'});
+        const recoverToken = jwt.sign({ email: email }, jwt_secret, { expiresIn: '20m' });
         const url = `${urlRecoverPassword}resetpassword/` + recoverToken;
         await transporter.sendMail({
             to: email,
@@ -110,23 +110,24 @@ const recoverPassword = async(req, res) => {
 };
 
 const renderResetPassword = (req, res) => {
-    res.status(200).render('resetPassword')
+    const token = req.params.recoverToken;
+    res.status(200).render('resetPassword', { token })
 }
 
-const resetPassword = async(req, res) => {
-    
+const resetPassword = async (req, res) => {
     try {
         const recoverToken = req.params.recoverToken;
         const payload = jwt.verify(recoverToken, jwt_secret);
-        const password = req.body.password
-        if(regex.validatePassword(password)){
+        console.log(payload)
+        const password = req.body.newPassword
+        if (regex.validatePassword(password)) {
             const hashPassword = await bcrypt.hash(password, saltRounds);
-            await users.setNewPassword(req.decoded.email, hashNewPassword)
+            await users.setNewPassword(payload.email, hashPassword)
             console.log('password changes')
-        }else{
-            res.status(400).json({msg: 'Password must have at least 8 characters, one uppercase, one lowercase and one special character'});
+        } else {
+            res.status(400).json({ msg: 'Password must have at least 8 characters, one uppercase, one lowercase and one special character' });
         }
-        res.status(200).json({message: 'Password actualized'});
+        res.status(200).redirect("/");
     } catch (error) {
         console.log('Error:', error);
     }
