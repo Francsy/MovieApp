@@ -24,7 +24,7 @@ const getUserData = async (email) => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query('SELECT user_id, password, role, googleId FROM users WHERE email = $1', [email])
+        const data = await client.query('SELECT user_id, password, role, google_Id FROM users WHERE email = $1', [email])
         result = data.rows;
     } catch (err) {
         console.log(err);

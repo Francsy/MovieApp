@@ -72,6 +72,7 @@ const logOut = async (req, res) => {
     try {
         console.log(req.decoded.email)
         await users.changeStatusToFalse(req.decoded.email)
+        req.session.destroy();
         res.clearCookie('access-token').redirect('/');
     } catch (err) {
         console.log(err)

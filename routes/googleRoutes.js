@@ -12,6 +12,6 @@ googleRouter.get("/callBack", googleController.authFailOrSuccess);
 googleRouter.get('/auth/failure', googleController.googleAuthFail);
 
 //Definimos la ruta de logout, donde eliminamos la sesión y limpiamos el token de las cookies.
-googleRouter.get('/logout', googleController.googleLogOut);
+// googleRouter.get('/logout', googleController.googleLogOut);
 
 module.exports = googleRouter

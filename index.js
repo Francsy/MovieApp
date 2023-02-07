@@ -41,8 +41,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes:
-app.use('/admin', protect.adminProtector, adminRouter);
-app.use('/u', /*protect.userProtectorAndRefresh,*/ userRouter);
+app.use('/admin', adminProtector, adminRouter);
+app.use('/u', userProtector, userRouter);
 app.use('/google', googleRouter)
 app.use('/', authRouter);
 

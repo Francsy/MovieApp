@@ -3,6 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config();
 const users = require('../models/usersPGSQL');
 const jwt = require("jsonwebtoken");
+const jwt_key = process.env.JWT_KEY
 
 //Establecemos la estrategia de Google con los credenciales de nuestro proyecto
 passport.use(new GoogleStrategy({
@@ -14,12 +15,15 @@ passport.use(new GoogleStrategy({
     async function (request, accessToken, refreshToken, profile, done) {
         const currentUser = await users.checkGoogleUser(profile.id);
         if (currentUser.length > 0) {
-            await users.changeStatusToTrue(profile.emails[0].value)
-            done(null, profile)
+            await users.changeStatusToTrue(profile._json.email)
         } else {
-            await users.createUser(profile.emails[0].value, hashPassword = null, role = "user", profile.id)
-            done(null, profile)
+            await users.createUser(profile._json.email, hashPassword = null, role = "user", profile.id)
         }
+        let data = await users.getUserData(profile._json.email)
+        const { user_id } = data[0];
+        profile.user_id = user_id;
+        profile.email = profile._json.email;
+        done(null, profile)
     }
 ));
 
@@ -38,26 +42,22 @@ const googlePrompt = (req, res, next) => {
 
 
 const authFailOrSuccess = (req, res, next) => {
-    passport.authenticate('google', (err, user) => {
+    passport.authenticate('google', async (err, user) => {
         if (err || !user) {
             return res.redirect('/google/auth/failure');
         }
-        req.session.user = user;
+        //req.session.user = user;
         const payload = {
-            check: true
+            //check: true
+            email: user.email,
+            id: user.user_id
         };
-        const token = jwt.sign(payload, `secret_key`, {
+        const token = jwt.sign(payload, jwt_key, {
             expiresIn: "20m"
         });
-        req.session.save((error) => {
-            if (error) {
-                return next(error);
-            }
-            res.cookie("access-token", token, {
-                httpOnly: true,
-                sameSite: "strict",
-            }).redirect("/u/search");
-        });
+        res.cookie("access-token", token, {
+            httpOnly: true,
+        }).redirect("/u/search");
     })(req, res, next);
 };
 
@@ -66,18 +66,20 @@ const googleAuthFail =  (req, res) => {
     res.send('Something went wrong..')
 }
 
+/*
 const googleLogOut = async (req, res) => {
     await users.changeStatusToFalse(req.session.user._json.email);
     req.logout(function (err) {
         if (err) { return next(err); }
-        req.session.destroy();
+        //req.session.destroy();
         res.clearCookie("access-token").redirect('/');
     });
 }
+*/
 
 module.exports = {
     googlePrompt,
     authFailOrSuccess,
     googleAuthFail,
-    googleLogOut
+    // googleLogOut
 }
