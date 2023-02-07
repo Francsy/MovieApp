@@ -18,7 +18,7 @@ authRouter.post('/signup', authController.postSignUp);
 authRouter.get('/logout', verifiedToken.getEmailForLogOutAndRefresh)
 
 // Renderiza pagina de recuperación de password:
-// authRouter.get('/recoverpassword', authController.renderRecoverPassword);
+authRouter.get('/recoverpassword/:email', authController.renderRecoverPassword);
 
 // Envia un post para la recuperación de password
 // authRouter.post('/recoverpassword', authController.postRecoverPassword)

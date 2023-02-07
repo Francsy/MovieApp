@@ -2,6 +2,7 @@ const express = require('express');
 const userRouter = express.Router();
 const userController = require('../controllers/userController');
 const verifiedToken = require('../middlewares/verifiedToken').userProtector;
+const urlRecoverPassword = process.env.URL_RECOVER;
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo
 userRouter.get('/search', userController.renderBrowser);
