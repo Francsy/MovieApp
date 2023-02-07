@@ -7,8 +7,6 @@ const favMovies = require('../models/favMoviesPGSQL');
 const users = require('../models/usersPGSQL')
 const saltRounds = 10;
 
-
-
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
     if (!req.query.search) {
@@ -143,8 +141,13 @@ const changePassword = async (req, res) => {
     if (newPassword === newPasswordCheck) {
         if (regex.validatePassword(newPassword)) {
             try {
-                let data = await users.getUserPassword(req.decoded.email)
+                let data = await users.getUserData(req.decoded.email)
                 const { password: dbPassword } = data[0];
+                if (dbPassword === null) {
+                    res.status(403).send({
+                        msj: "Google users can't change their password"
+                    })
+                }
                 const match = await bcrypt.compare(password, dbPassword);
                 if (match) {
                     const hashNewPassword = await bcrypt.hash(newPassword, saltRounds);
@@ -163,7 +166,6 @@ const changePassword = async (req, res) => {
     }
 }
 
-
 module.exports = {
     renderBrowser,
     renderMovieDetails,
@@ -171,5 +173,5 @@ module.exports = {
     addFav,
     deleteFav,
     renderRestorePassword,
-    changePassword
+    changePassword,
 }

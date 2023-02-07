@@ -29,21 +29,6 @@ if (document.querySelector('.movie-details')) {
 }
 
 //DELETE FAV
-// if (document.title === 'My Movies') {
-//     document.querySelectorAll('.delete-fav').forEach(button => {
-//         button.addEventListener('click', function (event) {
-//             event.preventDefault();
-//             const movieId = this.id;
-//             fetch(`/u/movies`, {
-//                 method: 'DELETE',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({ movie_id: movieId })
-//             });
-//             this.parentElement.remove();
-//         });
-//     });
-// }
-
 if (document.title === 'My Movies') {
     document.querySelectorAll('.delete-fav').forEach(button => {
         button.addEventListener('click', function (event) {
@@ -117,4 +102,24 @@ const deleteMovieButton = (deleteRoute) => {
         method: 'DELETE'
     })
         .then(location.reload())
+}
+
+if (document.title === 'Recover Password') {
+    document.querySelector('.recoverForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.querySelector('.emailForm').value;
+        try {
+            const response = await fetch('/recoverpassword/:email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error(error);
+        }
+    });
 }
