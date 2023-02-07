@@ -3,7 +3,6 @@ const authRouter = express.Router();
 const authController = require('../controllers/authController');
 const { logOutProtector } = require('../middlewares/verifiedToken')
 
-
 // Renderiza pagina inicial con formulario de autenticación: 
 authRouter.get('/', authController.renderLogin); 
 
@@ -20,9 +19,13 @@ authRouter.get('/logout', logOutProtector, authController.logOut)
 
 // Renderiza pagina de recuperación de password:
 authRouter.get('/recoverpassword/:email', authController.renderRecoverPassword);
+// Envía un POST para recuperación de password:
+authRouter.post('/recoverpassword/:email', authController.recoverPassword);
 
-// Envia un post para la recuperación de password
-// authRouter.post('/recoverpassword', authController.postRecoverPassword)
+// Renderiza pagina de recuperación de password:
+authRouter.get('/resetpassword/:recoverToken', authController.renderResetPassword);
+// PUT para Reset del Password
+authRouter.put('/resetpassword/:recoverToken', authController.resetPassword);
 
 // authRouter.post('/googlelogin, authController.googleLogin) ???
 

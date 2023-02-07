@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
 const users = require('../models/usersPGSQL')
-const urlRecoverPassword = process.env.URL_RECOVER;
 const saltRounds = 10;
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
@@ -162,25 +161,6 @@ const changePassword = async (req, res) => {
     }
 }
 
-const recoverPassword = async(req, res) => {
-    try {
-        const recoverToken = jwt.sign({email: req.params.email}, jwt_key, {expiresIn: '20m'});
-        const url = `${urlRecoverPassword}/restorepassword/:email` + recoverToken;
-        await transporter.sendMail({
-            to: req.params.email,
-            subject: 'Recover Password',
-            html: `<h3>Recover Password</h3>
-                <a href = ${url}>Click to recover password</a>
-                <p>Link will expire in 20 minutes</p>`
-        });
-        res.status(200).json({
-            message: 'A recovery email has been sent to your mail direction'
-        })
-    } catch (error) {
-        console.log('Error:', error)
-    }
-};
-
 module.exports = {
     renderBrowser,
     renderMovieDetails,
@@ -189,5 +169,4 @@ module.exports = {
     deleteFav,
     renderRestorePassword,
     changePassword,
-    recoverPassword,
 }
