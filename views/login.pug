@@ -8,14 +8,14 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/styles.css")
     header
         h2 FS MOVIES+
-        img(src="/assets/girl.jpg" alt="logo" class="girl-logo") 
+        img(src="/assets/girl.png" alt="logo" class="girl-logo") 
     body 
         h3 LOG IN
         div
             form(action="/login" method="post" class="loginForm")
                 input(type="email" class="emailForm" name="email",placeholder="Email address")
                 input(type="password" class="passwordForm" name="password" placeholder="Password")
-                a(href="/recoverpassword") Forgot your password?
+                a(href="/recoverpassword/:email") Forgot your password?
                 input(type="submit" value="Login")
         div
             a(href="/google/auth") Or login with GOOGLE

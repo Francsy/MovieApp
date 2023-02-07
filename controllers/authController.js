@@ -2,10 +2,11 @@ const regex = require('../utils/regex')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const users = require('../models/usersPGSQL');
-const jwt = require('jsonwebtoken');
 const jwt_key = process.env.JWT_KEY;
-
-
+const transporter = require('../config/nodemailer');
+const urlRecoverPassword = process.env.URL_RECOVER;
+const jwt_secret = process.env.ULTRA_SECRET_KEY;
+const jwt = require('jsonwebtoken');
 
 // Renderiza pagina inicial con formulario de autenticación: 
 
@@ -86,9 +87,50 @@ const renderRecoverPassword = (req, res) => {
     res.status(200).render('recoverPassword')
 }
 
-// Envia un post para la recuperación de password
-const postRecoverPassword = (req, res) => {
-    console.log('Pidiendo password')
+const recoverPassword = async (req, res) => {
+    console.log(req.body);
+    const email = req.body.email;
+    console.log(email);
+    try {
+        const recoverToken = jwt.sign({ email: email }, jwt_secret, { expiresIn: '20m' });
+        const url = `${urlRecoverPassword}resetpassword/` + recoverToken;
+        await transporter.sendMail({
+            to: email,
+            subject: 'Recover Password',
+            html: `<h3>Recover Password</h3>
+                <a href = ${url}>Click to recover password</a>
+                <p>Link will expire in 20 minutes</p>`
+        });
+        res.status(200).json({
+            message: 'A recovery email has been sent to your mail direction'
+        })
+    } catch (error) {
+        console.log('Error:', error)
+    }
+};
+
+const renderResetPassword = (req, res) => {
+    const token = req.params.recoverToken;
+    res.status(200).render('resetPassword', { token })
+}
+
+const resetPassword = async (req, res) => {
+    try {
+        const recoverToken = req.params.recoverToken;
+        const payload = jwt.verify(recoverToken, jwt_secret);
+        console.log(payload)
+        const password = req.body.newPassword
+        if (regex.validatePassword(password)) {
+            const hashPassword = await bcrypt.hash(password, saltRounds);
+            await users.setNewPassword(payload.email, hashPassword)
+            console.log('password changes')
+        } else {
+            res.status(400).json({ msg: 'Password must have at least 8 characters, one uppercase, one lowercase and one special character' });
+        }
+        res.status(200).redirect("/");
+    } catch (error) {
+        console.log('Error:', error);
+    }
 }
 
 module.exports = {
@@ -97,6 +139,8 @@ module.exports = {
     postLogin,
     postSignUp,
     renderRecoverPassword,
-    postRecoverPassword,
+    recoverPassword,
+    renderResetPassword,
+    resetPassword,
     logOut
 }

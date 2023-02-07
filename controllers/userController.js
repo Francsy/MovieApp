@@ -7,8 +7,6 @@ const favMovies = require('../models/favMoviesPGSQL');
 const users = require('../models/usersPGSQL')
 const saltRounds = 10;
 
-
-
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
     if (!req.query.search) {
@@ -168,7 +166,6 @@ const changePassword = async (req, res) => {
     }
 }
 
-
 module.exports = {
     renderBrowser,
     renderMovieDetails,
@@ -176,5 +173,5 @@ module.exports = {
     addFav,
     deleteFav,
     renderRestorePassword,
-    changePassword
+    changePassword,
 }
