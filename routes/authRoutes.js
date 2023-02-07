@@ -1,7 +1,8 @@
 const express = require('express');
 const authRouter = express.Router();
 const authController = require('../controllers/authController');
-const verifiedToken = require('../middlewares/verifiedToken')
+const { logOutProtector } = require('../middlewares/verifiedToken')
+
 
 // Renderiza pagina inicial con formulario de autenticación: 
 authRouter.get('/', authController.renderLogin); 
@@ -15,7 +16,7 @@ authRouter.post('/login', authController.postLogin);
 // Recibe email y contraseña para registrar usuario:
 authRouter.post('/signup', authController.postSignUp);
 
-authRouter.get('/logout', verifiedToken.getEmailForLogOutAndRefresh)
+authRouter.get('/logout', logOutProtector, authController.logOut)
 
 // Renderiza pagina de recuperación de password:
 authRouter.get('/recoverpassword/:email', authController.renderRecoverPassword);

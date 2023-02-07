@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const jwt_key = process.env.JWT_KEY;
 
 
+
 // Renderiza pagina inicial con formulario de autenticación: 
 
 const renderLogin = (req, res) => {
@@ -69,7 +70,8 @@ const postSignUp = async (req, res) => {
 
 const logOut = async (req, res) => {
     try {
-        await users.changeStatusToFalse(req)
+        console.log(req.decoded.email)
+        await users.changeStatusToFalse(req.decoded.email)
         res.clearCookie('access-token').redirect('/');
     } catch (err) {
         console.log(err)
@@ -90,7 +92,6 @@ const postRecoverPassword = (req, res) => {
 
 // const googleLogin?
 // const googleSingUp
-// const logOut
 
 
 module.exports = {
