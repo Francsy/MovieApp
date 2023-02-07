@@ -32,7 +32,7 @@ const postLogin = async (req, res) => {
             await users.changeStatusToTrue(email)
             const userForToken = {
                 email,
-                id: user_id        
+                id: user_id
             };
             const token = jwt.sign(userForToken, jwt_key, { expiresIn: '20m' });
             res.cookie('access-token', token, {
@@ -73,6 +73,7 @@ const logOut = async (req, res) => {
     try {
         console.log(req.decoded.email)
         await users.changeStatusToFalse(req.decoded.email)
+        req.session.destroy();
         res.clearCookie('access-token').redirect('/');
     } catch (err) {
         console.log(err)
@@ -120,10 +121,8 @@ const resetPassword = async(req, res) => {
         const password = req.body.password
         if(regex.validatePassword(password)){
             const hashPassword = await bcrypt.hash(password, saltRounds);
-            await User.findOneAndUpdate(
-                {email: payload.email},
-                {password: hashPassword}
-            );
+            await users.setNewPassword(req.decoded.email, hashNewPassword)
+            console.log('password changes')
         }else{
             res.status(400).json({msg: 'Password must have at least 8 characters, one uppercase, one lowercase and one special character'});
         }
@@ -133,20 +132,14 @@ const resetPassword = async(req, res) => {
     }
 }
 
-// const googleLogin?
-// const googleSingUp
-
 module.exports = {
     renderLogin,
     renderSignup,
     postLogin,
     postSignUp,
     renderRecoverPassword,
-    logOut,
     recoverPassword,
     renderResetPassword,
     resetPassword,
-    
-    // googleLogin?
-    // googleSingUp
+    logOut
 }

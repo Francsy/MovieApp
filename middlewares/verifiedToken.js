@@ -35,7 +35,8 @@ adminProtector.use(async (req, res, next) => {
 });
 
 userProtector.use(async (req, res, next) => {
-    const token = req.cookies['access-token'];
+    const token = await req.cookies['access-token'];
+    console.log(token)
     if (!token) return res.json({ msg: 'Token not provided' });
     try {
         const decoded = jwt.verify(token, jwt_key);
@@ -63,6 +64,7 @@ userProtector.use(async (req, res, next) => {
 
 logOutProtector.use(async (req, res, next) => {
     const token = req.cookies['access-token'];
+    console.log(token)
     if (!token) return res.json({ msg: 'Token not provided' });
     try {
         const decoded = jwt.verify(token, jwt_key);
