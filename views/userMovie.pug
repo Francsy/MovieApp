@@ -35,4 +35,11 @@ html(lang="en")
             p Directors: #{movie.director}
             p Writers: #{movie.writer}
             p Actors: #{movie.actors}
+            if critics
+                h3 Critics:
+                each critic in critics 
+                    p #{critic}
+            if specialReview
+                h3 Special user review:
+                p #{specialReview}
     script(src="/scripts.js")
