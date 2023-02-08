@@ -6,21 +6,28 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Login
         link(rel="stylesheet" type="text/css" href="/styles.css")
-    header
-        h2 FS MOVIES+
-        img(src="/assets/girl.png" alt="logo" class="girl-logo") 
-    body 
-        h3 LOG IN
-        div
+    
+    body
+        header(class="columnFormat") 
+            div(class="rowDirection")
+                h2(class="greenletter") FS
+                h2(class="pinkletter")  MOVIES
+                h2(class="greenletter")  +
+            img(src="/assets/girl.png" alt="logo" class="girl-logo") 
+            
+        main(class="columnFormat") 
+            h3 LOG IN
             form(action="/login" method="post" class="loginForm")
                 input(type="email" class="emailForm" name="email",placeholder="Email address")
                 input(type="password" class="passwordForm" name="password" placeholder="Password")
-                a(href="/recoverpassword/:email") Forgot your password?
+                a(href="/recoverpassword/:email" class="transparentBack") Forgot your password?
                 input(type="submit" value="Login")
-        div
-            a(href="/google/auth") Or login with GOOGLE
-            a(href="")
-                img(src="/assets/googleicon.png" class="googleicon")
-        a(href="/signup") Don't you have an account? SIGN UP
+            a(href="/google/auth" class="rowDirection") 
+                    h4 Or sign up with 
+                    h4(class="pinkletter") GOOGLE 
+                    img(src="/assets/googleicon.png" class="googleicon")
+            a(href="/signup" class="rowDirection") 
+                h4 Don't you have an account? 
+                h4(class="pinkletter") SIGN UP
 
     script(src="/scripts.js") 

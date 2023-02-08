@@ -175,6 +175,10 @@ const changePassword = async (req, res) => {
     }
 }
 
+const renderAbout = (req, res) => {
+    res.status(200).render('userAbout')
+}
+
 module.exports = {
     renderBrowser,
     renderMovieDetails,
@@ -183,4 +187,5 @@ module.exports = {
     deleteFav,
     renderRestorePassword,
     changePassword,
+    renderAbout
 }

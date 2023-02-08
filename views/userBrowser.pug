@@ -8,25 +8,32 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/styles.css")
     body
         header(id="formatHeader")
-            div(id="space")            
+            button(type="button", onclick="history.back()") &#8678
             h1.main-title Browser
-            label(for="burger-checkbox")
-                img(src="/assets/morty.png" id="burger" alt="burguer icon")
-        input(type="checkbox" id="burger-checkbox")
-        nav
-            ul
-                li 
-                    a(href="/u/movies/") Manage Your Movies
-                li 
-                    a(href="/u/restorepassword") Change Password
-                li 
-                    a(href="/about") About FS Movies+
-                li 
-                    a(href="/logout") < Log out
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href='/u/movies') Your Movies
+                        br
+                        a(href='/u/restorepassword') Change Password
+                        br
+                        a(href='/u/about') About FS Movies+
+                        br
+                        a(href='/logout') < Log out
         main
             form(action="/u/search" method="get" class="search-form")
                 img(src="/assets/search-icon.svg" alt="search" class="search-icon")
-                input(type="text" class="search-input hidden" name="search")
+                div(class="search-input hidden")
+                    input(type="text" name="search")
+                    input(type="submit" value="Search")
+                       
             if message
                 h2.search-title #{message}
             if movies
@@ -34,7 +41,7 @@ html(lang="en")
                 section(class="movies-found")
                     if movies
                         each movie in movies
-                            article 
+                            article
                                 a(href=`/u/search/${movie.id}`)
                                     img(src=`${movie.img}`)
                                     p.movie-title= movie.title

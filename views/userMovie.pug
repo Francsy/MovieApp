@@ -9,37 +9,42 @@ html(lang="en")
     body
         header(id="formatHeader")
             button(type="button", onclick="history.back()") &#8678
-            h1.main-title Your Selection
-            label(for="burger-checkbox")
-                img(src="/assets/morty.png" id="burger" alt="burguer icon")
-        input(type="checkbox" id="burger-checkbox")
-        nav
-            ul
-                li 
-                    a(href="/u/movies") Manage Your Movies
-                li 
-                    a(href="/u/search") Browser
-                li 
-                    a(href="/u/restorepassword") Change Password
-                li 
-                    a(href="/about") About FS Movies+
-                li 
-                    a(href="/logout") < Log out
-        main
+            h1.main-title Browser
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href="/u/movies") Your Movies
+                        br
+                        a(href="/u/search") Browser
+                        br
+                        a(href="/u/restorepassword") Change Password
+                        br
+                        a(href="/u/about") About FS Movies+
+                        br
+                        a(href="/logout") < Log out
+        main(class="columnFormat") 
             img(src=`${movie.img}` alt="" srcset="" id="renderPoster")
-            button#saveFav Save Favourite
-            h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
-            p Rating: #{movie.rating}
-            p Genres: #{movie.genre}
-            p #{movie.plot}
-            p Directors: #{movie.director}
-            p Writers: #{movie.writer}
-            p Actors: #{movie.actors}
-            if critics
-                h3 Critics:
-                each critic in critics 
-                    p #{critic}
-            if specialReview
-                h3 Special user review:
-                p #{specialReview}
+            button(type="button" id="saveFav") Save Favourite
+            div(id="alignleft")
+                h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
+                p Rating: #{movie.rating}
+                p Genres: #{movie.genre}
+                p #{movie.plot}
+                p Directors: #{movie.director}
+                p Writers: #{movie.writer}
+                p Actors: #{movie.actors}
+                if critics
+                    h3 Critics:
+                    each critic in critics 
+                        p #{critic}
+                if specialReview
+                    h3 Special user review:
+                    p #{specialReview}
     script(src="/scripts.js")

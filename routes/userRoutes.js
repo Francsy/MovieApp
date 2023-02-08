@@ -24,4 +24,6 @@ userRouter.get('/restorepassword', userController.renderRestorePassword);
 // Recieve the actual password and the new one twice
 userRouter.post('/restorepassword', userController.changePassword);
 
+userRouter.get('/about', userController.renderAbout);
+
 module.exports = userRouter;
