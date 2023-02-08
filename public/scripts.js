@@ -51,8 +51,7 @@ if (document.title === 'My Movies') {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ movie_id: movieId })
                 });
-                window.location.reload();
-                this.parentElement.remove();
+            document.querySelector(`#${movieId}`).parentElement.remove();
                 popup.remove();
             });
             document.getElementById("cancel-delete").addEventListener("click", function () {
