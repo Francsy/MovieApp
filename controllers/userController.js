@@ -6,6 +6,7 @@ const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
 const users = require('../models/usersPGSQL')
 const saltRounds = 10;
+const scraper = require('../utils/scraper')
 
 // Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
 const renderBrowser = async (req, res, next) => {
@@ -84,7 +85,11 @@ const renderMovieDetails = async (req, res, next) => {
             rating: apiMovie.imdbRating,
             id: apiMovie.imdbID
         }
-        res.status(200).render('userMovie', { movie });
+        const [critics, specialReview] = await Promise.all([
+            scraper.getFACritics(movie.title),
+            scraper.getRTReview(movie.title)
+        ]);
+        res.status(200).render('userMovie', { movie, critics, specialReview });
     } catch (err) {
         next(err)
     }
