@@ -14,7 +14,7 @@ if (document.title === 'Browser') {
 // u/search/:title page:
 if (document.querySelector('.movie-details')) {
     document.querySelector('#saveFav').addEventListener('click', function () {
-        
+
         const movie = {
             movie_id: document.querySelector('.movie-details').id,
             movie_title: document.title,
@@ -45,7 +45,7 @@ if (document.title === 'My Movies') {
                 </div>
             `;
             document.body.appendChild(popup);
-            document.getElementById("confirm-delete").addEventListener("click", function() {
+            document.getElementById("confirm-delete").addEventListener("click", function () {
                 fetch(`/u/movies`, {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
@@ -55,7 +55,7 @@ if (document.title === 'My Movies') {
                 this.parentElement.remove();
                 popup.remove();
             });
-            document.getElementById("cancel-delete").addEventListener("click", function() {
+            document.getElementById("cancel-delete").addEventListener("click", function () {
                 popup.remove();
             });
         });
@@ -117,9 +117,13 @@ if (document.title === 'Recover Password') {
                 body: JSON.stringify({ email })
             });
             const data = await response.json();
-            console.log(data.message);
+            if (data.message) {
+                alert(data.message);
+            } else {
+                alert(data.error);
+            }
         } catch (error) {
             console.error(error);
         }
     });
-}
+};
