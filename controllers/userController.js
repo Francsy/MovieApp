@@ -1,6 +1,4 @@
 const regex = require('../utils/regex')
-const jwt = require('jsonwebtoken');
-const jwt_key = process.env.JWT_KEY;
 const bcrypt = require('bcrypt');
 const Movie = require('../models/movieMongo')
 const favMovies = require('../models/favMoviesPGSQL');
@@ -8,37 +6,42 @@ const users = require('../models/usersPGSQL')
 const saltRounds = 10;
 const scraper = require('../utils/scraper')
 
-// Renderiza buscador sin peliculas y con peliculas de la api y de mongo cuando tiene una búsqueda hecha
+// Render the browser page without movies and show movies from the api and the Mongo db when the user has done a search
 const renderBrowser = async (req, res, next) => {
+    // No search has been done
     if (!req.query.search) {
         res.status(200).render('userBrowser')
     } else {
+        // The search has been done
         try {
             const { search } = req.query;
+            // Fetch movies from the api
             let movieRes = await fetch(`https://www.omdbapi.com/?s=${search}&type=movie&apikey=${process.env.OMDB_KEY}`);
             const moviesFounds = await movieRes.json();
             let moviesFoundsArr = moviesFounds.Search;
-            if (moviesFoundsArr === undefined) {
+            // Check if any movie has been found at the api fetch
+            if (moviesFoundsArr === undefined) { // No movie has been found. Try to find it at the Mongo db
                 try {
                     let dbMovies = await Movie.find({ Title: { $regex: search, $options: "i" } })
-                    console.log(dbMovies)
-                    if (dbMovies.length > 0) {
+                    if (dbMovies.length > 0) { // Movies were found. Get their data
                         let movies = dbMovies.map(film => {
                             let stringID = film['movieId'].toString();
                             return { id: stringID, title: film.Title, img: film.Poster }
                         })
                         res.status(200).render('userBrowser', { movies, search });
-                    } else {
+                    } else { // The movie has not been found
                         res.status(200).render('userBrowser', { message: "Not results available" });
                     }
                 } catch (err) {
                     next(err)
                 }
-            } else {
+            } else { // Movies were found at the api. Get their data
+                // Filter movies without poster
                 moviesFoundsArr = moviesFoundsArr.filter(film => film.Poster !== 'N/A');
                 let movies = moviesFoundsArr.map(film => {
                     return { id: film.imdbID, title: film.Title, img: film.Poster }
                 })
+                // Render the browser view with the movies found
                 res.status(200).render('userBrowser', { movies, search });
             }
         } catch (err) {
@@ -47,14 +50,13 @@ const renderBrowser = async (req, res, next) => {
     }
 }
 
-// Renderiza pagina detallada de la pelicula, con botón para añadir a fav y comentarios por scraping:
-// Faltan comentarios por scraping
-
+// Render movie with details view, with an add to favourites button and comments taken from web scraping
 const renderMovieDetails = async (req, res, next) => {
     try {
+        // Fetch the movie data from the api
         const movieRes = await fetch(`https://www.omdbapi.com/?i=${req.params.id}&plot=full&apikey=${process.env.OMDB_KEY}`);
         const apiMovie = await movieRes.json();
-        if (apiMovie.Response === 'False') {
+        if (apiMovie.Response === 'False') { // The movie was not found at the api. Look at the Mongo db
             const dbMovie = await Movie.findOne({ movieId: req.params.id }, { "_id": 0, "__v": 0 })
             let movie = {
                 title: dbMovie.Title,
@@ -84,7 +86,8 @@ const renderMovieDetails = async (req, res, next) => {
             img: apiMovie.Poster,
             rating: apiMovie.imdbRating,
             id: apiMovie.imdbID
-        }
+        } 
+        // Get the comments from web scraping
         const [critics, specialReview] = await Promise.all([
             scraper.getFACritics(movie.title),
             scraper.getRTReview(movie.title)
@@ -95,26 +98,23 @@ const renderMovieDetails = async (req, res, next) => {
     }
 }
 
-// Renderiza pagina de favoritos del usuario, cada peli con botón para borrar favorito:
-// Debe introducir en el front también el id de la peli (sea el de la api o el de mongo) para poder eliminar
-// Por ahora pasamos la id de usuario por params
+// Render the favourites view. Each movie has a delete button
 const renderUserFavs = async (req, res) => {
+    // Get movies by the user's id
     const { id } = req.decoded;
     const movies = await favMovies.getMoviesByUser(id);
-    if (!movies[0]) {
+    if (!movies[0]) { // No movies were found. Tell the user so
         res.render('userMyMovies', { title: 'You didn´t save any movie yet' })
-    } else {
+    } else { // Show the user's favourite movies
         res.render('userMyMovies', { movies, title: 'User´s Favorite Movies' });
     }
 }
 
-// Post de una película a lista de favoritos del usuario:
-// El id de la pelicula (sea de la api o de la peli en mongo debe llegar por req.body):
-// Por ahora pasamos la id de usuario por params:
+// Post from a movie to the user's favourites list
 const addFav = async (req, res) => {
     try {
         const { movie_title, movie_id, movie_poster } = req.body;
-        if (!movie_title) {
+        if (!movie_title) { // The movie's title was not provided
             return res.status(400).send({ error: 'Title is required' });
         }
         const { id } = req.decoded;
@@ -127,6 +127,7 @@ const addFav = async (req, res) => {
     }
 };
 
+// Delete the movie from the user's favourites list
 const deleteFav = async (req, res) => {
         const { id } = req.decoded;
         const userid = id;
@@ -135,26 +136,30 @@ const deleteFav = async (req, res) => {
         console.log(response);
 }
 
-// Renderiza la pagina con el formulario para cambiar contraseña:
+// Render the reset password view with a form
 const renderRestorePassword = (req, res) => {
     res.status(200).render('userRestorePassword')
 }
 
-// Recibe contraseña actual a través de POST y la nueva repetida dos veces para validar:
+// Recieve the actual password through the post form and the new one twice for validation
 const changePassword = async (req, res) => {
     const { password, newPassword, newPasswordCheck } = req.body;
+    // Check if the new password and the confirmation of the new password match
     if (newPassword === newPasswordCheck) {
+        // Check if the new password is safe enough
         if (regex.validatePassword(newPassword)) {
             try {
                 let data = await users.getUserData(req.decoded.email)
                 const { password: dbPassword } = data[0];
+                // Check if the user is signed up with Google. This kind of users cannot change their password
                 if (dbPassword === null) {
                     res.status(403).send({
                         msj: "Google users can't change their password"
                     })
                 }
+                // Check if the password provided matches with the one stored in the postgres db
                 const match = await bcrypt.compare(password, dbPassword);
-                if (match) {
+                if (match) { // Yes. Set the new password hashing it first so we cannot see it
                     const hashNewPassword = await bcrypt.hash(newPassword, saltRounds);
                     await users.setNewPassword(req.decoded.email, hashNewPassword)
                     console.log('password changes')
@@ -162,7 +167,6 @@ const changePassword = async (req, res) => {
             } catch (err) {
                 console.log(err)
             }
-            const token = req.cookies['access-token'];
         } else {
             res.status(400).json({ msg: 'Invalid new password' })
         }

@@ -1,6 +1,6 @@
 const Movie = require('../models/movieMongo');
 
-// Renderiza pagina del admin con todas las pelis, con botón para crear, boton en cada peli para editar por id de mongo y botón borrar.
+// Render the admin view with all the movies, with a create button, edit button for each movie by Mongo id and remove button
 const renderAdminPage = async (req, res, next) => {
     try {
         let movies = await Movie.find({}, '-_id -__v');
@@ -11,19 +11,18 @@ const renderAdminPage = async (req, res, next) => {
     }
 }
 
-// Renderiza pagina para crear nueva pelicula con formulario para introducirla en mongo (un id publico debe ser añadido automaticamente)
+// Render the create movie view with a form for posting to Mongo (a public id must be added automatically)
 const renderAdminCreate = (req, res) => {
     res.status(200).render('adminCreate')
 }
 
-// Renderiza la pagina para editar pelicula
-// Importante: cambbiar para que renderice por id (con el id publico en el front) => /editmovie/:id
+// Render the edit movie view
 const renderAdminEdit = async (req, res, next) => {
     const movie = await Movie.findOne({ movieId: req.params.movieId });
     res.status(200).render('adminEdit', { movie })
 }
 
-// Post del formulario de crear, envia todos los datos por req.body
+// Post from create form. It sends all the data by req.body
 const createMovie = async (req, res) => {
     const newMovie = await req.body;
     try {
@@ -39,8 +38,7 @@ const createMovie = async (req, res) => {
     }
 }
 
-// Envia un put a editar pelicula 
-// IMPORTANTE: cambiar para que edite por id => /editmovie/:id
+// Send a put for editing movie
 const editMovie = async (req, res) => {
     try {
         await Movie.findOneAndUpdate({ movieId: req.body.movieId }, {
@@ -64,10 +62,10 @@ const editMovie = async (req, res) => {
     }
 }
 
+// Send a delete for removing movie
 const deleteMovie = async (req, res) => {
     try {
         await Movie.findOneAndDelete({ movieId: req.params.movieId });
-
         res.status(200).redirect('/admin');
     } catch (err) {
         res.status(400).json({

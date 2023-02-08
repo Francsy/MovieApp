@@ -3,11 +3,22 @@
 if (document.title === 'Browser') {
     const searchIcon = document.querySelector('.search-icon');
     const searchInput = document.querySelector('.search-input');
+    const moviesLinksToDetails = document.querySelectorAll('body > main > section > article a')
     searchIcon.addEventListener('click', function () {
         searchIcon.classList.add('hidden');
         searchInput.classList.remove('hidden');
         searchInput.style.width = '80%';
         searchInput.style.opacity = '1';
+    });
+
+    moviesLinksToDetails.forEach(function (link) {
+        link.addEventListener('click', function () {
+            document.querySelector("main").style.display = "none";
+            const loadingImg = document.createElement("img");
+            loadingImg.setAttribute("id", "loadingGif");
+            loadingImg.setAttribute("src", "/assets/loading-gif.gif")
+            document.querySelector("body").appendChild(loadingImg);
+        });
     });
 }
 

@@ -21,6 +21,7 @@ html(lang="en")
             h3 SIGN UP
             form(action="/signup" method="post" class="loginForm")
                 input(type="email" class="emailForm" name="email" placeholder="Email address")
+                p Passwords must contain upper and lower letters, a number, a symbol and be at least 8 characters long
                 input(type="password" class="passwordForm" name="password" placeholder="Password")
                 input(type="password" class="passwordForm" name="passwordCheck" placeholder="Repeat Password")
                 div(class="transparentBack")
@@ -33,4 +34,5 @@ html(lang="en")
                     h4 Or login with 
                     h4(class="pinkletter") GOOGLE 
                     img(src="/assets/googleicon.png" class="googleicon")
+
     script(src="/scripts.js") 
