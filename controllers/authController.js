@@ -91,6 +91,15 @@ const recoverPassword = async (req, res) => {
     console.log(req.body);
     const email = req.body.email;
     console.log(email);
+
+    // Check if email exists in the database
+    const user = await users.getUserData(email);
+    if (!user.length) { // Check if user result array is empty
+        return res.status(400).json({
+            error: 'Email not registered'
+        });
+    }
+
     try {
         const recoverToken = jwt.sign({ email: email }, jwt_secret, { expiresIn: '20m' });
         const url = `${urlRecoverPassword}resetpassword/` + recoverToken;
