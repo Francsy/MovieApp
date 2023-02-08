@@ -7,8 +7,18 @@ html(lang="en")
         title Admin Page
         link(rel="stylesheet" type="text/css" href="/styles.css")
     body
-        header 
+        header(id="formatHeader")
+            div(id="space")            
             h1.main-title Admin
+            label(for="burger-checkbox")
+                img(src="/assets/rick.png" id="burger" alt="burguer icon")
+        input(type="checkbox" id="burger-checkbox")
+        nav
+            ul
+                li 
+                    a(href="/admin/createmovie") Create Movie
+                li 
+                    a(href="/logout") < Log out
         main
             section(class="movies-found")
                 if adminMovies
