@@ -6,9 +6,9 @@ html(lang="en")
         meta(name="viewport" content="width=device-width initial-scale=1.0")
         title Create Movie
         link(rel="stylesheet" type="text/css" href="/styles.css")
-    body
+    body(class="columnFormatAdmin") 
         button(type="button", onclick="history.back()") &#8678
-        p CREATE MOVIE
+        h1.main-title CREATE MOVIE
         form(method="post" id="createmovie-form")
             label Title
             input(type="text" name="Title")
@@ -32,7 +32,7 @@ html(lang="en")
             input(type="text" name="Actors")
             br
             label Plot
-            input(type="text" name="Plot" )
+            input(type="text" id="plot" name="Plot" )
             br
             label Poster
             input(type="text" name="Poster")

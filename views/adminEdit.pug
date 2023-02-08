@@ -6,9 +6,9 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Edit Movie
         link(rel="stylesheet" type="text/css" href="/styles.css")
-    body
+    body(class="columnFormatAdmin") 
         button(type="button" onclick="history.back()") &#8678
-        p EDIT MOVIE
+        h1.main-title EDIT MOVIE
         form(method="post" id="editmovie-form")
             label Title
             input(type="text" name="Title" value=movie.Title)

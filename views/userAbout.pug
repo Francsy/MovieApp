@@ -8,46 +8,47 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/styles.css")
     body
         header(id="formatHeader")
-            div(id="space")            
-            h1.main-title About FS Movies+
-            label(for="burger-checkbox")
-                img(src="/assets/morty.png" id="burger" alt="burguer icon")
-        input(type="checkbox" id="burger-checkbox")
-        nav
-            ul
-                li 
-                    a(href="/u/movies/") Manage Your Movies
-                li 
-                    a(href="/u/search") Browser
-                li 
-                    a(href="/u/restorepassword") Change Password
-                li 
-                    a(href="/logout") < Log out
-        main 
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title Browser
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href="/u/movies") Your Movies
+                        br
+                        a(href="/u/search") Browser
+                        br
+                        a(href="/u/restorepassword") Change Password
+                        br
+                        a(href="/logout") Log out
+        main(id="generalFormat")
             p FS Movies+ is a full-stack project made by:
             ul
-                li 
                     a(href="https://github.com/Francsy" class="integrantes")
                         p Fran V.Hernández
                         img(src="/assets/githublogo.png" class="githublogo")
-                li 
                     a(href="https://github.com/ZeberMVP" class="integrantes")
                         p Rubén Zafra
                         img(src="/assets/githublogo.png" class="githublogo")
-                li 
                     a(href="https://github.com/Cesario87" class="integrantes")
                         p César Alba
                         img(src="/assets/githublogo.png" class="githublogo")
 
             p by employing the following technologies & techniques:
             ul
-                li JavaScript ES6 
-                li Node.js Express
-                li NPM Packages: 
-                li Mongo Compass
-                li SQL-Postgres
-                li API fetching
-                li SCRUM Methodology
+                li brJavaScript ES6 
+                li brNode.js Express
+                li brNPM Packages: 
+                li brMongo Compass
+                li brSQL-Postgres
+                li brAPI fetching
+                li brSCRUM Methodology
             a(href="https://github.com/Francsy/MovieApp/blob/main/README.mdv")
                         p If you need further information, please check our project's README
 

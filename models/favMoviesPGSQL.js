@@ -31,7 +31,7 @@ const getMoviesByUser = async (id) => {
         console.log(err);
         throw err;
     } finally {
-        // client.release();
+        client.release();
     }
     return result
 }
@@ -55,7 +55,7 @@ const postMovieById = async (id, movie_id, movie_title, movie_poster) => {
         console.log(err);
         throw err;
     } finally {
-        // client.release();
+        client.release();
     }
     return result
 };

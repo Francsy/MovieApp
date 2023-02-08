@@ -7,26 +7,30 @@ html(lang="en")
         title Sign Up
         link(rel="stylesheet" type="text/css" href="/styles.css") 
     body
-        header(class="format_logSign") 
-            div(class="rowDirection")
-                h2(class="greenletter") FS
-                h2(class="pinkletter")  MOVIES
-                h2(class="greenletter")  +
+        header(class="columnFormat")
+            div(class="rowDirectionHeader")
+                button(type="button" onclick="history.back()") &#8678    
+                div(class="rowDirection" id="signTitle")
+                    h2(class="greenletter") FS
+                    h2(class="pinkletter")  MOVIES
+                    h2(class="greenletter")  +
+                div(id="space") 
             img(src="/assets/girl.png" alt="logo" class="girl-logo")
 
-        main(class="format_logSign") 
+        main(class="columnFormat") 
             h3 SIGN UP
             form(action="/signup" method="post" class="loginForm")
                 input(type="email" class="emailForm" name="email" placeholder="Email address")
                 input(type="password" class="passwordForm" name="password" placeholder="Password")
                 input(type="password" class="passwordForm" name="passwordCheck" placeholder="Repeat Password")
                 div(class="transparentBack")
-                    label(for="user" class="transparentBack") User 
                     input(type="radio" value="user" name="role")
-                    label(for="admin" class="transparentBack") Admin
+                    label(for="user" class="transparentBack") User 
                     input(type="radio" value="admin" name="role")
+                    label(for="admin" class="transparentBack") Admin
                 input(type="submit" value="Sign up") 
             a(href="/google/auth" class="rowDirection") 
-                p Or sign up with GOOGLE
-                img(src="/assets/googleicon.png" class="googleicon")
+                    h4 Or login with 
+                    h4(class="pinkletter") GOOGLE 
+                    img(src="/assets/googleicon.png" class="googleicon")
     script(src="/scripts.js") 

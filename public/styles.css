@@ -1,22 +1,52 @@
-.format_logSign{
+#generalFormat{
+    margin: 10% 5% 0% 10%;
+}
+
+.columnFormat{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5%;
+}
+
+.columnFormatAdmin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#plot{
+    height: 50px;
+}
+
+#alignleft{
+    align-items: baseline;
 }
 
 .loginForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(180deg, #837688 20%, #066254 100%) padding-box;
+    background: linear-gradient(180deg, #422d4a 40%, #022520 100%) padding-box;
     border-radius: 1em;
     width: 80%;
     padding: 5% 0%;
 }
 
-a, .transparentBack{
-    background: rgba(255, 255, 255, 0)
+h1{
+    font-size: 20px;
+}
+
+h2{
+    font-size:xx-large;
+}
+
+.transparentBack{
+    background: rgba(255, 255, 255, 0);
+    color: #f8982b;
+}
+
+h4{
+    white-space: nowrap;
 }
 
 input[type="email"], input[type="password"]{
@@ -30,6 +60,8 @@ input[type="email"], input[type="password"]{
 
 .pinkletter{
     color:#EF5DBC;
+    margin: 0% 2%;
+    font-weight: bolder;
 }
 
 .rowDirection {
@@ -37,6 +69,16 @@ input[type="email"], input[type="password"]{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.rowDirectionHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#signTitle{
+    margin: 0% 8%;
 }
 
 input[type="submit"] {
@@ -47,6 +89,39 @@ input[type="submit"] {
     border-radius: 0.75em;
     border: 4px solid transparent;
     font-size: 20px;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+} 
+
+input[type="submit"]:active {
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
+}
+
+button[type="button"], button[type="submit"] {
+    padding: 5px 15px;
+    background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
+        linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
+    border-radius: 0.75em;
+    border: 4px solid transparent;
+    font-size: 20px;
+}
+
+.delete-fav{
+    padding: 5px 15px;
+    background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
+        linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
+    border-radius: 0.75em;
+    border: 4px solid transparent;
+    font-size: 20px;
+    margin-top: 5%;
+    margin-left: 40%;
+}
+
+#renderPoster{
+    margin: 5% 0%;
 }
 
 /* BROWSER */
@@ -61,10 +136,6 @@ input[type="submit"] {
     box-sizing: border-box;
     background-color: var(--background-base);
     color: white;
-}
-
-body {
-    margin: 0px;
 }
 
 .main-title {
@@ -85,11 +156,13 @@ body {
 }
 
 .search-icon {
-    position: relative;
+    position: block;
     cursor: pointer;
 }
 
 .search-input {
+    display: flex;
+    flex-direction: column;
     padding: 10px 40px;
     position: relative;
     border: 2px var(--pink) solid;
@@ -116,13 +189,12 @@ body {
     font-weight: 400;
 }
 
-
 .movies-found {
-    height: 25vh;
+    height: 75vh;
     overflow-y: scroll;
     overflow-x: scroll;
     white-space: nowrap;
-    margin: 2% 2%;
+    margin-left: 10%;
 }
 
 section.movies-found article {
@@ -130,8 +202,8 @@ section.movies-found article {
     vertical-align: top;
     width: 25%;
     margin-right: 2%;
-    height: 80%;
-    /*  */
+    height: 75%;
+    width: 80%;
     position: relative;
 
 }
@@ -191,68 +263,123 @@ section.movies-found article a:hover p.movie-title {
     display: none;
 }
 
-/* HAMBURGUESA */
+
 #formatHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     margin-top: 5%;
+    z-index: 9999;
 }
 
 #space {
-    width: 10vw;
+    width: 25vw;
+}
+#space2 {
+    width: 7vw;
 }
 
-#burger {
-    width: 10vw;
-    border: solid rgb(206, 78, 228);
-    border-radius: 50%;
-}
-
-#burger-checkbox {
+/* HAMBURGUESA */
+#toggle {
     display: none;
-}
-
-nav {
-    display: none;
-    top: 0;
-    left: 0;
+  }
+  
+  /**
+    Hamburger
+  **/
+  .hamburger {
+    position: absolute;
+    top: 4em;
+    right: 10%;
+    margin-left: -2em;
+    margin-top: -45px;
+    width: 2em;
+    height: 45px;
+    z-index: 5;
+  }
+  
+  .hamburger div {
+    position: relative;
+    width: 3em;
+    height: 7px;
+    border-radius: 3px;
+    background-color: #f8982b;
+    margin-top: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /**
+  Nav Styles
+  **/
+  .nav {
+    position: fixed;
     width: 100%;
-    height: 80px;
-    padding: 10px 90px;
-    box-sizing: border-box;
-    z-index: 9999
-}
-
-nav ul {
-    list-style: none;
-    float: right;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    border: solid white;
-    background-color: wheat;
-}
-
-nav ul li a {
-    line-height: 60px;
-    color: #fff;
-    padding: 12px 30px;
+    height: 100%;
+    background-color: #090E6B;
+    top: -100%; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: scale(0);
+  }
+  .nav-wrapper {
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+  }
+  nav {
+    text-align: left;
+    margin-left: 25%;
+  }
+  nav a {
+    position: relative;
     text-decoration: none;
-    font-size: 10px;
-}
-
-nav ul li a:hover {
-    background-color: rgb(161, 108, 108);
-    border-radius: 5px;
-}
-
-#burger-checkbox:checked~nav {
-    display: block;
-}
-
+    color: #6ecddd;
+    font-size: 2em;
+    display: inline-block;
+    margin-top: 1.25em;
+    margin-right: 1.25em;
+    transition: color 0.2s ease-in-out;
+    letter-spacing: 1px;
+  }
+  nav a:before {
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0.25em;
+    background-color: white;
+    left: -0.5em;
+    transition: all 0.2s ease-in-out;
+  }
+  nav a:hover {
+    color: white;
+  }
+  nav a:hover:before {
+    height: 100%;
+  }
+  
+  /**
+  Animations
+  **/
+  #toggle:checked + .hamburger .top-bun {
+    transform: rotate(-45deg);
+    margin-top: 25px;
+  }
+  #toggle:checked + .hamburger .bottom-bun {
+    opacity: 0;
+    transform: rotate(45deg);
+  }
+  #toggle:checked + .hamburger .meat {
+    transform: rotate(45deg);
+    margin-top: -7px;
+  }
+  
+  #toggle:checked + .hamburger + .nav {
+    top: 0;
+    transform: scale(1);
+    z-index: 3;
+  }
 /* ***** */
 
 /* LOG/SIGN */
@@ -263,7 +390,7 @@ nav ul li a:hover {
 
 .girl-logo {
     border-radius: 50%;
-    border: #e83ca9;
+    border: #f074c3;
     border-style: solid;
     border-width: 5px;
     border-radius: 50%;
@@ -335,13 +462,29 @@ button:active {
     }
 
     .movies-found {
-        height: 40vh;
-
+        height: 60vh;
+        margin-top: 10%;
     }
 
     .search-title {
         margin-top: 5%;
         font-size: 1.4rem;
+    }
+    .rowDirectionHeader {
+        margin-left: 15%;
+    }
+
+    #formatHeader {
+        margin-top: 2%;
+    }
+
+    section.movies-found article {
+        height: 80%;
+        width: 50%;
+    }
+
+    .columnFormat{
+        margin: 0% 20%;
     }
 }
 
@@ -355,11 +498,62 @@ button:active {
     }
 
     .movies-found {
-        height: 70vh;
+        height: 50vh;
+    }
+
+    section.movies-found article {
+        height: 70%;
+        width: 15%;
     }
 
     .search-title {
         margin-top: 4%;
         font-size: 1.5rem;
+    }
+
+    .girl-logo {
+        width: 20%;
+        height: 20%;
+    }
+
+    .loginForm{
+        width: 40%;
+        padding: 2% 0%;
+    }
+
+    input[type="email"], input[type="password"]{
+        width: 75%;
+        margin-bottom: 2%;
+    }
+
+    input[type="submit"] {
+        margin-top: 1%;
+    }
+
+    .rowDirectionHeader{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+    }
+
+    #formatHeader {
+        margin-top: 1%;
+    }
+
+    #generalFormat{
+        margin: 1% 5% 0% 10%;
+    }
+
+    #renderPoster{
+        margin: 1% 0%;
+    }
+
+    .columnFormat{
+        margin: 0% 20%;
+    }
+
+    .githublogo {
+        width: 3%;
+        height: 3%;
     }
 }

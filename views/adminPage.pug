@@ -8,18 +8,22 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/styles.css")
     body
         header(id="formatHeader")
-            div(id="space")            
-            h1.main-title Admin
-            label(for="burger-checkbox")
-                img(src="/assets/rick.png" id="burger" alt="burguer icon")
-        input(type="checkbox" id="burger-checkbox")
-        nav
-            ul
-                li 
-                    a(href="/admin/createmovie") Create Movie
-                li 
-                    a(href="/logout") < Log out
-        main
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title Browser
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href="/admin/createmovie") Create Movie
+                        br
+                        a(href="/logout") Log out
+        main(id="generalFormat")
             section(class="movies-found")
                 if adminMovies
                         each movie in adminMovies

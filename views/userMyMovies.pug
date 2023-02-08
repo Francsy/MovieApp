@@ -8,28 +8,32 @@ html(lang="en")
         link(rel="stylesheet" type="text/css" href="/styles.css")
     body
         header(id="formatHeader")
-            button(type="button" onclick="history.back()") &#8678        
-            h1.main-title My movies
-            label(for="burger-checkbox")
-                img(src="/assets/morty.png" id="burger" alt="burguer icon")
-        input(type="checkbox" id="burger-checkbox")
-        nav
-            ul
-                li 
-                    a(href="/u/search") Browser
-                li 
-                    a(href="/u/restorepassword") Change Password
-                li 
-                    a(href="/u/about") About FS Movies+
-                li 
-                    a(href="/logout") < Log out
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title Your Movies
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href="/u/search") Browser
+                        br
+                        a(href="/u/restorepassword") Change Password
+                        br
+                        a(href="/u/about") About FS Movies+
+                        br
+                        a(href="/logout") < Log out
         main 
-            h1 #{title}
+            h3 #{title}
             
             section(class="movies-found")
                 if movies
                     each movie in movies
-                        article
+                        article(class="myMoviesFormat")
                             a(href=`/u/search/${movie.movie_id}`)
                                 img(src=`${movie.movie_poster}`)
                                 p.movie-title= movie.movie_title
