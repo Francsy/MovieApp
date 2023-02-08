@@ -22,7 +22,7 @@ const renderSignup = (req, res) => {
 const postLogin = async (req, res) => {
     const { email, password } = req.body;
     try {
-        // Get the data from the user at the postgres db
+        // Get the data from the user at the Postgres db
         let data = await users.getUserData(email)
         const { user_id, password: dbPassword, role } = data[0];
         // Check if the password matches with the hashed password at the db
@@ -60,7 +60,7 @@ const postSignUp = async (req, res) => {
             const hashPassword = await bcrypt.hash(password, saltRounds);
             // Check if the email is well formed and the password is safe through regex
             if (regex.validateEmail(email) && regex.validatePassword(password)) {
-                // Create the user row at the postgres db
+                // Create the user row at the Postgres db
                 let data = await users.createUser(email, hashPassword, role);
                 console.log(data)
                 // Redirect the user to the login page
@@ -136,8 +136,11 @@ const resetPassword = async (req, res) => {
         const recoverToken = req.params.recoverToken;
         const payload = jwt.verify(recoverToken, jwt_secret);
         const password = req.body.newPassword
+        // Check if the password and the confirmation of the password match
         if (password === req.body.newPasswordCheck) {
+            // Check if the new password is safe enough
             if (regex.validatePassword(password)) {
+                // Hash the password so we cannot see it and set it in the Postgres db
                 const hashPassword = await bcrypt.hash(password, saltRounds);
                 await users.setNewPassword(payload.email, hashPassword)
                 console.log('password changes')

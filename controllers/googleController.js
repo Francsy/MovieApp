@@ -5,7 +5,7 @@ const users = require('../models/usersPGSQL');
 const jwt = require("jsonwebtoken");
 const jwt_key = process.env.JWT_KEY
 
-//Establecemos la estrategia de Google con los credenciales de nuestro proyecto
+// Establish the Google strategy with our project credentials
 passport.use(new GoogleStrategy({
     clientID: `${process.env.CLIENT_ID}`,
     clientSecret: `${process.env.CLIENT_SECRET}`,
@@ -13,12 +13,16 @@ passport.use(new GoogleStrategy({
     proxy: true
 },
     async function (request, accessToken, refreshToken, profile, done) {
+        // Check if the user already exists in our users db
         const currentUser = await users.checkGoogleUser(profile.id);
         if (currentUser.length > 0) {
+            // Yes. Change the logged_in status to true
             await users.changeStatusToTrue(profile._json.email)
         } else {
+            // No. Create the user at the db
             await users.createUser(profile._json.email, hashPassword = null, role = "user", profile.id)
         }
+        // Take the user data out of the function
         let data = await users.getUserData(profile._json.email)
         const { user_id } = data[0];
         profile.user_id = user_id;
@@ -27,28 +31,29 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-//Esta función determina los datos que se van a guardar en la sesión de google: user
+// Serialize the user data
 passport.serializeUser(function (user, done) {
     done(null, user)
 });
-//Determina que objeto borrar de la sesión: user
+// Deserialize the user data
 passport.deserializeUser(function (user, done) {
     done(null, user)
 });
 
+// Ask the user to choose a Google account to enter to the app. Take email and profile data
 const googlePrompt = (req, res, next) => {
     return passport.authenticate("google", { scope: ['email', 'profile'], prompt: "select_account" })(req, res, next);
 }
 
-
 const authFailOrSuccess = (req, res, next) => {
+    // Try to authenticate the user
     passport.authenticate('google', async (err, user) => {
+        // The authentication failed. Redirect to the failure route
         if (err || !user) {
             return res.redirect('/google/auth/failure');
         }
-        //req.session.user = user;
+        // Create a cookie to navigate the website. It contains the user's email and id of at the db
         const payload = {
-            //check: true
             email: user.email,
             id: user.user_id
         };
@@ -57,29 +62,17 @@ const authFailOrSuccess = (req, res, next) => {
         });
         res.cookie("access-token", token, {
             httpOnly: true,
-        }).redirect("/u/search");
+        }).redirect("/u/search"); // Redirect to the browser page
     })(req, res, next);
 };
 
-
+// Tells the user something went wrong at the Google auth
 const googleAuthFail =  (req, res) => {
     res.send('Something went wrong..')
 }
 
-/*
-const googleLogOut = async (req, res) => {
-    await users.changeStatusToFalse(req.session.user._json.email);
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        //req.session.destroy();
-        res.clearCookie("access-token").redirect('/');
-    });
-}
-*/
-
 module.exports = {
     googlePrompt,
     authFailOrSuccess,
-    googleAuthFail,
-    // googleLogOut
+    googleAuthFail
 }

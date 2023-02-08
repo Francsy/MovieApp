@@ -1,6 +1,6 @@
 const Movie = require('../models/movieMongo');
 
-// Render the admin view with all the movies, with a create button, edit button for each movie by mongo id and remove button
+// Render the admin view with all the movies, with a create button, edit button for each movie by Mongo id and remove button
 const renderAdminPage = async (req, res, next) => {
     try {
         let movies = await Movie.find({}, '-_id -__v');
@@ -11,7 +11,7 @@ const renderAdminPage = async (req, res, next) => {
     }
 }
 
-// Render the create movie view with a form for posting to mongo (a public id must be added automatically)
+// Render the create movie view with a form for posting to Mongo (a public id must be added automatically)
 const renderAdminCreate = (req, res) => {
     res.status(200).render('adminCreate')
 }

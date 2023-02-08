@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-sequence')(mongoose);
 require('../utils/db_mongo')
 
+// How the movies will be stored in the Mongo db
 const movieSchema = new mongoose.Schema({
     Title: { type: String, required: true },
     Year: { type: String, required: true },
@@ -15,13 +16,14 @@ const movieSchema = new mongoose.Schema({
     imdbRating: { type: String, required: true },
     movieId: { type: Number, required: false }
 });
-
+ // Make the movieId be asigned automatically following an autoincremental algorithm done by the moongose-sequence module
 movieSchema.plugin(autoIncrement, {inc_field: 'movieId'});
 const Movie = mongoose.model('editedMovies', movieSchema);
 
 module.exports = Movie;
 
-/*
+/* Uncomment the following lines to create new movies. The movie must be inside new Movie() and only accepts one. 
+*This movies might already exist. You can either delete them first or modify these before creating them*
 const newMovie = new Movie({
     "Title": "Indiana Jones and the Raiders of the Lost Ark",
     "Year": "1981",

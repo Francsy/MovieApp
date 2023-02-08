@@ -3,35 +3,24 @@ const authRouter = express.Router();
 const authController = require('../controllers/authController');
 const { logOutProtector } = require('../middlewares/verifiedToken')
 
-// Renderiza pagina inicial con formulario de autenticación: 
+// Render the initial page with an auth form
 authRouter.get('/', authController.renderLogin); 
-
-// Renderiza pagina de registro de usuario:
+// Render sign up page
 authRouter.get('/signup', authController.renderSignup);
-
-// Recibe email y contraseña para logear al usuario:
+// Recieve email and password for logging in the user
 authRouter.post('/login', authController.postLogin);
-
-// Recibe email y contraseña para registrar usuario:
+// Receive email and password for signing up the user
 authRouter.post('/signup', authController.postSignUp);
-
+// Log out the user
 authRouter.get('/logout', logOutProtector, authController.logOut)
 
-// Renderiza pagina de recuperación de password:
+// Render the recover password page
 authRouter.get('/recoverpassword/:email', authController.renderRecoverPassword);
-// Envía un POST para recuperación de password:
+// Post the user's email
 authRouter.post('/recoverpassword/:email', authController.recoverPassword);
-
-// Renderiza pagina de recuperación de password:
+// Render the reset password page
 authRouter.get('/resetpassword/:recoverToken', authController.renderResetPassword);
-// PUT para Reset del Password
+// Post the new password into the Postgres db
 authRouter.post('/resetpassword/:recoverToken', authController.resetPassword);
-
-// authRouter.post('/googlelogin, authController.googleLogin) ???
-
-// authRouter.post('/googlesignup, authController.googleSignUp) ??
-
-// authRouter.get('/logout', authController.logOut) ????
-
 
 module.exports = authRouter;
