@@ -16,7 +16,11 @@ const getMoviesByUser = async (id) => {
         throw err;
     } finally {
 <<<<<<< HEAD
+<<<<<<< HEAD
         client.release();
+=======
+        client.release(); // Close the connection
+>>>>>>> develop
 =======
         client.release(); // Close the connection
 >>>>>>> develop
@@ -44,7 +48,11 @@ const postMovieById = async (id, movie_id, movie_title, movie_poster) => {
         throw err;
     } finally {
 <<<<<<< HEAD
+<<<<<<< HEAD
         client.release();
+=======
+        client.release(); // Close the connection
+>>>>>>> develop
 =======
         client.release(); // Close the connection
 >>>>>>> develop

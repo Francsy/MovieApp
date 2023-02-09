@@ -1,28 +1,28 @@
-#generalFormat{
+#generalFormat {
     margin: 10% 5% 0% 10%;
 }
 
-.columnFormat{
+.columnFormat {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.columnFormatAdmin{
+.columnFormatAdmin {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#plot{
+#plot {
     height: 50px;
 }
 
-#alignleft{
+#alignleft {
     align-items: baseline;
 }
 
-.loginForm{
+.loginForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,34 +32,35 @@
     padding: 5% 0%;
 }
 
-h1{
+h1 {
     font-size: 20px;
 }
 
-h2{
-    font-size:xx-large;
+h2 {
+    font-size: xx-large;
 }
 
-.transparentBack{
+.transparentBack {
     background: rgba(255, 255, 255, 0);
     color: #f8982b;
 }
 
-h4{
+h4 {
     white-space: nowrap;
 }
 
-input[type="email"], input[type="password"]{
+input[type="email"],
+input[type="password"] {
     width: 80%;
     margin-bottom: 5%;
 }
 
-.greenletter{
+.greenletter {
     color: rgb(4, 234, 255);
 }
 
-.pinkletter{
-    color:#EF5DBC;
+.pinkletter {
+    color: #EF5DBC;
     margin: 0% 2%;
     font-weight: bolder;
 }
@@ -71,13 +72,13 @@ input[type="email"], input[type="password"]{
     justify-content: center;
 }
 
-.rowDirectionHeader{
+.rowDirectionHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-#signTitle{
+#signTitle {
     margin: 0% 8%;
 }
 
@@ -91,16 +92,17 @@ input[type="submit"] {
     font-size: 20px;
 }
 
-input[type="submit"]:hover{
+input[type="submit"]:hover {
     cursor: pointer;
-} 
+}
 
 input[type="submit"]:active {
     box-shadow: 0 3px #666;
     transform: translateY(4px);
 }
 
-button[type="button"], button[type="submit"] {
+button[type="button"],
+button[type="submit"] {
     padding: 5px 15px;
     background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
         linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
@@ -109,7 +111,7 @@ button[type="button"], button[type="submit"] {
     font-size: 20px;
 }
 
-.delete-fav{
+.delete-fav {
     padding: 5px 15px;
     background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
         linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
@@ -120,7 +122,7 @@ button[type="button"], button[type="submit"] {
     margin-left: 40%;
 }
 
-#renderPoster{
+#renderPoster {
     margin: 5% 0%;
 }
 
@@ -276,6 +278,7 @@ section.movies-found article a:hover p.movie-title {
 #space {
     width: 25vw;
 }
+
 #space2 {
     width: 7vw;
 }
@@ -283,12 +286,12 @@ section.movies-found article a:hover p.movie-title {
 /* HAMBURGUESA */
 #toggle {
     display: none;
-  }
-  
-  /**
+}
+
+/**
     Hamburger
   **/
-  .hamburger {
+.hamburger {
     position: absolute;
     top: 4em;
     right: 10%;
@@ -297,9 +300,9 @@ section.movies-found article a:hover p.movie-title {
     width: 2em;
     height: 45px;
     z-index: 5;
-  }
-  
-  .hamburger div {
+}
+
+.hamburger div {
     position: relative;
     width: 3em;
     height: 7px;
@@ -307,32 +310,38 @@ section.movies-found article a:hover p.movie-title {
     background-color: #f8982b;
     margin-top: 8px;
     transition: all 0.3s ease-in-out;
-  }
-  
-  /**
+}
+
+/**
   Nav Styles
   **/
-  .nav {
+.nav {
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: #090E6B;
-    top: -100%; left: 0; right: 0; bottom: 0;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     transform: scale(0);
-  }
-  .nav-wrapper {
+}
+
+.nav-wrapper {
     position: relative;
     overflow: hidden;
     overflow-y: auto;
     height: 100%;
-  }
-  nav {
+}
+
+nav {
     text-align: left;
     margin-left: 25%;
-  }
-  nav a {
+}
+
+nav a {
     position: relative;
     text-decoration: none;
     color: #6ecddd;
@@ -342,8 +351,9 @@ section.movies-found article a:hover p.movie-title {
     margin-right: 1.25em;
     transition: color 0.2s ease-in-out;
     letter-spacing: 1px;
-  }
-  nav a:before {
+}
+
+nav a:before {
     content: '';
     height: 0;
     position: absolute;
@@ -351,35 +361,40 @@ section.movies-found article a:hover p.movie-title {
     background-color: white;
     left: -0.5em;
     transition: all 0.2s ease-in-out;
-  }
-  nav a:hover {
+}
+
+nav a:hover {
     color: white;
-  }
-  nav a:hover:before {
+}
+
+nav a:hover:before {
     height: 100%;
-  }
-  
-  /**
+}
+
+/**
   Animations
   **/
-  #toggle:checked + .hamburger .top-bun {
+#toggle:checked+.hamburger .top-bun {
     transform: rotate(-45deg);
     margin-top: 25px;
-  }
-  #toggle:checked + .hamburger .bottom-bun {
+}
+
+#toggle:checked+.hamburger .bottom-bun {
     opacity: 0;
     transform: rotate(45deg);
-  }
-  #toggle:checked + .hamburger .meat {
+}
+
+#toggle:checked+.hamburger .meat {
     transform: rotate(45deg);
     margin-top: -7px;
-  }
-  
-  #toggle:checked + .hamburger + .nav {
+}
+
+#toggle:checked+.hamburger+.nav {
     top: 0;
     transform: scale(1);
     z-index: 3;
-  }
+}
+
 /* ***** */
 
 /* LOG/SIGN */
@@ -452,6 +467,15 @@ button:active {
     transform: translateY(4px);
 }
 
+#regexExplanation {
+    text-align: center;
+}
+
+#loadingGif {
+    display: block;
+    margin: 0 auto
+}
+
 @media screen and (min-width: 768px) and (max-width: 1366px) {
     * {
         font-size: 1.1rem;
@@ -470,6 +494,7 @@ button:active {
         margin-top: 5%;
         font-size: 1.4rem;
     }
+
     .rowDirectionHeader {
         margin-left: 15%;
     }
@@ -483,7 +508,7 @@ button:active {
         width: 50%;
     }
 
-    .columnFormat{
+    .columnFormat {
         margin: 0% 20%;
     }
 }
@@ -516,12 +541,13 @@ button:active {
         height: 20%;
     }
 
-    .loginForm{
+    .loginForm {
         width: 40%;
         padding: 2% 0%;
     }
 
-    input[type="email"], input[type="password"]{
+    input[type="email"],
+    input[type="password"] {
         width: 75%;
         margin-bottom: 2%;
     }
@@ -530,25 +556,25 @@ button:active {
         margin-top: 1%;
     }
 
-    .rowDirectionHeader{
+    .rowDirectionHeader {
         display: flex;
         flex-direction: column;
-        align-items:center;
+        align-items: center;
     }
 
     #formatHeader {
         margin-top: 1%;
     }
 
-    #generalFormat{
+    #generalFormat {
         margin: 1% 5% 0% 10%;
     }
 
-    #renderPoster{
+    #renderPoster {
         margin: 1% 0%;
     }
 
-    .columnFormat{
+    .columnFormat {
         margin: 0% 20%;
     }
 
