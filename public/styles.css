@@ -198,7 +198,7 @@ button[type="submit"] {
     white-space: nowrap;
     margin-left: 10%;
     max-width: 100%;
-    }
+}
 
 section.movies-found article {
     display: inline-block;
@@ -255,7 +255,7 @@ section.movies-found article a p.movie-title {
     display: none;
     max-width: 100%;
     white-space: normal;
-    }
+}
 
 section.movies-found article a:hover p.movie-title {
     display: block;
