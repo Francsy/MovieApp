@@ -469,6 +469,10 @@ button:active {
 
 #regexExplanation {
     text-align: center;
+    background: rgba(255, 255, 255, 0);
+    color: #EF5DBC;
+    font-size: x-small;
+    margin: 0 5% 2% 5%;
 }
 
 #loadingGif {
