@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Edit Movie
+        link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
+        link(rel="stylesheet" type="text/css" href="/styles.css")
+    body(class="columnFormatAdmin") 
+        button(type="button" onclick="history.back()") &#8678
+        h1.main-title EDIT MOVIE
+        form(method="post" id="editmovie-form")
+            label Title
+            input(type="text" name="Title" value=movie.Title)
+            br
+            label Year
+            input(type="text" name="Year" value=movie.Year)
+            br
+            label Runtime
+            input(type="text" name="Runtime" value=movie.Runtime)
+            br
+            label Genre
+            input(type="text" name="Genre" value=movie.Genre)
+            br
+            label Director
+            input(type="text" name="Director" value=movie.Director)
+            br
+            label Writer
+            input(type="text" name="Writer" value=movie.Writer)
+            br
+            label Actors
+            input(type="text" name="Actors" value=movie.Actors)
+            br
+            label Plot
+            input(type="text" name="Plot" value=movie.Plot)
+            br
+            label Poster
+            input(type="text" name="Poster" value=movie.Poster)
+            br
+            label imdbRating
+            input(type="text" name="imdbRating" value=movie.imdbRating)
+            br
+            input(type="hidden" name="movieId" value=movie.movieId)
+            button(type="submit" value="CONFIRM EDITION" name="submit") CONFIRM EDITION

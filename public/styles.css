@@ -1,0 +1,591 @@
+#generalFormat {
+    margin: 10% 5% 0% 10%;
+}
+
+.columnFormat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.columnFormatAdmin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#plot {
+    height: 50px;
+}
+
+#alignleft {
+    align-items: baseline;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, #422d4a 40%, #022520 100%) padding-box;
+    border-radius: 1em;
+    width: 80%;
+    padding: 5% 0%;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: xx-large;
+}
+
+.transparentBack {
+    background: rgba(255, 255, 255, 0);
+    color: #f8982b;
+}
+
+h4 {
+    white-space: nowrap;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 80%;
+    margin-bottom: 5%;
+}
+
+.greenletter {
+    color: rgb(4, 234, 255);
+}
+
+.pinkletter {
+    color: #EF5DBC;
+    margin: 0% 2%;
+    font-weight: bolder;
+}
+
+.rowDirection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.rowDirectionHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#signTitle {
+    margin: 0% 8%;
+}
+
+input[type="submit"] {
+    margin-top: 10%;
+    padding: 7px 40px;
+    background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
+        linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
+    border-radius: 0.75em;
+    border: 4px solid transparent;
+    font-size: 20px;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+input[type="submit"]:active {
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
+}
+
+button[type="button"],
+button[type="submit"] {
+    padding: 5px 15px;
+    background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
+        linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
+    border-radius: 0.75em;
+    border: 4px solid transparent;
+    font-size: 20px;
+}
+
+.delete-fav {
+    padding: 5px 15px;
+    background: linear-gradient(180deg, #ad4788 0%, #066254 100%) padding-box,
+        linear-gradient(to bottom, #EF5DBC, rgb(4, 234, 255)) border-box;
+    border-radius: 0.75em;
+    border: 4px solid transparent;
+    font-size: 20px;
+    margin-top: 5%;
+    margin-left: 40%;
+}
+
+#renderPoster {
+    margin: 5% 0%;
+}
+
+/* BROWSER */
+:root {
+    --pink: #c2318d;
+    --background-base: #19191A;
+    --title-blue: #11E0C1;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-color: var(--background-base);
+    color: white;
+}
+
+.main-title {
+    color: var(--title-blue);
+    text-align: center;
+}
+
+/* Formulario de búsqueda: */
+
+.search-form {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 30px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-icon {
+    position: block;
+    cursor: pointer;
+}
+
+.search-input {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 40px;
+    position: relative;
+    border: 2px var(--pink) solid;
+    border-radius: 10px;
+    color: var(--pink);
+    font-weight: bold;
+    width: 0;
+    opacity: 0;
+    transition: width 0.1s, opacity 0.1s;
+}
+
+.search-input:focus {
+    outline-color: var(--pink);
+    border-color: var(--pink);
+    outline-style: none;
+}
+
+/* Lista de pelis encontradas: */
+
+.search-title {
+    margin: 3% 2%;
+    margin-top: 10%;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.movies-found {
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-left: 10%;
+    max-width: 100%;
+    }
+
+section.movies-found article {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    margin-right: 2%;
+    height: 75%;
+    width: 80%;
+    position: relative;
+
+}
+
+section.movies-found article a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+section.movies-found article a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+section.movies-found article a:hover::before {
+    opacity: 1;
+}
+
+section.movies-found article a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+section.movies-found article a p.movie-title {
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px;
+    display: none;
+    max-width: 100%;
+    white-space: normal;
+    }
+
+section.movies-found article a:hover p.movie-title {
+    display: block;
+    opacity: 1;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+#formatHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 5%;
+    z-index: 9999;
+}
+
+#space {
+    width: 25vw;
+}
+
+#space2 {
+    width: 7vw;
+}
+
+/* HAMBURGUESA */
+#toggle {
+    display: none;
+}
+
+/**
+    Hamburger
+  **/
+.hamburger {
+    position: absolute;
+    top: 4em;
+    right: 10%;
+    margin-left: -2em;
+    margin-top: -45px;
+    width: 2em;
+    height: 45px;
+    z-index: 5;
+}
+
+.hamburger div {
+    position: relative;
+    width: 3em;
+    height: 7px;
+    border-radius: 3px;
+    background-color: #f8982b;
+    margin-top: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+/**
+  Nav Styles
+  **/
+.nav {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #090E6B;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: scale(0);
+}
+
+.nav-wrapper {
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+
+nav {
+    text-align: left;
+    margin-left: 25%;
+}
+
+nav a {
+    position: relative;
+    text-decoration: none;
+    color: #6ecddd;
+    font-size: 2em;
+    display: inline-block;
+    margin-top: 1.25em;
+    margin-right: 1.25em;
+    transition: color 0.2s ease-in-out;
+    letter-spacing: 1px;
+}
+
+nav a:before {
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0.25em;
+    background-color: white;
+    left: -0.5em;
+    transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav a:hover:before {
+    height: 100%;
+}
+
+/**
+  Animations
+  **/
+#toggle:checked+.hamburger .top-bun {
+    transform: rotate(-45deg);
+    margin-top: 25px;
+}
+
+#toggle:checked+.hamburger .bottom-bun {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+#toggle:checked+.hamburger .meat {
+    transform: rotate(45deg);
+    margin-top: -7px;
+}
+
+#toggle:checked+.hamburger+.nav {
+    top: 0;
+    transform: scale(1);
+    z-index: 3;
+}
+
+/* ***** */
+
+/* LOG/SIGN */
+.googleicon {
+    margin-left: 2%;
+    width: 5%;
+}
+
+.girl-logo {
+    border-radius: 50%;
+    border: #f074c3;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+}
+
+/* ***** */
+
+/*ABOUT*/
+.integrantes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.githublogo {
+    width: 7%;
+    height: 7%;
+    border-radius: 50%;
+    margin-left: 2%;
+}
+
+/* ***** */
+/*POPUP DELETE MY MOVIES*/
+.popup-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* ***** */
+
+.popup-content {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: solid var(--pink);
+    width: 50%;
+    height: 25%;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
+}
+
+#regexExplanation {
+    text-align: center;
+    background: rgba(255, 255, 255, 0);
+    color: #EF5DBC;
+    font-size: x-small;
+    margin: 0 5% 2% 5%;
+}
+
+#loadingGif {
+    display: block;
+    margin: 0 auto
+}
+
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+    * {
+        font-size: 1.1rem;
+    }
+
+    .main-title {
+        font-size: 1.8rem;
+    }
+
+    .movies-found {
+        height: 60vh;
+        margin-top: 10%;
+    }
+
+    .search-title {
+        margin-top: 5%;
+        font-size: 1.4rem;
+    }
+
+    .rowDirectionHeader {
+        margin-left: 15%;
+    }
+
+    #formatHeader {
+        margin-top: 2%;
+    }
+
+    section.movies-found article {
+        height: 80%;
+        width: 50%;
+    }
+
+    .columnFormat {
+        margin: 0% 20%;
+    }
+}
+
+@media screen and (min-width: 1366px) {
+    * {
+        font-size: 1.2rem;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .movies-found {
+        height: 50vh;
+    }
+
+    section.movies-found article {
+        height: 70%;
+        width: 15%;
+    }
+
+    .search-title {
+        margin-top: 4%;
+        font-size: 1.5rem;
+    }
+
+    .girl-logo {
+        width: 20%;
+        height: 20%;
+    }
+
+    .loginForm {
+        width: 40%;
+        padding: 2% 0%;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 75%;
+        margin-bottom: 2%;
+    }
+
+    input[type="submit"] {
+        margin-top: 1%;
+    }
+
+    .rowDirectionHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #formatHeader {
+        margin-top: 1%;
+    }
+
+    #generalFormat {
+        margin: 1% 5% 0% 10%;
+    }
+
+    #renderPoster {
+        margin: 1% 0%;
+    }
+
+    .columnFormat {
+        margin: 0% 20%;
+    }
+
+    .githublogo {
+        width: 3%;
+        height: 3%;
+    }
+}

@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Login
+        link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
+        link(rel="stylesheet" type="text/css" href="/styles.css")
+    
+    body
+        header(class="columnFormat") 
+            div(class="rowDirection")
+                h2(class="greenletter") FS
+                h2(class="pinkletter")  MOVIES
+                h2(class="greenletter")  +
+            img(src="/assets/girl.png" alt="logo" class="girl-logo") 
+            
+        main(class="columnFormat") 
+            h3 LOG IN
+            form(action="/login" method="post" class="loginForm")
+                input(type="email" class="emailForm" name="email",placeholder="Email address")
+                input(type="password" class="passwordForm" name="password" placeholder="Password")
+                a(href="/recoverpassword/:email" class="transparentBack") Forgot your password?
+                input(type="submit" value="Login")
+            a(href="/google/auth" class="rowDirection") 
+                    h4 Or sign up with 
+                    h4(class="pinkletter") GOOGLE 
+                    img(src="/assets/googleicon.png" class="googleicon")
+            a(href="/signup" class="rowDirection") 
+                h4 Don't you have an account? 
+                h4(class="pinkletter") SIGN UP
+
+    script(src="/scripts.js") 

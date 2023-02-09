@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Browser
+        link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
+        link(rel="stylesheet" type="text/css" href="/styles.css")
+    body
+        header(id="formatHeader")
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title Browser
+            div(id="space2") 
+            input#toggle(type='checkbox')
+            label.hamburger(for='toggle')
+                div.top-bun
+                div.meat
+                div.bottom-bun
+
+            .nav
+                .nav-wrapper
+                    nav
+                        a(href='/u/movies') Your Movies
+                        br
+                        a(href='/u/restorepassword') Change Password
+                        br
+                        a(href='/u/about') About FS Movies+
+                        br
+                        a(href='/logout') < Log out
+        main
+            form(action="/u/search" method="get" class="search-form")
+                img(src="/assets/search-icon.svg" alt="search" class="search-icon")
+                div(class="search-input hidden")
+                    input(type="text" name="search")
+                    input(type="submit" value="Search")
+                       
+            if message
+                h2.search-title #{message}
+            if movies
+                h2.search-title Results for #{search}
+                section(class="movies-found")
+                    if movies
+                        each movie in movies
+                            article
+                                a(href=`/u/search/${movie.id}`)
+                                    img(src=`${movie.img}`)
+                                    p.movie-title= movie.title
+    script(src="/scripts.js")  

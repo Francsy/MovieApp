@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Sign Up
+        link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
+        link(rel="stylesheet" type="text/css" href="/styles.css") 
+    body
+        header(class="columnFormat")
+            div(class="rowDirectionHeader")
+                button(type="button" onclick="history.back()") &#8678    
+                div(class="rowDirection" id="signTitle")
+                    h2(class="greenletter") FS
+                    h2(class="pinkletter")  MOVIES
+                    h2(class="greenletter")  +
+                div(id="space") 
+            img(src="/assets/girl.png" alt="logo" class="girl-logo")
+
+        main(class="columnFormat") 
+            h3 SIGN UP
+            form(action="/signup" method="post" class="loginForm")
+                input(type="email" class="emailForm" name="email" placeholder="Email address")
+                p(id="regexExplanation") Passwords must contain upper and lower letters, a number, a symbol and be at least 8 characters long
+                input(type="password" class="passwordForm" name="password" placeholder="Password")
+                input(type="password" class="passwordForm" name="passwordCheck" placeholder="Repeat Password")
+                div(class="transparentBack")
+                    input(type="radio" value="user" name="role")
+                    label(for="user" class="transparentBack") User 
+                    input(type="radio" value="admin" name="role")
+                    label(for="admin" class="transparentBack") Admin
+                input(type="submit" value="Sign up") 
+            a(href="/google/auth" class="rowDirection") 
+                    h4 Or login with 
+                    h4(class="pinkletter") GOOGLE 
+                    img(src="/assets/googleicon.png" class="googleicon")
+
+    script(src="/scripts.js")
