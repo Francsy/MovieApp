@@ -197,7 +197,8 @@ button[type="submit"] {
     overflow-x: scroll;
     white-space: nowrap;
     margin-left: 10%;
-}
+    max-width: 100%;
+    }
 
 section.movies-found article {
     display: inline-block;
@@ -249,11 +250,12 @@ section.movies-found article a p.movie-title {
     left: 0;
     right: 0;
     background-color: transparent;
-    /* background: rgba(0, 0, 0, 0.5); */
     color: #fff;
     padding: 10px;
     display: none;
-}
+    max-width: 100%;
+    white-space: normal;
+    }
 
 section.movies-found article a:hover p.movie-title {
     display: block;
