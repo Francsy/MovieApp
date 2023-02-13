@@ -46,3 +46,7 @@ Shows all the admin created movies. Admins can enter the edit movies page and re
 Create movie page <br> 
 ### /admin/editmovie
 Edit movie page <br> <br>
+
+
+## ERD (users and favorites)
+![image](https://user-images.githubusercontent.com/106594858/218485174-9794a9c9-7cf7-43df-9ec3-72c3158a2cfe.png)
