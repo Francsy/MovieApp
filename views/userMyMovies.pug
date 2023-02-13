@@ -23,8 +23,9 @@ html(lang="en")
                     nav
                         a(href="/u/search") Browser
                         br
-                        a(href="/u/restorepassword") Change Password
-                        br
+                        if notGoogleUser
+                            a(href='/u/restorepassword') Change Password
+                            br
                         a(href="/u/about") About FS Movies+
                         br
                         a(href="/logout") < Log out
