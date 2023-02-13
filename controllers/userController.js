@@ -5,12 +5,15 @@ const favMovies = require('../models/favMoviesPGSQL');
 const users = require('../models/usersPGSQL')
 const saltRounds = 10;
 const scraper = require('../utils/scraper')
+const { notFromGoogle } = require('../models/usersPGSQL')
 
 // Render the browser page without movies and show movies from the api and the Mongo db when the user has done a search
 const renderBrowser = async (req, res, next) => {
+    // Check if a user is from Google
+    let notGoogleUser = await notFromGoogle(req.decoded.email);
     // No search has been done
     if (!req.query.search) {
-        res.status(200).render('userBrowser')
+        res.status(200).render('userBrowser', {notGoogleUser})
     } else {
         // The search has been done
         try {
@@ -28,7 +31,7 @@ const renderBrowser = async (req, res, next) => {
                             let stringID = film['movieId'].toString();
                             return { id: stringID, title: film.Title, img: film.Poster }
                         })
-                        res.status(200).render('userBrowser', { movies, search });
+                        res.status(200).render('userBrowser', { movies, search, notGoogleUser });
                     } else { // The movie has not been found
                         res.status(200).render('userBrowser', { message: "Not results available" });
                     }
