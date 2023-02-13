@@ -55,6 +55,27 @@ const checkGoogleUser = async (google_id) => {
     return result
 }
 
+// Check if a user is not from Google
+const notFromGoogle = async (email) => {
+    let client, result;
+    try {
+        // Connect to the Postgres db and make the query
+        client = await pool.connect();
+        const data = await client.query('SELECT password FROM users WHERE email = $1', [email]);
+        if (data.rows[0].password !== null) {
+            result = true;
+        } else {
+            result = false;
+        }       
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release(); // Close the connection
+    }
+    return result
+}
+
 // Change the user's logged_in status to true
 const changeStatusToTrue = async (email) => {
     let client, result;
@@ -127,6 +148,7 @@ module.exports = {
     createUser,
     getUserData,
     checkGoogleUser,
+    notFromGoogle,
     changeStatusToTrue,
     changeStatusToFalse,
     getRole,

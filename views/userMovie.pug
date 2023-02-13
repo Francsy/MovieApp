@@ -10,7 +10,7 @@ html(lang="en")
     body
         header(id="formatHeader")
             button(type="button", onclick="history.back()") &#8678
-            h1.main-title Browser
+            h1.main-title #{movie.title}
             div(id="space2") 
             input#toggle(type='checkbox')
             label.hamburger(for='toggle')
@@ -25,8 +25,9 @@ html(lang="en")
                         br
                         a(href="/u/search") Browser
                         br
-                        a(href="/u/restorepassword") Change Password
-                        br
+                        if notGoogleUser
+                            a(href='/u/restorepassword') Change Password
+                            br
                         a(href="/u/about") About FS Movies+
                         br
                         a(href="/logout") < Log out
