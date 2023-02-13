@@ -9,7 +9,7 @@ const passport = require("passport");
 // Middlewares modules:
 const morgan = require('morgan');
 const errorManager = require('./middlewares/errorManager');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 // Routes modules:
 const authRouter = require('./routes/authRoutes');
@@ -34,11 +34,13 @@ app.use(passport.session())
 app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+/* 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); 
+*/
 
 // Routes:
 app.use('/admin', adminProtector, adminRouter);
