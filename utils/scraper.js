@@ -31,20 +31,24 @@ const getFACritics = async (title) => {
 
 // A partir de la linea comentada no consigo seleccionar la peli
 const getRTReview = async (title) => {
-    const browser = await puppeteer.launch({ headless: true })
-    const page = await browser.newPage();
-    await page.goto(`https://www.rottentomatoes.com/search?search=${title}`);
-    await page.waitForSelector('#onetrust-accept-btn-handler');
-    await page.click('#onetrust-accept-btn-handler')
-    await page.waitForSelector('li[class="js-search-filter searchNav__filter"][data-filter="movie"]');
-
-    await page.click('li[class="js-search-filter searchNav__filter"][data-filter="movie"]')
-    await page.waitForSelector('#search-results > search-page-result:nth-child(3) > ul > search-page-media-row > a:nth-child(2)')
-    const firstResult = await page.$eval('#search-results > search-page-result:nth-child(3) > ul > search-page-media-row > a:nth-child(2)', result => result.href);
-    await page.goto(firstResult)
-    await page.waitForSelector('#audience_reviews > ul > li:nth-child(1) > div.mop-audience-reviews__review-quote > div.mop-audience-reviews__review--comment.clamp.clamp-4.js-clamp')
-    const specialReview = await page.$eval('#audience_reviews > ul > li:nth-child(1) > div.mop-audience-reviews__review-quote > div.mop-audience-reviews__review--comment.clamp.clamp-4.js-clamp', result => result.innerHTML)
-    return specialReview;
+    try {
+        const browser = await puppeteer.launch({ headless: true })
+        const page = await browser.newPage();
+        await page.goto(`https://www.rottentomatoes.com/search?search=${title}`);
+        await page.waitForSelector('#onetrust-accept-btn-handler');
+        await page.click('#onetrust-accept-btn-handler')
+        await page.waitForSelector('li[class="js-search-filter searchNav__filter"][data-filter="movie"]');
+    
+        await page.click('li[class="js-search-filter searchNav__filter"][data-filter="movie"]')
+        await page.waitForSelector('#search-results > search-page-result:nth-child(3) > ul > search-page-media-row > a:nth-child(2)')
+        const firstResult = await page.$eval('#search-results > search-page-result:nth-child(3) > ul > search-page-media-row > a:nth-child(2)', result => result.href);
+        await page.goto(firstResult)
+        await page.waitForSelector('#audience_reviews > ul > li:nth-child(1) > div.mop-audience-reviews__review-quote > div.mop-audience-reviews__review--comment.clamp.clamp-4.js-clamp')
+        const specialReview = await page.$eval('#audience_reviews > ul > li:nth-child(1) > div.mop-audience-reviews__review-quote > div.mop-audience-reviews__review--comment.clamp.clamp-4.js-clamp', result => result.innerHTML)
+        return specialReview;   
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 // PRUEBAS

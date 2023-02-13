@@ -91,11 +91,16 @@ const renderMovieDetails = async (req, res, next) => {
             id: apiMovie.imdbID
         } 
         // Get the comments from web scraping
-        const [critics, specialReview] = await Promise.all([
-            scraper.getFACritics(movie.title),
-            scraper.getRTReview(movie.title)
-        ]);
-        res.status(200).render('userMovie', { movie, critics, specialReview });
+        try {
+            const [critics, specialReview] = await Promise.all([
+                scraper.getFACritics(movie.title),
+                scraper.getRTReview(movie.title)
+            ]);
+            res.status(200).render('userMovie', { movie, critics, specialReview }); 
+        } catch (err) {
+            console.error(err);
+            res.status(200).render('userMovie', { movie });
+        }
     } catch (err) {
         next(err)
     }
