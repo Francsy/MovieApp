@@ -142,8 +142,9 @@ button[type="submit"] {
 
 .main-title {
     color: var(--title-blue);
-    font-size: 3em;
-    margin: 45px 50%;
+    font-size: 2em;
+    /* margin: 45px 50%; */
+    text-align: center;
 }
 
 /* Formulario de búsqueda: */
