@@ -1,7 +1,3 @@
-#generalFormat {
-    margin: 10% 5% 0% 10%;
-}
-
 .columnFormat {
     display: flex;
     flex-direction: column;
@@ -12,10 +8,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
-#plot {
-    height: 50px;
+#createmovie-form, #editmovie-form {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-left: 2%;
+}
+
+form#createmovie-form input, form#editmovie-form input, form#editmovie-form textarea, form#createmovie-form textarea{
+    width: 100%;
+    padding: 2%;
+}
+
+#buttonEdit {
+    margin-left: 10%;
 }
 
 #alignleft {
@@ -124,6 +133,7 @@ button[type="submit"] {
 
 #renderPoster {
     margin: 5% 0%;
+    max-height: 55vh;
 }
 
 /* BROWSER */
