@@ -23,7 +23,7 @@ const getMoviesByUser = async (id) => {
 // Add a favourite movie providing title, poster and ids
 const postMovieById = async (id, movie_id, movie_title, movie_poster) => {
     let client, result;
-    const currentDateTime = new Date().toLocaleString(); // Store the date the movie was added
+    const currentDateTime = new Date().toISOString(); // Store the date the movie was added
     try {
         if (!id) {
             throw new Error("userid is required"); // User's id was not provided
