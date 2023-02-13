@@ -41,6 +41,16 @@ if (document.querySelector('.movie-details')) {
 
 //DELETE FAV
 if (document.title === 'My Movies') {
+    const moviesLinksToDetails = document.querySelectorAll('body > main > section > article a');
+    moviesLinksToDetails.forEach(function (link) {
+        link.addEventListener('click', function () {
+            document.querySelector("main").style.display = "none";
+            const loadingImg = document.createElement("img");
+            loadingImg.setAttribute("id", "loadingGif");
+            loadingImg.setAttribute("src", "/assets/loading-gif.gif")
+            document.querySelector("body").appendChild(loadingImg);
+        });
+    });
     document.querySelectorAll('.delete-fav').forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
