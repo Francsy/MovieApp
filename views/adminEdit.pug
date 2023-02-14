@@ -7,12 +7,13 @@ html(lang="en")
         title Edit Movie
         link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
         link(rel="stylesheet" type="text/css" href="/styles.css")
-    body(class="columnFormatAdmin") 
+    body
         header(id="formatHeader")
             button(type="button" onclick="history.back()") &#8678
             h1.main-title EDIT MOVIE
+            div(id="space2") 
         main
-            form(method="post" id="editmovie-form")
+            form(method="post" class="editmovie-form")
                 label Title
                 input(type="text" name="Title" value=movie.Title)
                 br
@@ -44,4 +45,4 @@ html(lang="en")
                 input(type="text" name="imdbRating" value=movie.imdbRating)
                 br
                 input(type="hidden" name="movieId" value=movie.movieId)
-            button(type="submit" value="CONFIRM EDITION" name="submit" id="buttonEdit") CONFIRM EDITION
+                button(type="submit" value="CONFIRM EDITION" name="submit" id="editButton") CONFIRM EDITION

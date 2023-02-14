@@ -106,7 +106,7 @@ const renderMovieDetails = async (req, res, next) => {
     }
 }
 
-// Render the favourites view. Each movie has a delete button
+//Render the favourites view. Each movie has a delete button
 const renderUserFavs = async (req, res) => {
     // Get movies by the user's id
     const { id } = req.decoded;
@@ -118,7 +118,7 @@ const renderUserFavs = async (req, res) => {
     }
 }
 
-// Post from a movie to the user's favourites list
+//Post from a movie to the user's favourites list
 const addFav = async (req, res) => {
     try {
         const { movie_title, movie_id, movie_poster } = req.body;
