@@ -1,5 +1,13 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-color: var(--background-base);
+    color: white;
+}
+
 #generalFormat {
     margin: 10% 5% 0% 10%;
+    line-height: 150%;
 }
 
 .columnFormat {
@@ -8,17 +16,31 @@
     align-items: center;
 }
 
-.columnFormatAdmin {
+form.createmovie-form input, form.editmovie-form input, form.editmovie-form textarea, form.createmovie-form textarea{
+    width: 95%;
+    padding: 2%;
+    
+}
+
+.createmovie-form, .editmovie-form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#plot {
-    height: 50px;
+form.createmovie-form label, form.editmovie-form label{
+    margin-right: 65%;
+    font-weight: bold;
+}
+
+form.editmovie-form button, form.createmovie-form button{
+    width: 70%;
+    padding: 2%;
 }
 
 #alignleft {
+    display: flex;
+    flex-direction: column;
     align-items: baseline;
 }
 
@@ -32,12 +54,8 @@
     padding: 5% 0%;
 }
 
-h1 {
-    font-size: 20px;
-}
-
-h2 {
-    font-size: xx-large;
+h3{
+    margin-left: 5%;
 }
 
 .transparentBack {
@@ -57,11 +75,13 @@ input[type="password"] {
 
 .greenletter {
     color: rgb(4, 234, 255);
+    margin: 10% 2%;
+    font-weight: bolder;
 }
 
 .pinkletter {
     color: #EF5DBC;
-    margin: 0% 2%;
+    margin: 10% 2%;
     font-weight: bolder;
 }
 
@@ -124,6 +144,7 @@ button[type="submit"] {
 
 #renderPoster {
     margin: 5% 0%;
+    max-height: 55vh;
 }
 
 /* BROWSER */
@@ -133,16 +154,9 @@ button[type="submit"] {
     --title-blue: #11E0C1;
 }
 
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-    background-color: var(--background-base);
-    color: white;
-}
-
 .main-title {
     color: var(--title-blue);
-    font-size: 2em;
+    font-size: 1.5em;
     /* margin: 45px 50%; */
     text-align: center;
 }
@@ -480,8 +494,10 @@ button:active {
 }
 
 #loadingGif {
-    display: block;
-    margin: 0 auto
+    height: 50px;
+    position: fixed;
+    margin-top: 40vw;
+    margin-left: 43vw;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1366px) {
@@ -519,6 +535,21 @@ button:active {
     .columnFormat {
         margin: 0% 20%;
     }
+
+    #loadingGif {
+        margin-left: 46vw;
+    }
+
+    .githublogo {
+        width: 2%;
+        height: 2%;
+    }
+
+    #generalFormat {
+        margin: 5% 5% 0% 20%;
+        line-height: 115%;
+    }
+
 }
 
 @media screen and (min-width: 1366px) {
@@ -575,7 +606,8 @@ button:active {
     }
 
     #generalFormat {
-        margin: 1% 5% 0% 10%;
+        margin: 3% 5% 0% 20%;
+        line-height: 115%;
     }
 
     #renderPoster {
@@ -589,5 +621,17 @@ button:active {
     .githublogo {
         width: 3%;
         height: 3%;
+    }
+
+    #loadingGif {
+        height: 50px;
+        position: fixed;
+        margin-top: 15vw;
+        margin-left: 46vw;
+    }
+
+    .githublogo {
+        width: 2%;
+        height: 2%;
     }
 }

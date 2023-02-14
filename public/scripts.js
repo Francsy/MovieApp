@@ -22,7 +22,7 @@ if (document.title === 'Browser') {
     });
 }
 
-// u/search/:title page:
+//u/search/:title page:
 if (document.querySelector('.movie-details')) {
     document.querySelector('#saveFav').addEventListener('click', function () {
 
@@ -72,7 +72,7 @@ if (document.title === 'My Movies') {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ movie_id: movieId })
                 });
-            document.querySelector(`#${movieId}`).parentElement.remove();
+                document.querySelector(`#${movieId}`).parentElement.remove();
                 popup.remove();
             });
             document.getElementById("cancel-delete").addEventListener("click", function () {
