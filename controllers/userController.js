@@ -45,7 +45,7 @@ const renderBrowser = async (req, res, next) => {
                     return { id: film.imdbID, title: film.Title, img: film.Poster }
                 })
                 // Render the browser view with the movies found
-                res.status(200).render('userBrowser', { movies, search });
+                res.status(200).render('userBrowser', { movies, search, notGoogleUser });
             }
         } catch (err) {
             next(err)
@@ -55,6 +55,8 @@ const renderBrowser = async (req, res, next) => {
 
 // Render movie with details view, with an add to favourites button and comments taken from web scraping
 const renderMovieDetails = async (req, res, next) => {
+    // Check if a user is from Google
+    let notGoogleUser = await notFromGoogle(req.decoded.email);
     try {
         // Fetch the movie data from the api
         const movieRes = await fetch(`https://www.omdbapi.com/?i=${req.params.id}&plot=full&apikey=${process.env.OMDB_KEY}`);
@@ -75,7 +77,7 @@ const renderMovieDetails = async (req, res, next) => {
                 id: dbMovie.movieId
 
             }
-            res.status(200).render('userMovie', { movie });
+            res.status(200).render('userMovie', { movie, notGoogleUser });
         }
         let movie = {
             title: apiMovie.Title,
@@ -96,10 +98,10 @@ const renderMovieDetails = async (req, res, next) => {
                 scraper.getFACritics(movie.title),
                 scraper.getRTReview(movie.title)
             ]);
-            res.status(200).render('userMovie', { movie, critics, specialReview }); 
+            res.status(200).render('userMovie', { movie, critics, specialReview, notGoogleUser }); 
         } catch (err) {
             console.error(err);
-            res.status(200).render('userMovie', { movie });
+            res.status(200).render('userMovie', { movie, notGoogleUser });
         }
     } catch (err) {
         next(err)
@@ -108,13 +110,15 @@ const renderMovieDetails = async (req, res, next) => {
 
 // Render the favourites view. Each movie has a delete button
 const renderUserFavs = async (req, res) => {
+    // Check if a user is from Google
+    let notGoogleUser = await notFromGoogle(req.decoded.email);
     // Get movies by the user's id
     const { id } = req.decoded;
     const movies = await favMovies.getMoviesByUser(id);
     if (!movies[0]) { // No movies were found. Tell the user so
-        res.render('userMyMovies', { title: 'You didn´t save any movie yet' })
+        res.render('userMyMovies', { title: 'You didn´t save any movie yet', notGoogleUser })
     } else { // Show the user's favourite movies
-        res.render('userMyMovies', { movies, title: 'User´s Favorite Movies' });
+        res.render('userMyMovies', { movies, title: 'User´s Favorite Movies', notGoogleUser });
     }
 }
 
@@ -183,8 +187,10 @@ const changePassword = async (req, res) => {
     }
 }
 
-const renderAbout = (req, res) => {
-    res.status(200).render('userAbout')
+const renderAbout = async (req, res) => {
+    // Check if a user is from Google
+    let notGoogleUser = await notFromGoogle(req.decoded.email);
+    res.status(200).render('userAbout', { notGoogleUser })
 }
 
 module.exports = {
