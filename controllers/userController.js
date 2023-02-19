@@ -91,14 +91,15 @@ const renderMovieDetails = async (req, res, next) => {
             img: apiMovie.Poster,
             rating: apiMovie.imdbRating,
             id: apiMovie.imdbID
-        } 
+        }
+        let movieWasAdded = await favMovies.checkMovieInFavorites(req.decoded.id, movie.id)
         // Get the comments from web scraping
         try {
             const [critics, specialReview] = await Promise.all([
                 scraper.getFACritics(movie.title),
                 scraper.getRTReview(movie.title)
             ]);
-            res.status(200).render('userMovie', { movie, critics, specialReview, notGoogleUser }); 
+            res.status(200).render('userMovie', { movie, critics, specialReview, notGoogleUser, movieWasAdded }); 
         } catch (err) {
             console.error(err);
             res.status(200).render('userMovie', { movie, notGoogleUser });
@@ -141,11 +142,16 @@ const addFav = async (req, res) => {
 
 // Delete the movie from the user's favourites list
 const deleteFav = async (req, res) => {
+    try {
         const { id } = req.decoded;
         const userid = id;
         const { movie_id } = req.body;
         const response = await favMovies.deleteMovieById(userid, movie_id);
         console.log(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to remove movie from favorites' });
+    }
 }
 
 // Render the reset password view with a form
