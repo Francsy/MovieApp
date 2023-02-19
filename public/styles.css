@@ -10,6 +10,11 @@
     line-height: 150%;
 }
 
+#aboutFormat {
+    margin: 10% 5% 0% 10%;
+    line-height: 150%;
+}
+
 .columnFormat {
     display: flex;
     flex-direction: column;
@@ -54,7 +59,7 @@ form.editmovie-form button, form.createmovie-form button{
     padding: 5% 0%;
 }
 
-h3{
+#usersMoviesTitle{
     margin-left: 5%;
 }
 
@@ -500,6 +505,10 @@ button:active {
     margin-left: 43vw;
 }
 
+#buttonRestore{
+    font-size: small;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1366px) {
     * {
         font-size: 1.1rem;
@@ -549,7 +558,6 @@ button:active {
         margin: 5% 5% 0% 20%;
         line-height: 115%;
     }
-
 }
 
 @media screen and (min-width: 1366px) {
@@ -610,6 +618,11 @@ button:active {
         line-height: 115%;
     }
 
+    #aboutFormat {
+        margin: 2% 5% 0% 15%;
+        line-height: 150%;
+    }
+
     #renderPoster {
         margin: 1% 0%;
     }
@@ -627,11 +640,24 @@ button:active {
         height: 50px;
         position: fixed;
         margin-top: 15vw;
-        margin-left: 46vw;
+        margin-left: 48vw;
     }
 
     .githublogo {
         width: 2%;
         height: 2%;
+    }
+
+    #regexExplanation {
+        margin: 0 15% 2% 15%;
+    }
+
+    #generalFormat {
+        margin: 5% 5% 0% 5%;
+        line-height: 115%;
+    }
+
+    .main-title {
+        margin-left: 4%;
     }
 }
