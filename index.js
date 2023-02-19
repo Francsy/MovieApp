@@ -5,7 +5,6 @@ const path = require('path');
 const cookieParser = require("cookie-parser");
 const { adminProtector, userProtector } = require('./middlewares/verifiedToken');
 const passport = require("passport");
-const helmet = require('helmet')
 
 // Middlewares modules:
 const morgan = require('morgan');
@@ -28,15 +27,20 @@ app.use(session({
 }));
 
 
+/* 
+Helmet config that will work once we move all inline scripts (e.g. onclick=[JS code]) and styles into external files.
+const helmet = require('helmet')
+
 app.use(
     helmet.contentSecurityPolicy({
-      useDefaults: true,
-      directives: {
-        "img-src": ["'self'", "https: data:"]
-      },
-      crossOriginEmbedderPolicy: false,
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "https: data:"],
+        },
+        crossOriginEmbedderPolicy: false,
     })
-  )
+)
+ */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
