@@ -77,7 +77,8 @@ const renderMovieDetails = async (req, res, next) => {
                 id: dbMovie.movieId
 
             }
-            res.status(200).render('userMovie', { movie, notGoogleUser });
+            let movieWasAdded = await favMovies.checkMovieInFavorites(req.decoded.id, movie.id)
+            res.status(200).render('userMovie', { movie, notGoogleUser, movieWasAdded });
         }
         let movie = {
             title: apiMovie.Title,
@@ -102,7 +103,7 @@ const renderMovieDetails = async (req, res, next) => {
             res.status(200).render('userMovie', { movie, critics, specialReview, notGoogleUser, movieWasAdded }); 
         } catch (err) {
             console.error(err);
-            res.status(200).render('userMovie', { movie, notGoogleUser });
+            res.status(200).render('userMovie', { movie, notGoogleUser, movieWasAdded });
         }
     } catch (err) {
         next(err)

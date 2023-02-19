@@ -22,42 +22,7 @@ if (document.title === 'Browser') {
     });
 }
 
-//u/search/:title page:
-// if (document.querySelector('.movie-details')) {
-//     if (document.querySelector('#saveFav')) {
-//         document.querySelector('#saveFav').addEventListener('click', function () {
 
-//             const movie = {
-//                 movie_id: document.querySelector('.movie-details').id,
-//                 movie_title: document.title,
-//                 movie_poster: document.querySelector('#renderPoster').src,
-//             };
-//             fetch('/u/movies', {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify(movie)
-//             })
-//                 .then(location.reload())
-//         });
-//     } else {
-//         document.querySelector('#deleteFav').addEventListener('click', function () {
-//             const movie = {
-//                 movie_id: document.querySelector('.movie-details').id,
-//             };
-//             fetch(`/u/movies`, {
-//                 method: 'DELETE',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify(movie)
-//             })
-//                 // .then(location.reload())
-//                 .then(() => {
-//                     document.querySelector('#deleteFav').innerText = 'Save Favourite';
-//                     document.querySelector('#deleteFav').id = 'saveFav'
-//                 });
-//         })
-//     }
-
-// }
 
 if (document.querySelector('.movie-details')) {
     if (document.querySelector('#saveFav')) {
