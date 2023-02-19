@@ -7,38 +7,41 @@ html(lang="en")
         title Create Movie
         link(rel="icon" type="image/x-icon" href="/assets/palomitas.png")
         link(rel="stylesheet" type="text/css" href="/styles.css")
-    body(class="columnFormatAdmin") 
-        button(type="button", onclick="history.back()") &#8678
-        h1.main-title CREATE MOVIE
-        form(method="post" id="createmovie-form")
-            label Title
-            input(type="text" name="Title")
-            br
-            label Year
-            input(type="text" name="Year" )
-            br
-            label Runtime
-            input(type="text" name="Runtime" )
-            br
-            label Genre
-            input(type="text" name="Genre" )
-            br
-            label Director
-            input(type="text" name="Director")
-            br
-            label Writer
-            input(type="text" name="Writer")
-            br
-            label Actors
-            input(type="text" name="Actors")
-            br
-            label Plot
-            input(type="text" id="plot" name="Plot" )
-            br
-            label Poster
-            input(type="text" name="Poster")
-            br
-            label imdbRating
-            input(type="text" name="imdbRating" )
-            br
-            button(type="submit" value="CONFIRM CREATION" name="submit") CONFIRM CREATION
+    body
+        header(id="formatHeader")
+            button(type="button", onclick="history.back()") &#8678
+            h1.main-title CREATE MOVIE
+            div(id="space2") 
+        main
+            form(method="post" class="createmovie-form")
+                label Title
+                input(type="text" name="Title")
+                br
+                label Year
+                input(type="text" name="Year" )
+                br
+                label Runtime
+                input(type="text" name="Runtime" )
+                br
+                label Genre
+                input(type="text" name="Genre" )
+                br
+                label Director
+                input(type="text" name="Director")
+                br
+                label Writer
+                input(type="text" name="Writer")
+                br
+                label Actors
+                input(type="text" name="Actors")
+                br
+                label Plot
+                textarea(name="Plot" rows="20" cols="45")
+                br
+                label Poster
+                input(type="text" name="Poster")
+                br
+                label imdbRating
+                input(type="text" name="imdbRating" )
+                br
+                button(type="submit" value="CONFIRM CREATION" name="submit") CONFIRM CREATION

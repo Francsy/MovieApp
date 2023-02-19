@@ -10,7 +10,7 @@ html(lang="en")
     body
         header(id="formatHeader")
             button(type="button", onclick="history.back()") &#8678
-            h1.main-title Browser
+            h1.main-title Your Selection
             div(id="space2") 
             input#toggle(type='checkbox')
             label.hamburger(for='toggle')
@@ -25,14 +25,18 @@ html(lang="en")
                         br
                         a(href="/u/search") Browser
                         br
-                        a(href="/u/restorepassword") Change Password
-                        br
+                        if notGoogleUser
+                            a(href='/u/restorepassword') Change Password
+                            br
                         a(href="/u/about") About FS Movies+
                         br
                         a(href="/logout") < Log out
         main(class="columnFormat") 
             img(src=`${movie.img}` alt="" srcset="" id="renderPoster")
-            button(type="button" id="saveFav") Save Favourite
+            if movieWasAdded
+                button(type="button" id="deleteFav") Delete Favourite
+            else
+                button(type="button" id="saveFav") Save Favourite
             div(id="alignleft")
                 h2.movie-details(id=movie.id) #{movie.year} - #{movie.title} - #{movie.runtime}
                 p Rating: #{movie.rating}
