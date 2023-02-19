@@ -5,7 +5,6 @@ const path = require('path');
 const cookieParser = require("cookie-parser");
 const { adminProtector, userProtector } = require('./middlewares/verifiedToken');
 const passport = require("passport");
-const helmet = require('helmet')
 
 // Middlewares modules:
 const morgan = require('morgan');
