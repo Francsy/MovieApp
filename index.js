@@ -27,22 +27,6 @@ app.use(session({
 }));
 
 
-
-/* 
-Helmet this, move all inline scripts (e.g. onclick=[JS code]) and styles into external files:
-
-app.use(
-    helmet.contentSecurityPolicy({
-        useDefaults: true,
-        directives: {
-            "img-src": ["'self'", "https: data:"],
-            "script-src": ["'self'", "'unsafe-inline'"], // This allow scripts inline
-            "style-src": ["'self'", "'unsafe-inline'"], // permitir estilos en línea
-        },
-        crossOriginEmbedderPolicy: false,
-    })
-)
- */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
