@@ -20,7 +20,7 @@ Technologies & techniques
 - Unit testing with JEST
 - Test E2E Cypress
 - Mobile first
-- Deploy: Vercel - ONGOING
+- Deploy: Vercel
 
 
 
