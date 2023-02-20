@@ -23,7 +23,6 @@ Technologies & techniques
 - Deploy: Vercel
 
 
-
 ## Routes
 ### / 
 Login with email and password. Options to login with Google, recover password and sign up <br> 
