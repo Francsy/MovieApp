@@ -22,6 +22,7 @@ Technologies & techniques
 - Mobile first
 - Deploy: Vercel
 
+You´ll find a .env.example file that´ll help you to set your .env file.
 
 ## Routes
 ### / 
